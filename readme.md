@@ -1,4 +1,3 @@
-
 # 공통 프로젝트
 
 SSAFY 9기 부울경 1반 특화프로젝트 E103
@@ -121,7 +120,6 @@ my-react-app/
     - 이 브랜치는 공유할 필요가 없으므로 자신의 로컬저장소에서 관리합니다.
     - 개발이 완료되면 develop branch로 merge하여 다른사람과 공유합니다.
     - 기능 개발을 할 시 동일한 기능을 개발하지 않도록 **커뮤니케이션 하는 것이 중요**합니다.
-    - `feature/기능요약` ex) feature/FE/simul, feature/BE/simul
     - `feature/{issue-number}-{feature-name}` 이슈 추척 사용 시 ex) feature/6-lohin
 2. release branch
     - 출시 버전을 준비하는 브랜치입니다.
