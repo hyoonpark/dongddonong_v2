@@ -1,4 +1,3 @@
-
 # 공통 프로젝트
 
 SSAFY 9기 부울경 1반 특화프로젝트 E103
@@ -121,8 +120,7 @@ my-react-app/
     - 이 브랜치는 공유할 필요가 없으므로 자신의 로컬저장소에서 관리합니다.
     - 개발이 완료되면 develop branch로 merge하여 다른사람과 공유합니다.
     - 기능 개발을 할 시 동일한 기능을 개발하지 않도록 **커뮤니케이션 하는 것이 중요**합니다.
-    - `feature/기능요약` ex) feature/FE/simul, feature/BE/simul
-    - `feature/{issue-number}-{feature-name}` 이슈 추척 사용 시 ex) feature/6-lohin
+    - `feature/{postion}/{issue-number}-{feature-name}` 이슈 추척 사용 시 ex) feature/BE/6-login, ex2) feature/FE/7-login
 2. release branch
     - 출시 버전을 준비하는 브랜치입니다.
     - 이 브랜치는 develop branch로부터 분기합니다.
@@ -134,27 +132,6 @@ my-react-app/
     - 버그 수정만을 위한 브랜치이므로 개발하던 내용에 영향을 주지 않습니다.
     - `hotfix-버그가 발생한 배포 버전.n`  ex)hotfix-1.0.1, hotfix-1.2.0
 
-### Upstream Branch
-
-공동 Repo를 가리키는 브랜치입니다. 여러 컨트리뷰터들이 있으면 자신의 코드가 최신이 아닐 수 있기 때문에 Fetch할 때 주로 이용됩니다.
-
-- upstream branch 등록하기
-    
-    ```bash
-    git remote add upstream 공동_repo_address
-    ```
-    
-- upstream branch 삭제하기
-    
-    ```bash
-    git remote add upstream 공동_repo_address
-    ```
-    
-- upsteam branch fetch하기
-    
-    ```bash
-    git fetch upstream
-    ```
   
 ### 브랜치 생성 명령어
 
