@@ -36,3 +36,13 @@
 
 💡*Try* : 얼른 되었으면 좋겠다…!!!
 
+
+<br/>
+
+### 2023-09-08
+
+🖋️*Keep* : AI 모델을 돌려보겠다는 집념 하나로 SSAFY를 다니고 있습니다……
+
+🖍️*Problem* : RuntimeError: CUDA driver version is insufficient for CUDA runtime version
+
+💡*Try* : 안되면 그냥 학습시키는 방법도 생각해서 주말에는 학습을.. .해봐야 할 것 같다
