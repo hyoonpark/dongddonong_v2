@@ -5,12 +5,12 @@ spring:
 #    driver-class-name: org.mariadb.jdbc.Driver
 #    username: ssafyE204
 #    password: 1793
-    datasource:
-      url: jdbc:mysql://localhost:3307/dong_ddo_nong
-      driver-class-name: org.mariadb.jdbc.Driver
-      username: ssafy
-      password: ssafy
+    url: jdbc:mysql://localhost:3307/dong_ddo_nong
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ssafy
+    password: ssafy
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     open-in-view: false
     generate-ddl: true
     show-sql: true
