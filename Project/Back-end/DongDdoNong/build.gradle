@@ -30,6 +30,13 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// JWT, 스프링 시큐리티
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// gson
+	implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 tasks.named('test') {
