@@ -3,12 +3,12 @@ spring:
     #??
 #    url: jdbc:mariadb://43.202.55.53:3306/drug
 #    driver-class-name: org.mariadb.jdbc.Driver
-#    username: ssafyE204
+#    username: ssafyE103
 #    password: 1793
     url: jdbc:mysql://localhost:3307/dong_ddo_nong
     driver-class-name: org.mariadb.jdbc.Driver
-    username: ssafy
-    password: ssafy
+    username: ssafyE103
+    password: root
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     open-in-view: false
@@ -16,3 +16,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 1234
+    key-store-type: PKCS12
