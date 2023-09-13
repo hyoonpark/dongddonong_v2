@@ -1,0 +1,16 @@
+.arrow {
+  animation: bounce 1s ease-out alternate-reverse infinite;
+}
+
+.path {
+  stroke: #000;
+  stroke-dasharray: 1466.9200439453125;
+  stroke-dashoffset: 1466.9200439453125;
+  animation: path 3000ms forwards;
+}
+
+@keyframes path {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

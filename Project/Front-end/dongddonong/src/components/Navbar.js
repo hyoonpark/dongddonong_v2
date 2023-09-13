@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
-import "./Navbar.css";
 import Games from "../assets/Games.png";
 import Task from "../assets/Task.png";
 import Profile from "../assets/Profile.png";
 
 const Navbar = () => {
   return (
-    <nav className="h-20 mb-4 shadow-md">
+    <nav className="h-20 border-black border-b">
       <div class="flex justify-between items-center h-20 max-w-7xl mx-4 mb:m-auto">
         <Link to="/">
           <img
