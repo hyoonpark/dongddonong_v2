@@ -6,6 +6,7 @@ import Games from "../assets/Games.png";
 import Task from "../assets/Task.png";
 import Profile from "../assets/Profile.png";
 import Modal from './common/Modal';
+import SocialLogin from './SocialLogin';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,7 +50,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} onLogin={SocialLogin} />
     </nav>
   );
 };
