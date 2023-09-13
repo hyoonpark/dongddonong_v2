@@ -1,4 +1,4 @@
-// Dockerfile
+# Dockerfile
 FROM openjdk:17
 
 EXPOSE 8080
