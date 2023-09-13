@@ -14,3 +14,7 @@
     stroke-dashoffset: 0;
   }
 }
+
+.svg1 {
+  transform: scale(0.84) translateY(12%) translateX(-4%);
+}
