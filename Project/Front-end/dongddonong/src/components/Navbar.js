@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
 
-import Games from "../assets/Games.png";
-import Task from "../assets/Task.png";
-import Profile from "../assets/Profile.png";
-
 const Navbar = () => {
   return (
     <nav className="h-20 border-black border-b">
@@ -15,21 +11,11 @@ const Navbar = () => {
             alt="로고"
           />
         </Link>
-        <ul class="md:hidden flex justify-between w-20">
-          <li>
-            <img src={Games} alt="게임" />
+        <ul class="w-1/2 flex justify-between md:w-1/3">
+          <li className="hidden md:block">홈</li>
+          <li className="transition-all border-black delay-100 ease-in-out hover:border-b">
+            경기
           </li>
-          <li>
-            <img src={Task} alt="기록" />
-          </li>
-          <li>
-            <img src={Profile} alt="마이페이지" />
-          </li>
-        </ul>
-
-        <ul class="hidden md:flex space-x-8">
-          <li>홈</li>
-          <li>경기</li>
           <li>기록실</li>
           <li>로그인</li>
         </ul>

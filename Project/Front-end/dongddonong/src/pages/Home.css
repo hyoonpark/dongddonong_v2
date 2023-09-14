@@ -1,7 +1,3 @@
-.arrow {
-  animation: bounce 1s ease-out alternate-reverse infinite;
-}
-
 .path {
   stroke: #000;
   stroke-dasharray: 1466.9200439453125;
@@ -16,5 +12,30 @@
 }
 
 .svg1 {
-  transform: scale(0.84) translateY(12%) translateX(-4%);
+  transform: scale(0.84) translateY(10%) translateX(-4%);
+}
+
+.svg2 {
+  transform: scale(0.84) translateX(-2%) translateY(-4%);
+}
+
+.practice {
+  top: 12.8%;
+  left: 16%;
+}
+
+.two_bound {
+  top: 44.4%;
+  right: 10%;
+}
+
+.contest {
+  top: 72%;
+  left: 16%;
+}
+
+@media (min-width: 768px) {
+  .header {
+    transform: translateX(8%);
+  }
 }
