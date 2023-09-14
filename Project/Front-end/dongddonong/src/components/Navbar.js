@@ -6,7 +6,7 @@ import Games from "../assets/Games.png";
 import Task from "../assets/Task.png";
 import Profile from "../assets/Profile.png";
 import Modal from './common/Modal';
-import SocialLogin from './SocialLogin';
+import SocialLogin from './login/SocialLogin';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

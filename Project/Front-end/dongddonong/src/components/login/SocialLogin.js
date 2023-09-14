@@ -1,5 +1,5 @@
 import React from 'react';
-import KakaoLoginLogo from "../assets/images/kakao_login_btn.png";
+import KakaoLoginLogo from "../../assets/images/kakao_login_btn.png";
 
 const SocialLogin = () => {
   const Rest_api_key = '4e01b41f45f312031ef4c97ed183fa71'; //REST API KEY
@@ -8,10 +8,6 @@ const SocialLogin = () => {
 
   const handleLogin = () => {
     window.location.href = kakaoURL;
-    console.log(window.location.href)
-
-    const code = new URL(window.location.href).searchParams.get('code');
-    console.log(code);
   };
 
   return (

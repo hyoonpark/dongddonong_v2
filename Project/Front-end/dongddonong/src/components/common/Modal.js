@@ -1,5 +1,5 @@
 import React from 'react';
-import SocialLogin from './../SocialLogin';
+import SocialLogin from '../login/SocialLogin';
 
 const Modal = ({ isOpen, onClose, onLogin  }) => {
   if (!isOpen) return null;
