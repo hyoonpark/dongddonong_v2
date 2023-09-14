@@ -13,9 +13,11 @@ const Navbar = () => {
         </Link>
         <ul class="w-1/2 flex justify-between md:w-1/3">
           <li className="hidden md:block">홈</li>
-          <li className="transition-all border-b border-white duration-500 hover:border-orange">
-            경기
-          </li>
+          <Link to="/game">
+            <li className="transition-all border-b border-white duration-500 hover:border-orange">
+              경기
+            </li>
+          </Link>
           <li className="transition-all border-b border-white duration-500 hover:border-orange">
             기록실
           </li>
