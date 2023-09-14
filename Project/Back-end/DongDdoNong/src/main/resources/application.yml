@@ -16,9 +16,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  auth:
-    secret:
-      key : secretJiHongHaYoonDongJuDaEunJungWooBulHoeWeAreTogetherSecret*@#$^&&@$3
+  jwt:
+    secret: secretJiHongHaYoonDongJuDaEunJungWooBulHoeWeAreTogetherSecret*@#$^&&@$3
 kakao:
   client-id: 4e01b41f45f312031ef4c97ed183fa71
   redirect-uri: http://localhost:3000/oauth/callback/kakao

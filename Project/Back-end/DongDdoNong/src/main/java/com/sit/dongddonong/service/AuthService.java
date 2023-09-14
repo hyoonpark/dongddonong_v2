@@ -2,15 +2,24 @@ package com.sit.dongddonong.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.sit.dongddonong.dto.MemberDto;
+import com.sit.dongddonong.dto.TokenDto;
+import com.sit.dongddonong.dto.UserDto;
+import com.sit.dongddonong.model.RefreshToken;
+import com.sit.dongddonong.model.User;
+import com.sit.dongddonong.repository.RefreshTokenRepository;
+import com.sit.dongddonong.repository.UserRepository;
+import com.sit.dongddonong.util.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -22,7 +31,30 @@ public class AuthService {
 
     @Value("${kakao.redirect-uri}")
     String redirectUri;
-    public String login(String code) {
+
+    private final UserRepository userRepository;
+    private final JwtProvider jwtProvider;
+    private final RefreshTokenRepository tokenRepository;
+
+    public TokenDto login(String code){
+        UserDto newUser = getUser(getAccessToken(code));
+        Optional<User> user = userRepository.findById(newUser.getId());
+        if(user.isEmpty()){
+            userRepository.save(User.userToEntity(newUser));
+            user = userRepository.findById(newUser.getId());
+        }
+        log.info("[login] 계정을 찾았습니다. " + user);
+
+        TokenDto token = jwtProvider.generateTokenDto(newUser.getId());
+        RefreshToken refreshToken = RefreshToken.builder()
+                .key(newUser.getId())
+                .token(token.getRefreshToken())
+                .build();
+        tokenRepository.save(refreshToken);
+
+        return token;
+    }
+    public String getAccessToken(String code) {
 
         String accessToken = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -53,7 +85,6 @@ public class AuthService {
             String result = getRequestResult(conn);
 
             // Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-            JsonParser parser = new JsonParser();
             JsonElement element = JsonParser.parseString(result);
 
             accessToken = element.getAsJsonObject().get("access_token").getAsString();
@@ -68,10 +99,10 @@ public class AuthService {
         return accessToken;
     }
 
-    public MemberDto getMember(String token) {
+    public UserDto getUser(String token) {
 
         String reqURL = "https://kapi.kakao.com/v2/user/me";
-        MemberDto memberDto = new MemberDto();
+        UserDto userDto = new UserDto();
 
         //access_token을 이용하여 사용자 정보 조회
         try {
@@ -90,26 +121,25 @@ public class AuthService {
             String result = getRequestResult(conn);
 
             //Gson 라이브러리로 JSON파싱
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(result);
+            JsonElement element = JsonParser.parseString(result);
             JsonElement kakaoAccount = element.getAsJsonObject().get("kakao_account");
             JsonElement profile = kakaoAccount.getAsJsonObject().get("profile");
 
             //dto에 저장하기
-            memberDto.setId(element.getAsJsonObject().get("id").getAsLong());
-            memberDto.setNickName(profile.getAsJsonObject().get("nickname").getAsString());
-            memberDto.setProfileImgUrl(profile.getAsJsonObject().get("profile_image_url").getAsString());
-            memberDto.setType("user");
+            userDto.setId(element.getAsJsonObject().get("id").getAsLong());
+            userDto.setNickName(profile.getAsJsonObject().get("nickname").getAsString());
+            userDto.setProfileImgUrl(profile.getAsJsonObject().get("profile_image_url").getAsString());
+            userDto.setType("user");
 
-            log.info(memberDto.toString());
+
+            log.info(userDto.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return memberDto;
+        return userDto;
     }
 
-    // 이 메서드는 HTTP 응답 내용을 문자열로 변환하여 반환합니다.
     private String getRequestResult(HttpURLConnection conn) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         StringBuilder sb = new StringBuilder();
@@ -119,5 +149,20 @@ public class AuthService {
         }
         br.close();
         return sb.toString();
+    }
+
+    public HttpHeaders setTokenHeaders(TokenDto tokenDto) {
+        HttpHeaders headers = new HttpHeaders();
+        ResponseCookie cookie = ResponseCookie.from("RefreshToken", tokenDto.getRefreshToken())
+                .path("/")
+                .maxAge(60 * 60 * 24 * 7) // 쿠키 유효기간 7일로 설정
+                .secure(true)
+                .sameSite("None")
+                .httpOnly(true)
+                .build();
+        headers.add("Set-cookie", cookie.toString());
+        headers.add("Authorization", tokenDto.getAccessToken());
+
+        return headers;
     }
 }
