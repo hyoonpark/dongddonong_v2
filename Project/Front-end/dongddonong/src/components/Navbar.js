@@ -13,11 +13,15 @@ const Navbar = () => {
         </Link>
         <ul class="w-1/2 flex justify-between md:w-1/3">
           <li className="hidden md:block">홈</li>
-          <li className="transition-all border-black delay-100 ease-in-out hover:border-b">
+          <li className="transition-all border-b border-white duration-500 hover:border-orange">
             경기
           </li>
-          <li>기록실</li>
-          <li>로그인</li>
+          <li className="transition-all border-b border-white duration-500 hover:border-orange">
+            기록실
+          </li>
+          <li className="transition-all border-b border-white duration-500 hover:border-orange">
+            로그인
+          </li>
         </ul>
       </div>
     </nav>
