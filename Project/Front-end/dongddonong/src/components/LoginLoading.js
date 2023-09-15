@@ -7,7 +7,7 @@ const LoginLoading = () => {
   // const navigator = useNavigate();
 
   useEffect(() => {
-    axios.get(`https://j9e103.p.ssafy.io/user/login?code=${code}`
+    axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`
     ).then((res) => {
       console.log('성공!!', res.data);
     }).catch(error => {
