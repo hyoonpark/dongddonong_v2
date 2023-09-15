@@ -9,7 +9,7 @@ const LoginLoading = () => {
   useEffect(() => {
     Axios({
       method: "GET",
-      url: 'https://j9e103.p.ssafy.io/login?code=${code}',
+      url: 'https://j9e103.p.ssafy.io/user/login?code=${code}',
     }).then((res) => {
       console.log('성공!!', res.data);
     }).catch(error => {
