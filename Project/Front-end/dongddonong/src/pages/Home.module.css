@@ -1,0 +1,41 @@
+.path {
+  stroke: #000;
+  stroke-dasharray: 1466.9200439453125;
+  stroke-dashoffset: 1466.9200439453125;
+  animation: path 3000ms forwards;
+}
+
+@keyframes path {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.svg1 {
+  transform: scale(0.84) translateY(10%) translateX(-4%);
+}
+
+.svg2 {
+  transform: scale(0.84) translateX(-2%) translateY(-4%);
+}
+
+.practice {
+  top: 12.8%;
+  left: 16%;
+}
+
+.two_bound {
+  top: 44.4%;
+  right: 10%;
+}
+
+.contest {
+  top: 72%;
+  left: 16%;
+}
+
+@media (min-width: 768px) {
+  .header {
+    transform: translateX(8%);
+  }
+}
