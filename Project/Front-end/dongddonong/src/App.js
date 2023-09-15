@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Modal from './components/common/Modal';
-import CallbackKakao from './components/login/CallbackKakao';
+import Game from "./pages/Game/Game";
+import LoginLoading from "./components/LoginLoading";
 
 function App() {
   return (
@@ -11,9 +11,9 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/oauth/callback/kakao" element={<CallbackKakao />}></Route>
+        <Route path="/game" element={<Game />}></Route>
+        <Route path="/oauth/callback/kakao" element={<LoginLoading />}></Route>
       </Routes>
-      <Modal></Modal>
     </BrowserRouter>
   );
 }

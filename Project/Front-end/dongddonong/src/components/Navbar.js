@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
-import Modal from './common/Modal';
-import SocialLogin from './login/SocialLogin';
+import KakaoLogin from "./KakaoLogin";
+import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,16 +27,20 @@ const Navbar = () => {
         </Link>
         <ul class="w-1/2 flex justify-between md:w-1/3">
           <li className="hidden md:block">홈</li>
-          <li className="transition-all border-black delay-100 ease-in-out hover:border-b">
-            경기
+          <Link to="/game">
+            <li className="transition-all border-b border-white duration-500 hover:border-orange">
+              경기
+            </li>
+          </Link>
+          <li className="transition-all border-b border-white duration-500 hover:border-orange">
+            기록실
           </li>
-          <li>기록실</li>
-          <li>
-            <button onClick={openModal}>로그인</button>
+          <li onClick={openModal} className="transition-all border-b border-white duration-500 hover:border-orange">
+            로그인
           </li>
         </ul>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} onLogin={SocialLogin} />
+      <LoginModal isOpen={isModalOpen} onClose={closeModal} onLogin={KakaoLogin} />
     </nav>
   );
 };
