@@ -1,4 +1,23 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const NavItem = styled.li`
+  position: relative;
+  display: inline-block;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    margin-top: 0.25rem;
+    background-color: orange;
+    width: 0;
+    height: 1px;
+    transition: all 0.3s;
+  }
+  &:hover:before {
+    width: 100%;
+  }
+`;
 
 const Navbar = () => {
   return (
@@ -14,16 +33,10 @@ const Navbar = () => {
         <ul class="w-1/2 flex justify-between md:w-1/3">
           <li className="hidden md:block">홈</li>
           <Link to="/game">
-            <li className="transition-all border-b border-white duration-500 hover:border-orange">
-              경기
-            </li>
+            <NavItem>경기</NavItem>
           </Link>
-          <li className="transition-all border-b border-white duration-500 hover:border-orange">
-            기록실
-          </li>
-          <li className="transition-all border-b border-white duration-500 hover:border-orange">
-            로그인
-          </li>
+          <NavItem>기록실임당</NavItem>
+          <NavItem>로그인</NavItem>
         </ul>
       </div>
     </nav>

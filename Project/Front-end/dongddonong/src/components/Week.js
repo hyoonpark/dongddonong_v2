@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 
-function Calendar() {
+function Week() {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const today = new Date();
 
@@ -98,4 +98,4 @@ function Calendar() {
   );
 }
 
-export default Calendar;
+export default Week;

@@ -16,8 +16,6 @@ const Home = () => {
     const ratio = (scrollY - element.offsetTop) / element.offsetHeight;
     const value = length - length * ratio;
 
-    console.log(ratio);
-
     return value < 0 ? 0 : value > length ? length : value;
   };
 
@@ -29,7 +27,7 @@ const Home = () => {
     );
 
     path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.scrollY + window.innerHeight,
+      window.scrollY + window.innerHeight * 0.8,
       content2Ref.current,
       path2Length
     );
@@ -50,7 +48,7 @@ const Home = () => {
 
     path2Ref.current.style.strokeDasharray = path2Length;
     path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.innerHeight,
+      window.innerHeight * 0.8,
       content2Ref.current,
       path2Length
     );

@@ -1,10 +1,12 @@
-import Calendar from "../../components/Calendar";
+import Week from "../../components/Week";
 import Footer from "../../components/Footer";
+import Button from "../../components/Button";
 
 const Game = () => {
   return (
     <div>
-      <Calendar></Calendar>
+      <Week></Week>
+      <Button></Button>
       <Footer></Footer>
     </div>
   );
