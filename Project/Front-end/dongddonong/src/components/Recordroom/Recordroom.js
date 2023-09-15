@@ -10,16 +10,16 @@ const Recordroom = () => {
     return (
         <div className="flex flex-col mt-5 ml-2 mr-2">
             <div className="grid grid-cols-6 gap-3">
-                <div className=" w-24 col-start-1 col-end-3 h-24 bg-slate-300">
+                <div className="col-start-1 col-end-3 h-24">
                     <img src={user} className='rounded-3xl w-24 h-24' alt="사진이 안나와" />
                 </div>
 
-                <div className=" h-24 grid grid-rows-5 col-start-3 col-end-7 bg-slate-200">
-                    <div className='text-center row-start-2'>농구한 시간 : {totalTime}h</div>
-                    <div className='text-center row-start-4'>전체 득점 : 3,432</div>
+                <div className=" h-24 grid grid-rows-5 col-start-3 col-end-7 bg-slate-200 rounded-3xl" >
+                    <div className='text-center text-lg row-start-2'>농구한 시간 : {totalTime}h</div>
+                    <div className='text-center text-lg row-start-4'>전체 득점 : 3,432</div>
                 </div>
             </div>
-            <div className='mt-4 h-10 bg-slate-300 flex text-center items-center gap-6'>
+            <div className='mt-4 h-10 bg-slate-300 flex text-center items-center gap-6 rounded-3xl'>
                 <div></div>
                 <div className=' text-orange bg-white w-1/3 h-6'>연습모드</div>
                 <div className=' bg-white w-1/3 h-6'>투바모드</div>
