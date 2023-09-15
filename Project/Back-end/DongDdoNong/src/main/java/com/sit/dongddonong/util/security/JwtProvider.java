@@ -32,12 +32,6 @@ public class JwtProvider {
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7; //refresh 7일
 
     public JwtProvider(@Value("${spring.jwt.secret}") String secretKey) {
-//        log.info("Secret Key from Properties: {}", secretKey);
-//        byte[] keyBytes= Decoders.BASE64.decode(secretKey);
-//        log.info("Decoded Key Bytes: {}", Arrays.toString(keyBytes));
-//        this.key = Keys.hmacShaKeyFor(keyBytes);
-//        log.info("Key는 뭐야: {}", this.key);
-
         String keyBase64Encoded = Base64.getEncoder().encodeToString(secretKey.getBytes());
         this.key = Keys.hmacShaKeyFor(keyBase64Encoded.getBytes());
     }
@@ -95,12 +89,19 @@ public class JwtProvider {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             /* 커스텀 에러처리 */
+            log.error("시큐리티 예외 발생");
         } catch (ExpiredJwtException e) {
             /* 커스텀 에러처리 */
+            log.error("토큰 만료");
+
         } catch (UnsupportedJwtException e) {
             /* 커스텀 에러처리 */
+            log.error("지원하지 않는 JWT");
+
         } catch (IllegalArgumentException e) {
             /* 커스텀 에러처리 */
+            log.error("단단히 잘못 됐다.");
+
         }
         return false;
     }

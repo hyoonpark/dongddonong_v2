@@ -1,6 +1,5 @@
 package com.sit.dongddonong.dto;
 
-import com.sit.dongddonong.model.User;
 import lombok.*;
 
 @Getter
@@ -17,16 +16,17 @@ public class UserDto {
     private String nickName;
     private long playTime;
     private String email;
+    private String accessToken;
 
-    public static UserDto userToDto(User user){
-        return UserDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .nickName(user.getNickName())
-                .type(user.getType())
-                .playTime(user.getPlayTime())
-                .profileImgUrl(user.getProfileImgUrl())
-                .email(user.getEmail())
-                .build();
-    }
+//    public static UserDto userToDto(User user){
+//        return UserDto.builder()
+//                .id(user.getId())
+//                .name(user.getName())
+//                .nickName(user.getNickName())
+//                .type(user.getType())
+//                .playTime(user.getPlayTime())
+//                .profileImgUrl(user.getProfileImgUrl())
+//                .email(user.getEmail())
+//                .build();
+//    }
 }

@@ -25,6 +25,8 @@ public class User {
     private long playTime;
     @Column
     private String email;
+    @Column
+    private String accessToken;
 
     public static User userToEntity(UserDto userDto){
         return User.builder()
@@ -35,6 +37,7 @@ public class User {
                 .nickName(userDto.getNickName())
                 .playTime(userDto.getPlayTime())
                 .profileImgUrl(userDto.getProfileImgUrl())
+                .accessToken(userDto.getAccessToken())
                 .build();
     }
 

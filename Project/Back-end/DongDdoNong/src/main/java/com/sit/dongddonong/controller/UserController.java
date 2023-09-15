@@ -1,11 +1,10 @@
 package com.sit.dongddonong.controller;
 
 
-import com.sit.dongddonong.dto.TokenDto;
-import com.sit.dongddonong.service.AuthService;
+import com.sit.dongddonong.dto.UserDto;
+import com.sit.dongddonong.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    private final AuthService authService;
+    private final UserService userService;
 
     @GetMapping("/login")
-    public ResponseEntity login(@RequestParam String code) {
-        TokenDto tokenDto = authService.login(code);
-        HttpHeaders headers = authService.setTokenHeaders(tokenDto);
+    public ResponseEntity login(@RequestParam String code) throws Exception {
+        UserDto user = userService.login(code);
+//        HttpHeaders headers = userService.setTokenHeaders(tokenDto);
+//        return ResponseEntity.ok().headers(headers).body("accessToken: " + tokenDto.getAccessToken());
+        return ResponseEntity.ok().body(user);
 
-        return ResponseEntity.ok().headers(headers).body("accessToken: " + tokenDto.getAccessToken());
     }
 }
