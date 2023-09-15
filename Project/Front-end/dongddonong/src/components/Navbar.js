@@ -1,6 +1,20 @@
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import KakaoLogin from "./KakaoLogin";
+import LoginModal from './LoginModal';
+
 const Navbar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <nav className="h-20 border-black border-b">
       <div class="flex justify-between items-center h-20 max-w-7xl mx-4 mb:m-auto">
@@ -21,11 +35,12 @@ const Navbar = () => {
           <li className="transition-all border-b border-white duration-500 hover:border-orange">
             기록실
           </li>
-          <li className="transition-all border-b border-white duration-500 hover:border-orange">
+          <li onClick={openModal} className="transition-all border-b border-white duration-500 hover:border-orange">
             로그인
           </li>
         </ul>
       </div>
+      <LoginModal isOpen={isModalOpen} onClose={closeModal} onLogin={KakaoLogin} />
     </nav>
   );
 };

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Game from "./pages/Game/Game";
+import LoginLoading from "./components/LoginLoading";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/game" element={<Game />}></Route>
+        <Route path="/oauth/callback/kakao" element={<LoginLoading />}></Route>
       </Routes>
     </BrowserRouter>
   );
