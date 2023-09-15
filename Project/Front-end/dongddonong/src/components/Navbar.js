@@ -32,9 +32,11 @@ const Navbar = () => {
               경기
             </li>
           </Link>
+          <Link to="/recordroom">
           <li className="transition-all border-b border-white duration-500 hover:border-orange">
             기록실
           </li>
+          </Link>
           <li onClick={openModal} className="transition-all border-b border-white duration-500 hover:border-orange">
             로그인
           </li>
