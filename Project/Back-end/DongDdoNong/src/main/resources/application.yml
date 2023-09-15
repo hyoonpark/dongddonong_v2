@@ -5,20 +5,27 @@ spring:
 #    driver-class-name: org.mariadb.jdbc.Driver
 #    username: ssafyE103
 #    password: 1793
-    url: jdbc:mysql://localhost:3307/dong_ddo_nong
+    url: jdbc:mariadb://localhost:3307/dong_ddo_nong
     driver-class-name: org.mariadb.jdbc.Driver
-    username: ssafyE103
-    password: root
+    username: root
+    password: ssafy
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
     open-in-view: false
     generate-ddl: true
     show-sql: true
     hibernate:
       ddl-auto: update
+  jwt:
+    secret: secretJiHongHaYoonDongJuDaEunJungWooBulHoeWeAreTogetherSecret*@#$^&&@$3
+kakao:
+  client-id: 4e01b41f45f312031ef4c97ed183fa71
+#  redirect-uri: http://localhost:3000/oauth/callback/kakao
+  redirect-uri: https://j9e103.p.ssafy.io/oauth/callback/kakao
 
 server:
   ssl:
     key-store: classpath:keystore.p12
     key-store-password: 1234
     key-store-type: PKCS12
+
