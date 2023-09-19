@@ -20,48 +20,49 @@ SSAFY 9기 부울경 1반 특화프로젝트 E103
 
 #### Front-end
 ```
-my-react-app/
-  ├── public/
-  │   ├── index.html
-  │   └── favicon.ico
-  ├── src/
-  │   ├── api-config/
-  │   ├── assets/
-  │   │   ├── images/
-  │   │   └── css/
-  │   ├── components/
-  │   │   ├── App/
-  │   │   │   ├── App.js
-  │   │   │   └── App.css
-  │   │   ├── Header/
-  │   │   │   ├── Header.js
-  │   │   │   └── Header.css
-  │   │   ├── Nav/
-  │   │   │   ├── Nav.js
-  │   │   │   └── Nav.css
-  │   │   ├── Footer/
-  │   │   │   ├── Footer.js
-  │   │   │   └── Footer.css
-  │   │   ├── Simulation/
-  │   │   │   ├── StartForm/
-  │   │   │   └── StoryForm/
-  │   │   └── ...
-  │   ├── pages/
-  │   │   ├── HomePage/
-  │   │   │   ├── HomePage.js
-  │   │   │   └── HomePage.css
-  │   │   ├── AboutPage/
-  │   │   │   ├── AboutPage.js
-  │   │   │   └── AboutPage.css
-  │   │   └── ...
-  │   ├── utils/
-  │   ├── services/
-  │   ├── store/
-  │   ├── index.js
-  │   └── index.css
-  ├── .gitignore
-  ├── package.json
-  └── README.md
+📦src
+ ┣ 📂assets
+ ┃ ┗ 📂img
+ ┃ ┃ ┣ 📜Games.png
+ ┃ ┃ ┣ 📜image.png
+ ┃ ┃ ┣ 📜kakao_login_btn.png
+ ┃ ┃ ┣ 📜player.png
+ ┃ ┃ ┣ 📜player2.jpg
+ ┃ ┃ ┣ 📜player3.jpg
+ ┃ ┃ ┗ 📜Profile.png
+ ┣ 📂components
+ ┃ ┣ 📂Chart
+ ┃ ┃ ┣ 📜Chart.js
+ ┃ ┃ ┣ 📜HalfChart.js
+ ┃ ┃ ┗ 📜LineChart.js
+ ┃ ┗ 📂UI
+ ┃ ┃ ┣ 📜Button.js
+ ┃ ┃ ┣ 📜Card.js
+ ┃ ┃ ┣ 📜Footer.js
+ ┃ ┃ ┣ 📜Navbar.js
+ ┃ ┃ ┗ 📜Wrapper.js
+ ┣ 📂pages
+ ┃ ┣ 📂Game
+ ┃ ┃ ┗ 📜GamePage.js
+ ┃ ┃ ┣ 📜Calendar.js
+ ┃ ┣ 📂Home
+ ┃ ┃ ┣ 📜HomePage.js
+ ┃ ┃ ┗ 📜HomePage.module.css
+ ┃ ┣ 📂Login
+ ┃ ┃ ┣ 📜KakaoLoginPage.js
+ ┃ ┃ ┣ 📜CallbackKakao.js
+ ┃ ┃ ┣ 📜LoginLoading.js
+ ┃ ┃ ┗ 📜LoginModal.js
+ ┃ ┗ 📂Recordroom
+ ┃ ┃ ┣ 📜RecordroomPage.js
+ ┃ ┃ ┗ 📜RecordroomPage.module.css
+ ┣ 📜App.js
+ ┣ 📜index.css
+ ┗ 📜index.js
+
+ 1. components와 pages로 관리
+ 2. components폴더에는 재사용이 가능한 요소들을 기능별 폴더로 관리
+ 3. pages폴더에는 페이지별로 폴더를 두고, 각 폴더는 해당페이지에서만 사용하는 컴포넌트를 관리
 ```
 
 #### Back-end
