@@ -1,24 +1,30 @@
 package com.sit.dongddonong.controller;
 
 import com.sit.dongddonong.dto.GameDto;
+import com.sit.dongddonong.dto.PlayerHistoryDto;
 import com.sit.dongddonong.service.GameService;
+import com.sit.dongddonong.service.PlayerHistoryService;
 import com.sit.dongddonong.util.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/game")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@Tag(name = "영상 분석 데이터", description = "영상 분석 데이터 API")
+@Tag(name = "경기 영상 분석 데이터", description = "경기 영상 분석 데이터 API")
 public class GameController {
 
     private final GameService gameService;
+    private final PlayerHistoryService playerHistoryService;
 
     @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
     private ApiResponse<String> notFoundHandle(ChangeSetPersister.NotFoundException exception) {
@@ -33,6 +39,25 @@ public class GameController {
     @PostMapping
     public ApiResponse<String> createGameAndPlayerHistories(@RequestBody GameDto gameDto) {
         gameService.createGameAndPlayerHistories(gameDto);
+        return ApiResponse.ok("성공");
+    }
+
+    @Operation(summary = "경기 가져오기", description = "모든 경기를 가져옵니다.")
+    @GetMapping
+    public ApiResponse<List<GameDto>> getAllGames() {
+        return ApiResponse.ok(gameService.getAllGames());
+    }
+
+    @Operation(summary = "경기 유저별로 가져오기", description = "모든 경기를 유저별로 가져옵니다.")
+    @GetMapping("/{userId}")
+    public ApiResponse<List<PlayerHistoryDto>> getPlayerHistory(@PathVariable("userId") long userId) {
+        return ApiResponse.ok(playerHistoryService.getPlayerHistory(userId));
+    }
+
+    @Operation(summary = "경기 user 연결하기", description = "경기를 유저랑 매핑한다.")
+    @PatchMapping("/{PlayerHistoryId}")
+    public ApiResponse<String> putPlayerHistory(@PathVariable("PlayerHistoryId") long PlayerHistoryId, @Parameter long userId) {
+        playerHistoryService.putPlayerHistory(PlayerHistoryId, userId);
         return ApiResponse.ok("성공");
     }
 
