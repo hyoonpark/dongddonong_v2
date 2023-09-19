@@ -23,7 +23,7 @@ public class Game {
     private Date createdAt;
 
     @Column
-    private Date game_date;
+    private Date gameDate;
 
     @Column
     private String location;
@@ -38,7 +38,7 @@ public class Game {
 
     public static Game createGame(Date game_date, String location) {
         return Game.builder()
-                .game_date(game_date)
+                .gameDate(game_date)
                 .location(location)
                 .playerHistories(new ArrayList<>())
                 .build();
