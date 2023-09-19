@@ -39,12 +39,11 @@ public class UserService {
     public UserDto login(String code) throws Exception {
         UserDto newUser = getKakaoUser(getAccessToken(code));
         Optional<User> user = userRepository.findById(newUser.getId());
-        if(user.isEmpty()){
-            userRepository.save(User.userToEntity(newUser));
-            user = userRepository.findById(newUser.getId());
-        }
-
-        log.info("[login] 계정을 찾았습니다. " + user);
+//        if(user.isEmpty()){
+//            userRepository.save(User.userToEntity(newUser));
+//            user = userRepository.findById(newUser.getId());
+//        }
+//        log.info("[login] 계정을 찾았습니다. " + user);
 
         TokenDto token = jwtProvider.generateTokenDto(newUser.getId());
 
@@ -53,7 +52,9 @@ public class UserService {
                 .token(token.getRefreshToken())
                 .build();
         tokenRepository.save(refreshToken);
+
         newUser.setAccessToken(token.getAccessToken());
+        userRepository.save(User.userToEntity(newUser));
 
         return newUser;
     }

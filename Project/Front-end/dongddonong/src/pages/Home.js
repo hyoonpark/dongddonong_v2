@@ -7,53 +7,47 @@ import image from "../assets/image.png";
 const Home = () => {
   const content1Ref = useRef();
   const path1Ref = useRef();
-  let path1Length;
   const content2Ref = useRef();
   const path2Ref = useRef();
-  let path2Length;
 
   const calcDashoffset = (scrollY, element, length) => {
     const ratio = (scrollY - element.offsetTop) / element.offsetHeight;
     const value = length - length * ratio;
 
-    console.log(ratio);
-
     return value < 0 ? 0 : value > length ? length : value;
   };
 
-  const scrollHandler = () => {
-    path1Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.scrollY + window.innerHeight * 0.8,
-      content1Ref.current,
-      path1Length
-    );
-
-    path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.scrollY + window.innerHeight,
-      content2Ref.current,
-      path2Length
-    );
-  };
-
   useEffect(() => {
+    const scrollHandler = () => {
+      const scrollY = window.scrollY + window.innerHeight * 0.8;
+
+      if (path1Ref.current) {
+        const path1Length = path1Ref.current.getTotalLength();
+        path1Ref.current.style.strokeDasharray = path1Length;
+        path1Ref.current.style.strokeDashoffset = calcDashoffset(
+          scrollY,
+          content1Ref.current,
+          path1Length
+        );
+      }
+
+      if (path2Ref.current) {
+        const path2Length = path2Ref.current.getTotalLength();
+        path2Ref.current.style.strokeDasharray = path2Length;
+        path2Ref.current.style.strokeDashoffset = calcDashoffset(
+          scrollY,
+          content2Ref.current,
+          path2Length
+        );
+      }
+    };
+
     window.addEventListener("scroll", scrollHandler);
+    scrollHandler();
 
-    if (path1Ref.current) path1Length = path1Ref.current.getTotalLength();
-    if (path2Ref.current) path2Length = path2Ref.current.getTotalLength();
-
-    path1Ref.current.style.strokeDasharray = path1Length;
-    path1Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.innerHeight * 0.8,
-      content1Ref.current,
-      path1Length
-    );
-
-    path2Ref.current.style.strokeDasharray = path2Length;
-    path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.innerHeight,
-      content2Ref.current,
-      path2Length
-    );
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
 
   return (
