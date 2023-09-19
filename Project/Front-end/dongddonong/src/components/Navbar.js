@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const NavItem = styled.li`
+import KakaoLogin from "./KakaoLogin";
+import LoginModal from "./LoginModal";
+
+const Li = styled.li`
   position: relative;
   display: inline-block;
   &:before {
@@ -20,19 +23,8 @@ const NavItem = styled.li`
   }
 `;
 
-import KakaoLogin from "./KakaoLogin";
-import LoginModal from "./LoginModal";
-
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <nav className="h-20 border-black border-b">
@@ -47,26 +39,18 @@ const Navbar = () => {
         <ul class="w-1/2 flex justify-between md:w-1/3">
           <li className="hidden md:block">홈</li>
           <Link to="/game">
-            <NavItem>경기</NavItem>
+            <Li>경기</Li>
           </Link>
-          <NavItem>기록실임당</NavItem>
-          <NavItem>로그인</NavItem>
+
           <Link to="/recordroom">
-            <li className="transition-all border-b border-white duration-500 hover:border-orange">
-              기록실
-            </li>
+            <Li>기록실</Li>
           </Link>
-          <li
-            onClick={openModal}
-            className="transition-all border-b border-white duration-500 hover:border-orange"
-          >
-            로그인
-          </li>
+          <Li onClick={() => setIsModalOpen(true)}>로그인</Li>
         </ul>
       </div>
       <LoginModal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={() => setIsModalOpen(false)}
         onLogin={KakaoLogin}
       />
     </nav>
