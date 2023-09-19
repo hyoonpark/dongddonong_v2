@@ -4,6 +4,7 @@ import user2 from '../../assets/player2.jpg'
 import user3 from '../../assets/player3.jpg'
 import Chart from './Chart'
 import HalfChart from './HalfChart'
+import LineChart from './LineChart'
 
 const Recordroom = () => {
     const totalTime = 10
@@ -125,7 +126,7 @@ const Recordroom = () => {
                     </div>
                 </div>
             </div>
-
+            <LineChart></LineChart>
         </div>
     )
 }
