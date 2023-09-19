@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d854de1d-f5dc-432a-a52c-ed522fb3a0c6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Front-end/dongddonong/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/dongddonong/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/dongddonong/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/dongddonong/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/dongddonong/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/dongddonong/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/dongddonong/src/components/login/CallbackKakao.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": -1
+  "associatedIndex": 0
 }]]></component>
   <component name="ProjectId" id="2VNY54U4su5xiavkfrWOJBLBCRT" />
   <component name="ProjectViewState">
@@ -29,7 +41,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/FE/5-kakaoLogin",
+    "git-widget-placeholder": "feature/BE/6-CICD-setting",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -43,6 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694677819705</updated>
       <workItem from="1694677820949" duration="35000" />
+      <workItem from="1695089044448" duration="8779000" />
     </task>
     <servers />
   </component>
