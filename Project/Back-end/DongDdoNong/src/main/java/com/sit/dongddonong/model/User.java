@@ -21,8 +21,8 @@ public class User {
     private String name;
     @Column
     private String nickName;
-    @Column
-    private long playTime;
+//    @Column
+//    private long playTime;
     @Column
     private String email;
     @Column
@@ -35,7 +35,7 @@ public class User {
                 .name(userDto.getName())
                 .type(userDto.getType())
                 .nickName(userDto.getNickName())
-                .playTime(userDto.getPlayTime())
+//                .playTime(userDto.getPlayTime())
                 .profileImgUrl(userDto.getProfileImgUrl())
                 .accessToken(userDto.getAccessToken())
                 .build();

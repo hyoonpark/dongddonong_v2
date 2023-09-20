@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-import KakaoLogin from "./KakaoLogin";
-import LoginModal from "./LoginModal";
+import KakaoLogin from './../components/Login/KakaoLogin';
+import LoginModal from './../components/Login/LoginModal';
 
 const Li = styled.li`
   position: relative;

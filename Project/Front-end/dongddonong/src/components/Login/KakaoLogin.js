@@ -1,5 +1,5 @@
 import React from 'react';
-import KakaoLoginLogo from "../assets/kakao_login_btn.png";
+import KakaoLoginLogo from "../../assets/kakao_login_btn.png";
 
 const KakaoLogin = () => {
   const REST_API_KEY = '4e01b41f45f312031ef4c97ed183fa71'; //REST API KEY
@@ -18,4 +18,4 @@ const KakaoLogin = () => {
   );
 };
 
-export default KakaoLogin;
+export default KakaoLogin; 
