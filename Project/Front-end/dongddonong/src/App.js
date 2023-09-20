@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Game from "./pages/Game/Game";
 import LoginLoading from "./components/LoginLoading";
 import RecordRoom from "./components/Recordroom/Recordroom"
-
 function App() {
   return (
     <BrowserRouter>
