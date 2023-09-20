@@ -1,14 +1,13 @@
-import React, { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 
-function Week() {
+const Week = ({ onChange, selectedDate }) => {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = new Date();
-
-  const [selectedDate, setSelectedDate] = useState(today);
-  const [currentWeek, setCurrentWeek] = useState(() => getWeekArray(today));
+  const [currentWeek, setCurrentWeek] = useState(() =>
+    getWeekArray(selectedDate)
+  );
 
   const handleClick = useCallback((date) => {
-    setSelectedDate(date);
+    onChange(date);
   }, []);
 
   const isDateSelected = useCallback(
@@ -30,23 +29,26 @@ function Week() {
         ? `${baseClassName} border-b border-orange`
         : baseClassName;
     },
-
     [isDateSelected]
   );
 
   const weekArray = useMemo(() => getWeekArray(currentWeek[0]), [currentWeek]);
 
-  function goToNextWeek() {
+  const goToNextWeek = () => {
     const nextWeekDate = new Date(currentWeek[0]);
     nextWeekDate.setDate(nextWeekDate.getDate() + 7);
     setCurrentWeek([nextWeekDate, ...weekArray.slice(0, 6)]);
-  }
+  };
 
-  function goToPreviousWeek() {
+  const goToPreviousWeek = () => {
     const previousWeekDate = new Date(currentWeek[0]);
     previousWeekDate.setDate(previousWeekDate.getDate() - 7);
     setCurrentWeek([previousWeekDate, ...weekArray.slice(0, 6)]);
-  }
+  };
+
+  useEffect(() => {
+    setCurrentWeek(getWeekArray(selectedDate));
+  }, [selectedDate]);
 
   function getWeekArray(startDate) {
     const weekArray = [];
@@ -65,7 +67,7 @@ function Week() {
   const currentYear = currentWeek[0].getFullYear();
 
   return (
-    <div className="w-96 text-center">
+    <div className="text-center">
       <div>
         {currentYear}년 {currentMonth + 1}월
       </div>
@@ -96,6 +98,6 @@ function Week() {
       </div>
     </div>
   );
-}
+};
 
 export default Week;
