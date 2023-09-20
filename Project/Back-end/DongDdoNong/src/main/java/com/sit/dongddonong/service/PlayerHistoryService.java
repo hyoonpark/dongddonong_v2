@@ -8,6 +8,9 @@ import com.sit.dongddonong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,5 +41,19 @@ public class PlayerHistoryService {
                     .build();
             playerHistoryRepository.save(playerHistory);
         }
+    }
+
+    public List<PlayerHistoryDto> getPlayerHistoriesByCondition(long userId, String mode, String startDate, String endDate) throws ParseException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+
+
+        Date start = startDate != null ? format.parse(startDate) : null;
+        Date end = endDate != null ? format.parse(endDate) : null;
+
+        List<PlayerHistory> playerHistories = playerHistoryRepository.findPlayerHistoriesByCondition(userId, mode, start, end);
+        return playerHistories.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 }

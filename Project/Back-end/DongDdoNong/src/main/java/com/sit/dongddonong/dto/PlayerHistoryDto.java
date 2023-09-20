@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Getter
 @Builder(toBuilder = true)
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlayerHistoryDto {

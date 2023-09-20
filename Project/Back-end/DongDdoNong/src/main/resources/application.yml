@@ -26,7 +26,6 @@ kakao:
   redirect-uri: https://j9e103.p.ssafy.io/oauth/callback/kakao
 
 #서버
-
 server:
   ssl:
     key-store: classpath:keystore.p12

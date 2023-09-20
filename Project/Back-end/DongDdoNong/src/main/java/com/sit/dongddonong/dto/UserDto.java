@@ -5,7 +5,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
@@ -14,7 +13,7 @@ public class UserDto {
     private String profileImgUrl;
     private String name;
     private String nickName;
-    private long playTime;
+//    private long playTime;
     private String email;
     private String accessToken;
 
