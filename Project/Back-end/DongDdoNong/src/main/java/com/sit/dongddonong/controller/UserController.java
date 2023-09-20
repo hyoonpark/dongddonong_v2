@@ -31,8 +31,6 @@ public class UserController {
     @GetMapping("/login")
     public ApiResponse<UserDto> login(@RequestParam String code) throws Exception {
         UserDto user = userService.login(code);
-//        HttpHeaders headers = userService.setTokenHeaders(tokenDto);
-//        return ResponseEntity.ok().headers(headers).body("accessToken: " + tokenDto.getAccessToken());
         return ApiResponse.ok(user);
 
     }

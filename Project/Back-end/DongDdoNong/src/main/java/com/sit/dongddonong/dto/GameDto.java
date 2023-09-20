@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameDto {
