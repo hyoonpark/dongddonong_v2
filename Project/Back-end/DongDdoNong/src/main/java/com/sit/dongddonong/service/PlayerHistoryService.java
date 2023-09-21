@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 public class PlayerHistoryService {
     private final PlayerHistoryRepository playerHistoryRepository;
     private final UserRepository userRepository;
+    private final GameService gameService;
+
 
     public List<PlayerHistoryDto> getPlayerHistory(long userId){
         List<PlayerHistory> playerHistories = playerHistoryRepository.findByUserId(userId);
@@ -40,13 +42,19 @@ public class PlayerHistoryService {
                     .user(user)
                     .build();
             playerHistoryRepository.save(playerHistory);
+
+            // 부모 객체인 Game의 모든 유저가 할당 되어있는지 확인하고,
+            // 할당 다 되었다면 isAssigned 를 true 로 변경
+            gameService.checkGameUserAssigned(playerHistory.getGame().getId());
+
+
+
         }
     }
 
     public List<PlayerHistoryDto> getPlayerHistoriesByCondition(long userId, String mode, String startDate, String endDate) throws ParseException {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-
 
         Date start = startDate != null ? format.parse(startDate) : null;
         Date end = endDate != null ? format.parse(endDate) : null;
