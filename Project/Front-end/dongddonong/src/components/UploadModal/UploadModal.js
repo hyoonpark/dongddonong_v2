@@ -5,6 +5,7 @@ import MultiButton from './MultiButton';
 import axios from "axios";
 import trashbin from "../../assets/trashbin.png"
 
+//푸쉬용
 const UploadModal = () => {
     const [files, setFiles] = useState(null);
     const [imagesSrc, setImagesSrc] = useState([]);
