@@ -8,11 +8,15 @@
 
   & abbr {
     position: absolute;
-    left: 4px;
-    top: 4px;
+    left: 2px;
+    top: 2px;
+    font-size: 12px;
   }
 }
 
+abbr {
+  text-decoration: none;
+}
 .react-calendar__tile--now {
   background: white;
 }

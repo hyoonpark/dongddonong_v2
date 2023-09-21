@@ -37,7 +37,7 @@ const GamePage = () => {
 
   return (
     <div>
-      <div className="flex flex-col bg-secondary md:mx-4 md:max-w-7xl">
+      <div className="flex flex-col px-4 mx-auto bg-secondary max-w-7xl">
         <div className="relative">
           <Calendars
             className="absolute right-0"
