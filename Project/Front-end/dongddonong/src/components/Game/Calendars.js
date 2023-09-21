@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, useRef } from "react";
 import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -49,17 +49,17 @@ const Calendars = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div
-        className="relative h-12 cursor-pointer"
+        className={`relative h-12 cursor-pointer`}
         onClick={openCalendarHandler}
       >
-        <div className="text-center h-12 flex justify-center items-center">
+        <div className="flex items-center justify-center h-12 text-center">
           {selectedDate.getFullYear()}년 {selectedDate.getMonth() + 1}월
         </div>
         <div
           className={
-            "absolute right-0 top-6 flex w-16 items-center -translate-y-1/2"
+            "absolute right-0 top-6 flex w-16 items-center -translate-y-1/2 justify-end"
           }
         >
           <img src={calendar} alt="달력" className="w-7" />
@@ -71,19 +71,19 @@ const Calendars = ({
         </div>
       </div>
 
-      {isClick && (
-        <Calendar
-          onChange={handleDateChange}
-          formatDay={(e, date) => moment(date).format("DD")}
-          onActiveStartDateChange={handleActiveStartDateChange}
-          value={selectedDate}
-          activeStartDate={activeStartDate}
-          className={`${handleClassName} absolute right-0`}
-          tileClassName={tileClassNameHandler}
-          tileContent={tileContentHandler}
-        />
-      )}
-    </Fragment>
+      <Calendar
+        onChange={handleDateChange}
+        formatDay={(e, date) => moment(date).format("DD")}
+        onActiveStartDateChange={handleActiveStartDateChange}
+        value={selectedDate}
+        activeStartDate={activeStartDate}
+        className={`${handleClassName} ${
+          isClick ? "show" : ""
+        } absolute right-0 custom-calendar`}
+        tileClassName={tileClassNameHandler}
+        tileContent={tileContentHandler}
+      />
+    </>
   );
 };
 
