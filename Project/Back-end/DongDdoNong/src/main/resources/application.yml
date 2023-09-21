@@ -1,16 +1,16 @@
 spring:
   datasource:
     # 로컬
-    url: jdbc:mariadb://localhost:3307/dong_ddo_nong
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: ssafy
+#    url: jdbc:mariadb://localhost:3307/dong_ddo_nong
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    username: root
+#    password: ssafy
 
     # 서버
-#    url: jdbc:mariadb://j9e103.p.ssafy.io:3306/dong_ddo_nong
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    username: ssafyE103
-#    password: 1793
+    url: jdbc:mariadb://j9e103.p.ssafy.io:3306/dong_ddo_nong
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ssafyE103
+    password: 1793
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     open-in-view: false
@@ -22,15 +22,15 @@ spring:
     secret: secretJiHongHaYoonDongJuDaEunJungWooBulHoeWeAreTogetherSecret*@#$^&&@$3
 kakao:
   client-id: 4e01b41f45f312031ef4c97ed183fa71
-  redirect-uri: http://localhost:3000/oauth/callback/kakao
-#  redirect-uri: https://j9e103.p.ssafy.io/oauth/callback/kakao
+#  redirect-uri: http://localhost:3000/oauth/callback/kakao
+  redirect-uri: https://j9e103.p.ssafy.io/oauth/callback/kakao
 
 #서버
-#server:
-#  ssl:
-#    key-store: classpath:keystore.p12
-#    key-store-password: 1234
-#    key-store-type: PKCS12
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 1234
+    key-store-type: PKCS12
 
 springdoc:
   packages-to-scan: com.sit.dongddonong.controller

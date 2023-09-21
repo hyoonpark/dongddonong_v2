@@ -23,24 +23,25 @@ public class Game {
     private Long userId;
 
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Boolean isAssigned;
 
     @Column
     private Date gameDate;
 
-    @Column
-    private String location;
+//    @Column
+//    private String location;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlayerHistory> playerHistories = new ArrayList<>();
 
     @Column
-    private Boolean isAssigned;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+        isAssigned = false;
     }
 
     public static Game createGame(GameDto gameDto) {
@@ -48,7 +49,7 @@ public class Game {
                 .userId(gameDto.getUserId())
                 .isAssigned(gameDto.isAssigned())
                 .gameDate(gameDto.getGameDate())
-                .location(gameDto.getLocation())
+//                .location(gameDto.getLocation())
                 .playerHistories(new ArrayList<>())
                 .build();
     }

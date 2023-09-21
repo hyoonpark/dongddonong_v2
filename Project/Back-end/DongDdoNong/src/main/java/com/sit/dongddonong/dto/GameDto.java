@@ -22,9 +22,11 @@ public class GameDto {
     private Date gameDate;
     @Schema(hidden = true)
     private Date createdAt;
-    private String location;
-    private List<PlayerHistoryDto> playerHistories;
+    @Schema(hidden = true)
     private boolean isAssigned;
+//    private String location;
+    private List<PlayerHistoryDto> playerHistories;
+
 
     public static GameDto fromEntity(Game game) {
         return GameDto.builder()
@@ -33,11 +35,10 @@ public class GameDto {
                 .isAssigned(game.getIsAssigned())
                 .createdAt(game.getCreatedAt())
                 .gameDate(game.getGameDate())
-                .location(game.getLocation())
+//                .location(game.getLocation())
                 .playerHistories(game.getPlayerHistories().stream()
                         .map(PlayerHistoryDto::fromEntity)
                         .collect(Collectors.toList()))
-                .isAssigned(game.getIsAssigned())
                 .build();
     }
 }
