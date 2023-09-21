@@ -1,14 +1,11 @@
-import { useState, Fragment } from "react";
+import { useState, useRef } from "react";
 import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import axios from "axios";
 
 import calendar from "../../assets/calendar.png";
 import caret from "../../assets/caret.png";
 import "./Calderas.css";
-
-axios.get();
 
 const Calendars = ({
   selectedDate,
@@ -52,9 +49,9 @@ const Calendars = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div
-        className="relative h-12 cursor-pointer"
+        className={`relative h-12 cursor-pointer`}
         onClick={openCalendarHandler}
       >
         <div className="flex items-center justify-center h-12 text-center">
@@ -74,19 +71,19 @@ const Calendars = ({
         </div>
       </div>
 
-      {isClick && (
-        <Calendar
-          onChange={handleDateChange}
-          formatDay={(e, date) => moment(date).format("DD")}
-          onActiveStartDateChange={handleActiveStartDateChange}
-          value={selectedDate}
-          activeStartDate={activeStartDate}
-          className={`${handleClassName} absolute right-0`}
-          tileClassName={tileClassNameHandler}
-          tileContent={tileContentHandler}
-        />
-      )}
-    </Fragment>
+      <Calendar
+        onChange={handleDateChange}
+        formatDay={(e, date) => moment(date).format("DD")}
+        onActiveStartDateChange={handleActiveStartDateChange}
+        value={selectedDate}
+        activeStartDate={activeStartDate}
+        className={`${handleClassName} ${
+          isClick ? "show" : ""
+        } absolute right-0 custom-calendar`}
+        tileClassName={tileClassNameHandler}
+        tileContent={tileContentHandler}
+      />
+    </>
   );
 };
 

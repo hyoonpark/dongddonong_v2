@@ -44,3 +44,13 @@ abbr {
 .hide {
   color: var(--secondary);
 }
+
+.custom-calendar {
+  transition: transform 0.2s;
+  transform-origin: top right;
+  transform: scale(0);
+}
+
+.show {
+  transform: scale(1);
+}

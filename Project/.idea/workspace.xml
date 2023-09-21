@@ -8,7 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI/DongDdoNong/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/AI/DongDdoNong/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI/DongDdoNong/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI/DongDdoNong/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/DongDdoNong/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AI/DongDdoNong/requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI/DongDdoNong/requirement.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI/DongDdoNong/uwsgi.ini" beforeDir="false" afterPath="$PROJECT_DIR$/AI/DongDdoNong/uwsgi.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +113,8 @@
       <workItem from="1695089044448" duration="8779000" />
       <workItem from="1695170971887" duration="4580000" />
       <workItem from="1695254865549" duration="6634000" />
-      <workItem from="1695264081315" duration="2459000" />
+      <workItem from="1695264081315" duration="5944000" />
+      <workItem from="1695280704690" duration="418000" />
     </task>
     <servers />
   </component>
