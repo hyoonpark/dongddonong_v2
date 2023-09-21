@@ -20,7 +20,7 @@
 
 
 # Image Download
-FROM python:3.8.5
+FROM tiangolo/uwsgi-nginx-flask:python3.8
 WORKDIR /app
 
 # Copy files
