@@ -13,7 +13,7 @@ const LoginLoading = () => {
     axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`
       // axios.get(`http://localhost:8589/user/login?code=${code}`
     ).then((res) => {
-      console.log('성공!!', res.data);
+      // console.log('성공!!', res.data);
       localStorage.setItem('token', res.data.data.accessToken)
       setLoggedUser(res.data.data);
       navigator('/') // 로그인 시도하던 페이지로 이동
