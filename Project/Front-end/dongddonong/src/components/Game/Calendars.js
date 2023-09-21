@@ -2,10 +2,13 @@ import { useState, Fragment } from "react";
 import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import axios from "axios";
 
 import calendar from "../../assets/calendar.png";
 import caret from "../../assets/caret.png";
 import "./Calderas.css";
+
+axios.get();
 
 const Calendars = ({
   selectedDate,
@@ -54,12 +57,12 @@ const Calendars = ({
         className="relative h-12 cursor-pointer"
         onClick={openCalendarHandler}
       >
-        <div className="text-center h-12 flex justify-center items-center">
+        <div className="flex items-center justify-center h-12 text-center">
           {selectedDate.getFullYear()}년 {selectedDate.getMonth() + 1}월
         </div>
         <div
           className={
-            "absolute right-0 top-6 flex w-16 items-center -translate-y-1/2"
+            "absolute right-0 top-6 flex w-16 items-center -translate-y-1/2 justify-end"
           }
         >
           <img src={calendar} alt="달력" className="w-7" />

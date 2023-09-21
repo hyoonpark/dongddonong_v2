@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import KakaoLogin from './../components/Login/KakaoLogin';
-import LoginModal from './../components/Login/LoginModal';
+
+import KakaoLogin from "./../components/Login/KakaoLogin";
+import LoginModal from "./../components/Login/LoginModal";
+import video from "../assets/icon/video.png";
+import VideoModal from "./VideoModal";
 
 const Li = styled.li`
   position: relative;
@@ -12,9 +15,9 @@ const Li = styled.li`
     position: absolute;
     bottom: 0;
     margin-top: 0.25rem;
-    background-color: primary;
+    background-color: var(--primary);
     width: 0;
-    height: 1px;
+    height: 2px;
     transition: all 0.3s;
   }
   &:hover:before {
@@ -26,8 +29,8 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <nav className="h-20 border-black border-b">
-      <div className="flex justify-between items-center h-20 max-w-7xl mx-4 mb:m-auto">
+    <nav className="h-20">
+      <div className="flex items-center justify-between h-20 px-4 mx-auto border-b border-black max-w-7xl">
         <Link to="/">
           <img
             className="h-14"
@@ -35,8 +38,9 @@ const Navbar = () => {
             alt="로고"
           />
         </Link>
-        <ul className="w-1/2 flex justify-between md:w-1/3">
-          <li className="hidden md:block">홈</li>
+
+        <div className="w-1/4"></div>
+        <ul className="flex items-center justify-between w-1/3">
           <Link to="/game">
             <Li>경기</Li>
           </Link>
@@ -46,12 +50,18 @@ const Navbar = () => {
           </Link>
           <Li onClick={() => setIsModalOpen(true)}>로그인</Li>
         </ul>
+
+        <button>
+          <img className="w-8" src={video} alt="업로드" />
+        </button>
       </div>
+
       <LoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onLogin={KakaoLogin}
       />
+      <VideoModal></VideoModal>
     </nav>
   );
 };

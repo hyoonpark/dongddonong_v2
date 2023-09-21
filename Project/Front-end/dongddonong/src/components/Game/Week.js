@@ -3,7 +3,8 @@ import { useCallback, useMemo, useEffect } from "react";
 const Day = ({ date, onClick, isDateSelected }) => {
   const getDayClassName = () => {
     const baseClassName =
-      "text-center hover:cursor-pointer border-primary hover:border-b-2";
+      "text-center h-8 hover:cursor-pointer border-primary hover:border-b-2 w-1/12";
+
     return isDateSelected(date) ? `${baseClassName} border-b-2` : baseClassName;
   };
 
@@ -80,14 +81,16 @@ const Week = ({
   }, [selectedDate, setActiveStartDate]);
 
   return (
-    <div className="text-center px-4">
+    <div className="text-center">
       <div className="flex justify-between">
         <button onClick={goToPreviousWeek}>＜</button>
 
         <div className="w-3/4">
-          <div className="flex justify-between">
+          <div className="flex justify-between ">
             {daysOfWeek.map((day, index) => (
-              <div key={index}>{day}</div>
+              <div key={index} className="w-1/12">
+                {day}
+              </div>
             ))}
           </div>
 
