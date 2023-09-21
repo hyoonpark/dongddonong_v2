@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 
-import upload from "../assets/icon/upload.png";
-import time from "../assets/icon/time.png";
-import check from "../assets/icon/check.png";
+import upload from "../../assets/icon/upload.png";
+import time from "../../assets/icon/time.png";
+import check from "../../assets/icon/check.png";
 
 const VideoModal = forwardRef((props, ref) => {
   return (
