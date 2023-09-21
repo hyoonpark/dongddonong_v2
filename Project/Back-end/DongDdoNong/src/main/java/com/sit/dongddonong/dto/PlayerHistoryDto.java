@@ -28,6 +28,7 @@ public class PlayerHistoryDto {
     private int total;
     private String xyUrl;
     private int playTime;
+    private Boolean win;
 
     public static PlayerHistoryDto fromEntity(PlayerHistory playerHistory) {
         PlayerHistoryDto playerHistoryDto = PlayerHistoryDto.builder()
@@ -43,6 +44,7 @@ public class PlayerHistoryDto {
                 .total(playerHistory.getTotal())
                 .xyUrl(playerHistory.getXyUrl())
                 .playTime(playerHistory.getPlayTime())
+                .win(playerHistory.getWin())
                 .build();
         if(playerHistory.getUser()!=null){
             playerHistoryDto = playerHistoryDto
