@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import GamePage from "./pages/Game/GamePage";
-import LoginLoading from "./components/LoginLoading";
 import RecordRoom from "./components/Recordroom/Recordroom";
+import LoginLoading from './components/Login/LoginLoading';
 
 function App() {
   return (

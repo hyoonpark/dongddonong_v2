@@ -1,5 +1,6 @@
 package com.sit.dongddonong.model;
 
+import com.sit.dongddonong.dto.GameDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,28 +19,37 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
+    private Long userId;
+
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Boolean isAssigned;
 
     @Column
     private Date gameDate;
 
-    @Column
-    private String location;
+//    @Column
+//    private String location;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlayerHistory> playerHistories = new ArrayList<>();
 
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+        isAssigned = false;
     }
 
-    public static Game createGame(Date game_date, String location) {
+    public static Game createGame(GameDto gameDto) {
         return Game.builder()
-                .gameDate(game_date)
-                .location(location)
+                .userId(gameDto.getUserId())
+                .isAssigned(gameDto.isAssigned())
+                .gameDate(gameDto.getGameDate())
+//                .location(gameDto.getLocation())
                 .playerHistories(new ArrayList<>())
                 .build();
     }

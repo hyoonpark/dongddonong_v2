@@ -44,16 +44,16 @@ public class GameController {
     }
 
     @Operation(summary = "경기 가져오기", description = "모든 경기를 가져옵니다.")
-    @GetMapping
+    @GetMapping("all")
     public ApiResponse<List<GameDto>> getAllGames() {
         return ApiResponse.ok(gameService.getAllGames());
     }
 
-//    @Operation(summary = "경기 유저별로 가져오기", description = "모든 경기를 유저별로 가져옵니다.")
-//    @GetMapping("/{userId}")
-//    public ApiResponse<List<PlayerHistoryDto>> getPlayerHistory(@PathVariable("userId") long userId) {
-//        return ApiResponse.ok(playerHistoryService.getPlayerHistory(userId));
-//    }
+    @Operation(summary = "할당 여부에 따라 경기 가져오기", description = "isAssigned 여부에 따라 경기를 가져온다. ")
+    @GetMapping("/{userId}/assigned")
+    public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId, @RequestParam(defaultValue = "false") boolean isAssigned) {
+        return ApiResponse.ok(gameService.getAllByAssignedGames(userId, isAssigned));
+    }
 
     @Operation(summary = "경기 user 연결하기", description = "경기를 유저랑 매핑한다.")
     @PatchMapping("/{PlayerHistoryId}")
@@ -62,7 +62,7 @@ public class GameController {
         return ApiResponse.ok("성공");
     }
 
-    @Operation(summary = "경기 목록 필터 ", description = "경기를 mode, 기간별로 가져온다. mode가 0이면 mode상관없이 전체")
+    @Operation(summary = "경기 목록 필터 ", description = "경기를 mode, 기간별로 가져온다. (mode가 0이면 mode 전체, date가 null이면 전체)")
     @GetMapping("/{userId}")
     public ApiResponse<List<PlayerHistoryDto>> getPlayerHistoriesByCondition(
             @PathVariable("userId") long userId,
