@@ -1,14 +1,21 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
+import upArrow from "../assets/icon/up-arrow.png";
+// import ScrollTopButton from "../components/ScrollTopButton";
 
 const Home = () => {
+  const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
   const path1Ref = useRef();
   const content2Ref = useRef();
   const path2Ref = useRef();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const calcDashoffset = (scrollY, element, length) => {
     const ratio = (scrollY - element.offsetTop) / element.offsetHeight;
@@ -19,6 +26,12 @@ const Home = () => {
 
   useEffect(() => {
     const scrollHandler = () => {
+      if (window.pageYOffset > 100) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+
       const scrollY = window.scrollY + window.innerHeight * 0.8;
 
       if (path1Ref.current) {
@@ -54,9 +67,9 @@ const Home = () => {
     <div className="overflow-x-hidden">
       <div className="mb-24 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative header top-12 left-4 mt-4 max-w-7xl md:absolute md:top-0">
+          <div className="relative mt-4 header top-12 left-4 max-w-7xl md:absolute md:top-0">
             <div className="w-1/3 md:w-5/12 md:-translate-y-1/4">
-              <h1 className="font-bold text-3xl mb-4">동또농</h1>
+              <h1 className="mb-4 text-3xl font-bold">동또농</h1>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
                 libero porro natus, omnis tenetur molestiae quibusdam, expedita
@@ -79,7 +92,7 @@ const Home = () => {
 
       <div className={`${styles.content1} relative`} ref={content1Ref}>
         <img
-          className="grayscale -scale-x-100 w-full h-full absolute -z-10"
+          className="absolute w-full h-full grayscale -scale-x-100 -z-10"
           src={image}
           alt=""
         />
@@ -101,7 +114,7 @@ const Home = () => {
       <div className={`${styles.content1} w-screen relative`} ref={content2Ref}>
         <div className={`${styles.practice} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
           <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
+          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             libero porro natus, omnis tenetur molestiae quibusdam,
@@ -112,7 +125,7 @@ const Home = () => {
           className={`${styles.two_bound} absolute w-2/3 sm:w-5/12 md:w-1/3`}
         >
           <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
+          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             libero porro natus, omnis tenetur molestiae quibusdam,
@@ -121,7 +134,7 @@ const Home = () => {
 
         <div className={`${styles.contest} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
           <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
+          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             libero porro natus, omnis tenetur molestiae quibusdam,
@@ -141,6 +154,15 @@ const Home = () => {
           </g>
         </svg>
       </div>
+
+      <button
+        onClick={scrollToTop}
+        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${
+          showButton ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <img className="w-6" src={upArrow} alt="스크롤상단" />
+      </button>
 
       <Footer></Footer>
     </div>
