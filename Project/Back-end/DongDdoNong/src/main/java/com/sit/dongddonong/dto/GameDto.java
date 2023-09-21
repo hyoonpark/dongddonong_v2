@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,22 +20,28 @@ public class GameDto {
     @Schema(hidden = true)
     private Long id;
     private Long userId;
-    private Date gameDate;
+    private String gameDate;
     @Schema(hidden = true)
     private Date createdAt;
     @Schema(hidden = true)
-    private boolean isAssigned;
+    private Boolean isAssigned = false;
 //    private String location;
     private List<PlayerHistoryDto> playerHistories;
 
 
+    public void updateAssignedTrue(){
+        isAssigned = true;
+    }
     public static GameDto fromEntity(Game game) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String gameDate = format.format(game.getGameDate());
+
         return GameDto.builder()
                 .id(game.getId())
                 .userId(game.getUserId())
                 .isAssigned(game.getIsAssigned())
                 .createdAt(game.getCreatedAt())
-                .gameDate(game.getGameDate())
+                .gameDate(gameDate)
 //                .location(game.getLocation())
                 .playerHistories(game.getPlayerHistories().stream()
                         .map(PlayerHistoryDto::fromEntity)

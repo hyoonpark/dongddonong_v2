@@ -4,6 +4,8 @@ import com.sit.dongddonong.dto.GameDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,14 +43,22 @@ public class Game {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
-        isAssigned = false;
     }
 
     public static Game createGame(GameDto gameDto) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+
+        Date gameDate;
+        try{
+            gameDate = format.parse(gameDto.getGameDate());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
         return Game.builder()
                 .userId(gameDto.getUserId())
-                .isAssigned(gameDto.isAssigned())
-                .gameDate(gameDto.getGameDate())
+                .isAssigned(gameDto.getIsAssigned())
+                .gameDate(gameDate)
 //                .location(gameDto.getLocation())
                 .playerHistories(new ArrayList<>())
                 .build();
