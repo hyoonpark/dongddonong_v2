@@ -4,11 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        orange: "#EE6730",
+        primary: "#EE6730",
+        secondary: "#e6e6e6",
       },
       strokeWidth: {
         3: "3px",
         4: "4px",
+      },
+      fontFamily: {
+        anton: "anton",
       },
     },
   },
