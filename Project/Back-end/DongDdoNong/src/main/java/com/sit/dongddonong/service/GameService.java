@@ -18,10 +18,12 @@ import java.util.stream.Collectors;
 public class GameService {
     private final GameRepository gameRepository;
 
+    private GameDto convertToDto(Game game) {
+        return GameDto.fromEntity(game);
+    }
+
     public void createGameAndPlayerHistories(GameDto gameDto) {
-        Game game = Game.createGame(
-                gameDto.getGameDate(), gameDto.getLocation()
-        );
+        Game game = Game.createGame(gameDto);
 
         List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
 
@@ -34,15 +36,26 @@ public class GameService {
 
     // 여러 작업을 묶어 작업해야 하기때문에 Transactional
     @Transactional
-    public List<GameDto> getAllGames(){
-        List<Game> games = gameRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+    public List<GameDto> getAllGamesByUser(long userId){
+        List<Game> games = gameRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
         return games.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    private GameDto convertToDto(Game game) {
-        return GameDto.fromEntity(game);
+    @Transactional
+    public List<GameDto> getAllGames(){
+        List<Game> games = gameRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
+        return games.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
+
+    public List<GameDto> getAllByAssignedGames(long userId, boolean isAssigned) {
+        List<Game> games = gameRepository.findAllByUserIdAndIsAssignedOrderByCreatedAtDesc(userId, isAssigned);
+        return games.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 }
