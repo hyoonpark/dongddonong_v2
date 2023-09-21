@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import KakaoLogin from './../components/Login/KakaoLogin';
 import LoginModal from './../components/Login/LoginModal';
+import { useUserContext } from "../constexts/userContext";
 
 const Li = styled.li`
   position: relative;
@@ -24,6 +25,11 @@ const Li = styled.li`
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { loggedIn } = useUserContext();
+
+  const handleLoginClick = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <nav className="h-20 border-black border-b">
@@ -36,15 +42,26 @@ const Navbar = () => {
           />
         </Link>
         <ul className="w-1/2 flex justify-between md:w-1/3">
-          <li className="hidden md:block">홈</li>
-          <Link to="/game">
-            <Li>경기</Li>
+          <Link to="/">
+            <Li>홈</Li>
           </Link>
-
-          <Link to="/recordroom">
-            <Li>기록실</Li>
-          </Link>
-          <Li onClick={() => setIsModalOpen(true)}>로그인</Li>
+          {loggedIn ? (
+            <>
+              <Link to="/game">
+                <Li>경기</Li>
+              </Link>
+              <Link to="/recordroom">
+                <Li>기록실</Li>
+              </Link>
+              <Li>로그아웃</Li>
+            </>
+          ) : (
+            <>
+              <Li onClick={handleLoginClick}>경기</Li>
+              <Li onClick={handleLoginClick}>기록실</Li>
+              <Li onClick={handleLoginClick}>로그인</Li>
+            </>
+          )}
         </ul>
       </div>
       <LoginModal

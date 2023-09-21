@@ -1,10 +1,10 @@
 import { useRef, useEffect } from "react";
-
 import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
 
 const Home = () => {
+  
   const content1Ref = useRef();
   const path1Ref = useRef();
   const content2Ref = useRef();
