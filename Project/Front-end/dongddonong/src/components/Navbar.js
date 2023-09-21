@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -27,10 +27,11 @@ const Li = styled.li`
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const videoRef = useRef(null);
 
   return (
-    <nav className="h-20">
-      <div className="flex items-center justify-between h-20 px-4 mx-auto border-b border-black max-w-7xl">
+    <nav className="h-20 border-b border-black">
+      <div className="relative flex items-center justify-between h-20 px-4 mx-auto max-w-7xl">
         <Link to="/">
           <img
             className="h-14"
@@ -39,8 +40,8 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="w-1/4"></div>
-        <ul className="flex items-center justify-between w-1/3">
+        <div className="w-1/4 max-w-xs"></div>
+        <ul className="flex items-center justify-between w-1/3 max-w-xs">
           <Link to="/game">
             <Li>경기</Li>
           </Link>
@@ -51,9 +52,15 @@ const Navbar = () => {
           <Li onClick={() => setIsModalOpen(true)}>로그인</Li>
         </ul>
 
-        <button>
+        <button
+          onClick={() => {
+            videoRef.current.classList.toggle("scale-0");
+          }}
+        >
           <img className="w-8" src={video} alt="업로드" />
         </button>
+
+        <VideoModal ref={videoRef}></VideoModal>
       </div>
 
       <LoginModal
@@ -61,7 +68,6 @@ const Navbar = () => {
         onClose={() => setIsModalOpen(false)}
         onLogin={KakaoLogin}
       />
-      <VideoModal></VideoModal>
     </nav>
   );
 };

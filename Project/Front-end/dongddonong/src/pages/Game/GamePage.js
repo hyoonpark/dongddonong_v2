@@ -37,25 +37,39 @@ const GamePage = () => {
 
   return (
     <div>
-      <div className="flex flex-col px-4 mx-auto bg-secondary max-w-7xl">
-        <div className="relative">
-          <Calendars
-            className="absolute right-0"
+      <div className=" bg-secondary">
+        <div className="flex flex-col px-4 mx-auto max-w-7xl">
+          <div className="relative">
+            <Calendars
+              className="absolute right-0"
+              selectedDate={selectedDate}
+              setSelectedDate={handleDateChange}
+              activeStartDate={activeStartDate}
+              setActiveStartDate={handleActiveStartDateChange}
+            />
+          </div>
+          <Week
             selectedDate={selectedDate}
             setSelectedDate={handleDateChange}
             activeStartDate={activeStartDate}
             setActiveStartDate={handleActiveStartDateChange}
           />
         </div>
-        <Week
-          selectedDate={selectedDate}
-          setSelectedDate={handleDateChange}
-          activeStartDate={activeStartDate}
-          setActiveStartDate={handleActiveStartDateChange}
-        />
       </div>
 
       <Games />
+
+      <div
+        className="w-16 py-1 mx-auto mt-4 text-center text-white border cursor-pointer bg-primary rounded-xl"
+        onClick={() => {
+          setDates({
+            selectedDate: new Date(),
+            activeStartDate: new Date(),
+          });
+        }}
+      >
+        오늘
+      </div>
 
       <Footer />
     </div>
