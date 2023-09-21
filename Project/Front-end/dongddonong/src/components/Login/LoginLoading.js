@@ -7,7 +7,7 @@ const LoginLoading = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const navigator = useNavigate();
 
-  const { setLoggedUser, setLoggedIn } = useUserContext();
+  const { setLoggedUser } = useUserContext();
 
   useEffect(() => {
     axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`

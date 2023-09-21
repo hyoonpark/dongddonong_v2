@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const UserContext = createContext();
+const userContext = createContext();
 
 export function UserContextProvider({ children }) {
+  const initialToken = localStorage.getItem('token');
   const [user, setUser] = useState({
     id: 0,
     type: ' ',
@@ -10,7 +11,7 @@ export function UserContextProvider({ children }) {
     name: ' ',
     nickName: ' ',
     email: ' ',
-    accessToken: ' ',
+    accessToken: initialToken,
   });
   
   const [loggedIn, setLoggedIn] = useState(false);
@@ -34,12 +35,12 @@ export function UserContextProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, loggedIn, setLoggedUser, setLoggedOut }}>
+    <userContext.Provider value={{ user, loggedIn, setLoggedUser, setLoggedOut }}>
       {children}
-    </UserContext.Provider>
+    </userContext.Provider>
   );
 }
 
 export function useUserContext() {
-  return useContext(UserContext);
+  return useContext(userContext);
 }

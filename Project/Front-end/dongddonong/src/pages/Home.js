@@ -6,6 +6,7 @@ import image from "../assets/image.png";
 import upArrow from "../assets/icon/up-arrow.png";
 // import ScrollTopButton from "../components/ScrollTopButton";
 
+
 const Home = () => {
   const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
