@@ -10,7 +10,7 @@ function MultiButton({ options, selected, onChange }) {
             {options.map((option, index) => (
                 <button
                     key={index}
-                    className={selected === option ? 'bg-orange ml-2 w-12 drop-shadow-xl text-white rounded-md' : 'ml-2 w-12 drop-shadow-xl text-orange rounded-md'}
+                    className={selected === option ? 'bg-primary ml-2 w-12 drop-shadow-xl text-white rounded-md' : 'ml-2 w-12 drop-shadow-xl text-primary rounded-md'}
                     onClick={() => onChange(option)}
                 >
                     {option}

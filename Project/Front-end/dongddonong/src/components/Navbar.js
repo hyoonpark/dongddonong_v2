@@ -61,7 +61,6 @@ const Navbar = () => {
           >
             <img className="w-8" src={video} alt="업로드" />
           </button>
-
           <VideoModal ref={videoRef}></VideoModal>
         </div>
       </Wrapper>
