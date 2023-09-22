@@ -4,7 +4,6 @@ import user3 from "../../assets/player3.jpg";
 import Chart from "../../components/Recordroom/Chart";
 import HalfChart from "../../components/Recordroom/HalfChart";
 import LineChart from "../../components/Recordroom/LineChart";
-import classes from "./Recordroom.module.css";
 import { useUserContext } from "../../constexts/userContext";
 
 const Recordroom = () => {

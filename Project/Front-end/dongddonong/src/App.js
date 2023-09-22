@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import GamePage from "./pages/Game/GamePage";
-import RecordRoom from "./components/Recordroom/Recordroom";
+import RecordRoom from "./pages/Recordroom/Recordroom";
 import LoginLoading from "./components/Login/LoginLoading";
 
 function App() {
