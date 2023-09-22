@@ -14,7 +14,7 @@ export function UserContextProvider({ children }) {
     type: ' ',
     profileImgUrl: initialProfileImgUrl,
     name: ' ',
-    nickName: 'initialnickName',
+    nickName: initialnickName,
     email: ' ',
     accessToken: initialToken,
   });
