@@ -1,14 +1,54 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useCallback, useMemo, useEffect } from "react";
 
-const Week = ({ onChange, selectedDate }) => {
+const Day = ({ date, onClick, isDateSelected }) => {
+  const getDayClassName = () => {
+    const baseClassName =
+      "text-center h-8 hover:cursor-pointer border-primary hover:border-b-2 w-1/12";
+
+    return isDateSelected(date) ? `${baseClassName} border-b-2` : baseClassName;
+  };
+
+  return (
+    <div className={getDayClassName()} onClick={() => onClick(date)}>
+      {date.getDate()}
+    </div>
+  );
+};
+
+const Week = ({
+  selectedDate,
+  setSelectedDate,
+  activeStartDate,
+  setActiveStartDate,
+}) => {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentWeek, setCurrentWeek] = useState(() =>
-    getWeekArray(selectedDate)
+
+  const getWeekArray = (startDate) => {
+    const weekArray = [];
+    const startDayOfWeek = startDate.getDay();
+    const firstDate = new Date(startDate);
+    firstDate.setDate(startDate.getDate() - startDayOfWeek);
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(firstDate);
+      date.setDate(firstDate.getDate() + i);
+      weekArray.push(date);
+    }
+
+    return weekArray;
+  };
+
+  const weekArray = useMemo(
+    () => getWeekArray(activeStartDate),
+    [activeStartDate]
   );
 
-  const handleClick = useCallback((date) => {
-    onChange(date);
-  }, []);
+  const handleClick = useCallback(
+    (date) => {
+      setSelectedDate(date);
+    },
+    [setSelectedDate]
+  );
 
   const isDateSelected = useCallback(
     (date) => {
@@ -22,74 +62,46 @@ const Week = ({ onChange, selectedDate }) => {
     [selectedDate]
   );
 
-  const getDayClassName = useCallback(
-    (date) => {
-      const baseClassName = "text-center hover:cursor-pointer";
-      return isDateSelected(date)
-        ? `${baseClassName} border-b border-orange`
-        : baseClassName;
-    },
-    [isDateSelected]
-  );
-
-  const weekArray = useMemo(() => getWeekArray(currentWeek[0]), [currentWeek]);
-
   const goToNextWeek = () => {
-    const nextWeekDate = new Date(currentWeek[0]);
+    const nextWeekDate = new Date(weekArray[0]);
     nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-    setCurrentWeek([nextWeekDate, ...weekArray.slice(0, 6)]);
+
+    setActiveStartDate(nextWeekDate);
   };
 
   const goToPreviousWeek = () => {
-    const previousWeekDate = new Date(currentWeek[0]);
+    const previousWeekDate = new Date(weekArray[0]);
     previousWeekDate.setDate(previousWeekDate.getDate() - 7);
-    setCurrentWeek([previousWeekDate, ...weekArray.slice(0, 6)]);
+
+    setActiveStartDate(previousWeekDate);
   };
 
   useEffect(() => {
-    setCurrentWeek(getWeekArray(selectedDate));
-  }, [selectedDate]);
-
-  function getWeekArray(startDate) {
-    const weekArray = [];
-    const startDayOfWeek = startDate.getDay();
-    const firstDate = new Date(startDate);
-    firstDate.setDate(startDate.getDate() - startDayOfWeek);
-    for (let i = 0; i < 7; i++) {
-      const date = new Date(firstDate);
-      date.setDate(firstDate.getDate() + i);
-      weekArray.push(date);
-    }
-    return weekArray;
-  }
-
-  const currentMonth = currentWeek[0].getMonth();
-  const currentYear = currentWeek[0].getFullYear();
+    setActiveStartDate(selectedDate);
+  }, [selectedDate, setActiveStartDate]);
 
   return (
     <div className="text-center">
-      <div>
-        {currentYear}년 {currentMonth + 1}월
-      </div>
-      <div className="flex justify-center">
+      <div className="flex justify-between">
         <button onClick={goToPreviousWeek}>＜</button>
 
-        <div className="">
-          <div className="flex justify-between">
+        <div className="w-3/4">
+          <div className="flex justify-between ">
             {daysOfWeek.map((day, index) => (
-              <div key={index}>{day}</div>
+              <div key={index} className="w-1/12">
+                {day}
+              </div>
             ))}
           </div>
 
           <div className="flex justify-between">
             {weekArray.map((date, index) => (
-              <div
+              <Day
                 key={index}
-                className={getDayClassName(date)}
-                onClick={() => handleClick(date)}
-              >
-                {date.getDate()}
-              </div>
+                date={date}
+                onClick={handleClick}
+                isDateSelected={isDateSelected}
+              />
             ))}
           </div>
         </div>

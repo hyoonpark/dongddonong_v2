@@ -46,6 +46,8 @@ public class PlayerHistory {
     private String xyUrl;
     @Column
     private int playTime;
+    @Column
+    private Boolean win;
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
@@ -64,6 +66,7 @@ public class PlayerHistory {
                 .total(playerHistoryDto.getTwoPts() + playerHistoryDto.getThreePts() * 2)
                 .xyUrl(playerHistoryDto.getXyUrl())
                 .playTime(playerHistoryDto.getPlayTime())
+                .win(playerHistoryDto.getWin())
                 .build();
     }
 }

@@ -32,6 +32,5 @@ public class UserController {
     public ApiResponse<UserDto> login(@RequestParam String code) throws Exception {
         UserDto user = userService.login(code);
         return ApiResponse.ok(user);
-
     }
 }
