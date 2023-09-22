@@ -4,10 +4,13 @@ import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
 import upArrow from "../assets/icon/up-arrow.png";
+import { useUserContext } from "../constexts/userContext";
 // import ScrollTopButton from "../components/ScrollTopButton";
 
-
 const Home = () => {
+  const {user} = useUserContext()
+  console.log(user)
+
   const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
   const path1Ref = useRef();
