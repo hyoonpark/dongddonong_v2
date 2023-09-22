@@ -3,6 +3,7 @@ import { forwardRef, useEffect, memo } from "react";
 import upload from "../../assets/icon/upload.png";
 import time from "../../assets/icon/time.png";
 import check from "../../assets/icon/check.png";
+import UploadModal from "../UploadModal/UploadModal";
 
 const VideoModal = forwardRef((_, ref) => {
   const handleClickOutside = (event) => {
