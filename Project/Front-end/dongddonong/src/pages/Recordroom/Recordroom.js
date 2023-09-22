@@ -1,18 +1,22 @@
-import classes from "./Recordroom.module.css";
 import user from "../../assets/player.png";
 import user2 from "../../assets/player2.jpg";
 import user3 from "../../assets/player3.jpg";
-import Chart from "./Chart";
-import HalfChart from "./HalfChart";
+import Chart from "../../components/Recordroom/Chart";
+import HalfChart from "../../components/Recordroom/HalfChart";
+import LineChart from "../../components/Recordroom/LineChart";
+import { useUserContext } from "../../constexts/userContext";
 
 const Recordroom = () => {
+  const { user } = useUserContext();
+
   const totalTime = 10;
   return (
     <div className="flex flex-col mt-5 ml-2 mr-2">
       <div className="grid grid-cols-6 gap-3">
         <div className="col-start-1 col-end-3 h-24">
+          <p>닉네임 : {user.nickName}</p>
           <img
-            src={user}
+            src={user.profileImgUrl}
             className="rounded-3xl w-24 h-24"
             alt="사진이 안나와"
           />
