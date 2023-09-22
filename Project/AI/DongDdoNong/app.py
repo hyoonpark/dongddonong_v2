@@ -1,12 +1,8 @@
-import os
-
 from flask import Flask, request, jsonify, send_file
 import boto3
 import uuid
 from werkzeug.utils import secure_filename  # 파일 가져오기
-# import joblib  # 학습된 모델 가져오기
 
-# dongddonong_model = joblib.load(# 경로)
 
 app = Flask(__name__)
 
@@ -37,10 +33,6 @@ def upload_file():
     return 'No file selected', 404
 
 
-@app.route('/ai')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+@app.route('/')
+def index():
+    return "Hello World!"

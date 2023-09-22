@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -13,6 +14,7 @@ import Wrapper from "../components/Wrapper";
 const Li = styled.li`
   position: relative;
   display: inline-block;
+  cursor: pointer;
   &:before {
     content: "";
     position: absolute;
@@ -30,13 +32,17 @@ const Li = styled.li`
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { loggedIn } = useUserContext();
-  
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const { loggedIn, setLoggedOut } = useUserContext();
+  const videoRef = useRef(null);
+
   const handleLoginClick = () => {
     setIsModalOpen(true);
   };
 
-  const videoRef = useRef(null);
+  const handleLogoutClick = () => {
+    setLoggedOut()
+  };
 
   return (
     <nav className="h-20 border-b border-black">
@@ -50,7 +56,7 @@ const Navbar = () => {
             />
           </Link>
 
-          <div className="w-1/4 max-w-xs"></div>
+          <div className="w-1/12 max-w-xs md:w-1/4"></div>
           {loggedIn ? (
             <>
               <Link to="/game">
@@ -59,7 +65,7 @@ const Navbar = () => {
               <Link to="/recordroom">
                 <Li>기록실</Li>
               </Link>
-              <Li>로그아웃</Li>
+              <Li onClick={handleLogoutClick}>로그아웃</Li> 
             </>
           ) : (
             <>
@@ -69,13 +75,18 @@ const Navbar = () => {
             </>
           )}
           <button
+            className=""
             onClick={() => {
+              setVideoModalOpen(true);
               videoRef.current.classList.toggle("scale-0");
             }}
           >
             <img className="w-8" src={video} alt="업로드" />
           </button>
-          <VideoModal ref={videoRef}></VideoModal>
+          <VideoModal
+            ref={videoRef}
+            videoModalOpen={videoModalOpen}
+          ></VideoModal>
         </div>
       </Wrapper>
       <LoginModal

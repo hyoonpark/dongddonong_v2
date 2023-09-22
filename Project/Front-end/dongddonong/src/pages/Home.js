@@ -4,9 +4,12 @@ import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
 import upArrow from "../assets/icon/up-arrow.png";
-// import ScrollTopButton from "../components/ScrollTopButton";
+import { useUserContext } from "../constexts/userContext";
 
 const Home = () => {
+  const {user} = useUserContext()
+  console.log(user)
+
   const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
   const path1Ref = useRef();
@@ -65,16 +68,14 @@ const Home = () => {
 
   return (
     <div className="overflow-x-hidden">
-      <div className="mb-24 md:pt-48">
+      <div className="mb-10 md:mb-0 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative mt-4 header top-12 left-4 max-w-7xl md:absolute md:top-0">
-            <div className="w-1/3 md:w-5/12 md:-translate-y-1/4">
-              <h1 className="mb-4 text-3xl font-bold">동또농</h1>
+          <div className="relative mt-4 header top-12 max-w-7xl md:absolute md:top-0 md:left-32">
+            <div className="w-1/3 md:w-3/5 md:-translate-y-1/4">
+              <h1 className="mb-4 text-3xl md:text-4xl font-bold">동또농</h1>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                libero porro natus, omnis tenetur molestiae quibusdam, expedita
-                sint tempore nostrum fugiat recusandae aliquid maxime in
-                inventore voluptatem voluptatibus sunt. Sapiente.
+                libero porro natus, omnis tenetur molestiae quibusdam.
               </p>
             </div>
           </div>
@@ -112,8 +113,8 @@ const Home = () => {
       </div>
 
       <div className={`${styles.content1} w-screen relative`} ref={content2Ref}>
-        <div className={`${styles.practice} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
-          <h2 className="text-xl font-bold">연습 모드</h2>
+        <div className={`${styles.practice} px-4 absolute w-3/5 md:w-1/3`}>
+          <h2 className="text-2xl font-bold">연습</h2>
           <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
@@ -122,18 +123,20 @@ const Home = () => {
         </div>
 
         <div
-          className={`${styles.two_bound} absolute w-2/3 sm:w-5/12 md:w-1/3`}
+          className={`${styles.two_bound} px-4 text-right right-4 absolute w-3/5 md:w-1/3`}
         >
-          <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-            libero porro natus, omnis tenetur molestiae quibusdam,
-          </p>
+          <div className="relative">
+            <h2 className="text-2xl font-bold">투바운드</h2>
+            <div className="absolute right-0 w-28 my-1 border-t-2 border-black md:my-2"></div>
+            <p className="my-3 md:my-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              libero porro natus, omnis tenetur molestiae quibusdam,
+            </p>
+          </div>
         </div>
 
-        <div className={`${styles.contest} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
-          <h2 className="text-xl font-bold">연습 모드</h2>
+        <div className={`${styles.contest} px-4 absolute w-3/5 md:w-1/3`}>
+          <h2 className="text-2xl font-bold">경기</h2>
           <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque

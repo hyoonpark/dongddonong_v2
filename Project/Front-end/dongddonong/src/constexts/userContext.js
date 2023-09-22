@@ -1,23 +1,31 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const UserContext = createContext();
+const userContext = createContext();
 
 export function UserContextProvider({ children }) {
+  const initialToken = localStorage.getItem('token');
+  const initialId = localStorage.getItem('id');
+  const initialProfileImgUrl = localStorage.getItem('profileImgUrl');
+  const initialnickName = localStorage.getItem('nickName');
+  const initialLoggedIn = localStorage.getItem('loggedIn') === 'true';
+
   const [user, setUser] = useState({
-    id: 0,
+    id: initialId,
     type: ' ',
-    profileImgUrl: '',
+    profileImgUrl: initialProfileImgUrl,
     name: ' ',
-    nickName: ' ',
+    nickName: initialnickName,
     email: ' ',
-    accessToken: ' ',
+    accessToken: initialToken,
   });
   
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(initialLoggedIn);
 
   const setLoggedUser = (userData) => {
     setUser(userData);
     setLoggedIn(true);
+    localStorage.setItem('token', userData.accessToken);
+    localStorage.setItem('loggedIn', 'true'); 
   };
 
   const setLoggedOut = () => {
@@ -31,15 +39,20 @@ export function UserContextProvider({ children }) {
       accessToken: ' ',
     });
     setLoggedIn(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('profileImgUrl');
+    localStorage.removeItem('nickName');
+    localStorage.setItem('loggedIn', 'false');
   };
 
   return (
-    <UserContext.Provider value={{ user, loggedIn, setLoggedUser, setLoggedOut }}>
+    <userContext.Provider value={{ user, loggedIn, setLoggedUser, setLoggedOut }}>
       {children}
-    </UserContext.Provider>
+    </userContext.Provider>
   );
 }
 
 export function useUserContext() {
-  return useContext(UserContext);
+  return useContext(userContext);
 }
