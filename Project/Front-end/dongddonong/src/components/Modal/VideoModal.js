@@ -29,7 +29,7 @@ const VideoModal = forwardRef((_, ref) => {
     <>
       <div
         ref={ref}
-        className="absolute z-10 w-64 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-4 top-14"
+        className="absolute z-10 w-64 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-0 top-14"
       >
         <div className="py-3 border-b border-black">
           <img className="inline h-6 pr-4" src={upload} alt="업로드" />
