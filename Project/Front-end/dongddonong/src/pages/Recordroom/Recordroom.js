@@ -1,9 +1,9 @@
-import classes from "./Recordroom.module.css";
 import user from "../../assets/player.png";
 import user2 from "../../assets/player2.jpg";
 import user3 from "../../assets/player3.jpg";
-import Chart from "./Chart";
-import HalfChart from "./HalfChart";
+import Chart from "../../components/Recordroom/Chart";
+import HalfChart from "../../components/Recordroom/HalfChart";
+import LineChart from "../../components/Recordroom/LineChart";
 import { useUserContext } from "../../constexts/userContext";
 
 const Recordroom = () => {
