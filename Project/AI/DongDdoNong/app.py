@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, jsonify, send_file
 import boto3
 import uuid
