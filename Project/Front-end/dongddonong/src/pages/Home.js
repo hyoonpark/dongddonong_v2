@@ -1,73 +1,81 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
+import upArrow from "../assets/icon/up-arrow.png";
+import { useUserContext } from "../constexts/userContext";
 
 const Home = () => {
+  const {user} = useUserContext()
+  console.log(user)
+
+  const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
   const path1Ref = useRef();
-  let path1Length;
   const content2Ref = useRef();
   const path2Ref = useRef();
-  let path2Length;
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const calcDashoffset = (scrollY, element, length) => {
     const ratio = (scrollY - element.offsetTop) / element.offsetHeight;
     const value = length - length * ratio;
 
-    console.log(ratio);
-
     return value < 0 ? 0 : value > length ? length : value;
   };
 
-  const scrollHandler = () => {
-    path1Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.scrollY + window.innerHeight * 0.8,
-      content1Ref.current,
-      path1Length
-    );
-
-    path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.scrollY + window.innerHeight,
-      content2Ref.current,
-      path2Length
-    );
-  };
-
   useEffect(() => {
+    const scrollHandler = () => {
+      if (window.pageYOffset > 100) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+
+      const scrollY = window.scrollY + window.innerHeight * 0.8;
+
+      if (path1Ref.current) {
+        const path1Length = path1Ref.current.getTotalLength();
+        path1Ref.current.style.strokeDasharray = path1Length;
+        path1Ref.current.style.strokeDashoffset = calcDashoffset(
+          scrollY,
+          content1Ref.current,
+          path1Length
+        );
+      }
+
+      if (path2Ref.current) {
+        const path2Length = path2Ref.current.getTotalLength();
+        path2Ref.current.style.strokeDasharray = path2Length;
+        path2Ref.current.style.strokeDashoffset = calcDashoffset(
+          scrollY,
+          content2Ref.current,
+          path2Length
+        );
+      }
+    };
+
     window.addEventListener("scroll", scrollHandler);
+    scrollHandler();
 
-    if (path1Ref.current) path1Length = path1Ref.current.getTotalLength();
-    if (path2Ref.current) path2Length = path2Ref.current.getTotalLength();
-
-    path1Ref.current.style.strokeDasharray = path1Length;
-    path1Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.innerHeight * 0.8,
-      content1Ref.current,
-      path1Length
-    );
-
-    path2Ref.current.style.strokeDasharray = path2Length;
-    path2Ref.current.style.strokeDashoffset = calcDashoffset(
-      window.innerHeight,
-      content2Ref.current,
-      path2Length
-    );
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
 
   return (
     <div className="overflow-x-hidden">
-      <div className="mb-24 md:pt-48">
+      <div className="mb-10 md:mb-0 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative header top-12 left-4 mt-4 max-w-7xl md:absolute md:top-0">
-            <div className="w-1/3 md:w-5/12 md:-translate-y-1/4">
-              <h1 className="font-bold text-3xl mb-4">동또농</h1>
+          <div className="relative mt-4 header top-12 max-w-7xl md:absolute md:top-0 md:left-32">
+            <div className="w-1/3 md:w-3/5 md:-translate-y-1/4">
+              <h1 className="mb-4 text-3xl md:text-4xl font-bold">동또농</h1>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                libero porro natus, omnis tenetur molestiae quibusdam, expedita
-                sint tempore nostrum fugiat recusandae aliquid maxime in
-                inventore voluptatem voluptatibus sunt. Sapiente.
+                libero porro natus, omnis tenetur molestiae quibusdam.
               </p>
             </div>
           </div>
@@ -85,7 +93,7 @@ const Home = () => {
 
       <div className={`${styles.content1} relative`} ref={content1Ref}>
         <img
-          className="grayscale -scale-x-100 w-full h-full absolute -z-10"
+          className="absolute w-full h-full grayscale -scale-x-100 -z-10"
           src={image}
           alt=""
         />
@@ -105,9 +113,9 @@ const Home = () => {
       </div>
 
       <div className={`${styles.content1} w-screen relative`} ref={content2Ref}>
-        <div className={`${styles.practice} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
-          <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
+        <div className={`${styles.practice} px-4 absolute w-3/5 md:w-1/3`}>
+          <h2 className="text-2xl font-bold">연습</h2>
+          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             libero porro natus, omnis tenetur molestiae quibusdam,
@@ -115,19 +123,21 @@ const Home = () => {
         </div>
 
         <div
-          className={`${styles.two_bound} absolute w-2/3 sm:w-5/12 md:w-1/3`}
+          className={`${styles.two_bound} px-4 text-right right-4 absolute w-3/5 md:w-1/3`}
         >
-          <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-            libero porro natus, omnis tenetur molestiae quibusdam,
-          </p>
+          <div className="relative">
+            <h2 className="text-2xl font-bold">투바운드</h2>
+            <div className="absolute right-0 w-28 my-1 border-t-2 border-black md:my-2"></div>
+            <p className="my-3 md:my-5">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              libero porro natus, omnis tenetur molestiae quibusdam,
+            </p>
+          </div>
         </div>
 
-        <div className={`${styles.contest} absolute w-2/3 sm:w-5/12 md:w-1/3`}>
-          <h2 className="text-xl font-bold">연습 모드</h2>
-          <div className="border-t-2 w-16 border-black my-1 md:my-2"></div>
+        <div className={`${styles.contest} px-4 absolute w-3/5 md:w-1/3`}>
+          <h2 className="text-2xl font-bold">경기</h2>
+          <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             libero porro natus, omnis tenetur molestiae quibusdam,
@@ -147,6 +157,15 @@ const Home = () => {
           </g>
         </svg>
       </div>
+
+      <button
+        onClick={scrollToTop}
+        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${
+          showButton ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <img className="w-6" src={upArrow} alt="스크롤상단" />
+      </button>
 
       <Footer></Footer>
     </div>

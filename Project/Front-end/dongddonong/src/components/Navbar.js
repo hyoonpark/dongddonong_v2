@@ -1,48 +1,99 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import KakaoLogin from "./KakaoLogin";
-import LoginModal from './LoginModal';
+import KakaoLogin from "./../components/Login/KakaoLogin";
+import LoginModal from "./../components/Login/LoginModal";
+import { useUserContext } from "../constexts/userContext";
+
+import video from "../assets/icon/video.png";
+import VideoModal from "./Modal/VideoModal";
+import Wrapper from "../components/Wrapper";
+
+const Li = styled.li`
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    margin-top: 0.25rem;
+    background-color: var(--primary);
+    width: 0;
+    height: 2px;
+    transition: all 0.3s;
+  }
+  &:hover:before {
+    width: 100%;
+  }
+`;
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const { loggedIn, setLoggedOut } = useUserContext();
+  const videoRef = useRef(null);
 
-  const openModal = () => {
+  const handleLoginClick = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleLogoutClick = () => {
+    setLoggedOut()
   };
 
   return (
-    <nav className="h-20 border-black border-b">
-      <div class="flex justify-between items-center h-20 max-w-7xl mx-4 mb:m-auto">
-        <Link to="/">
-          <img
-            className="h-14"
-            src={`${process.env.PUBLIC_URL}/logo.png`}
-            alt="로고"
-          />
-        </Link>
-        <ul class="w-1/2 flex justify-between md:w-1/3">
-          <li className="hidden md:block">홈</li>
-          <Link to="/game">
-            <li className="transition-all border-b border-white duration-500 hover:border-orange">
-              경기
-            </li>
+    <nav className="h-20 border-b border-black">
+      <Wrapper>
+        <div className="relative flex items-center justify-between h-20">
+          <Link to="/">
+            <img
+              className="h-14"
+              src={`${process.env.PUBLIC_URL}/logo.png`}
+              alt="로고"
+            />
           </Link>
-          <Link to="/recordroom">
-          <li className="transition-all border-b border-white duration-500 hover:border-orange">
-            기록실
-          </li>
-          </Link>
-          <li onClick={openModal} className="transition-all border-b border-white duration-500 hover:border-orange">
-            로그인
-          </li>
-        </ul>
-      </div>
-      <LoginModal isOpen={isModalOpen} onClose={closeModal} onLogin={KakaoLogin} />
+
+          <div className="w-1/12 max-w-xs md:w-1/4"></div>
+          {loggedIn ? (
+            <>
+              <Link to="/game">
+                <Li>경기</Li>
+              </Link>
+              <Link to="/recordroom">
+                <Li>기록실</Li>
+              </Link>
+              <Li onClick={handleLogoutClick}>로그아웃</Li> 
+            </>
+          ) : (
+            <>
+              <Li onClick={handleLoginClick}>경기</Li>
+              <Li onClick={handleLoginClick}>기록실</Li>
+              <Li onClick={handleLoginClick}>로그인</Li>
+            </>
+          )}
+          <button
+            className=""
+            onClick={() => {
+              setVideoModalOpen(true);
+              videoRef.current.classList.toggle("scale-0");
+            }}
+          >
+            <img className="w-8" src={video} alt="업로드" />
+          </button>
+          <VideoModal
+            ref={videoRef}
+            videoModalOpen={videoModalOpen}
+          ></VideoModal>
+        </div>
+      </Wrapper>
+      <LoginModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onLogin={KakaoLogin}
+      />
     </nav>
   );
 };

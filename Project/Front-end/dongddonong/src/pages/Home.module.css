@@ -20,22 +20,37 @@
 }
 
 .practice {
-  top: 12.8%;
-  left: 16%;
+  top: 10%;
 }
 
 .two_bound {
-  top: 44.4%;
-  right: 10%;
+  top: 39.6%;
 }
 
 .contest {
-  top: 72%;
-  left: 16%;
+  top: 66.6%;
 }
 
 @media (min-width: 768px) {
   .header {
     transform: translateX(8%);
+  }
+
+  .practice {
+    font-size: larger;
+    transform: translateY(50%);
+    left: 12%;
+  }
+
+  .two_bound {
+    font-size: larger;
+    transform: translateY(50%);
+    right: 10%;
+  }
+
+  .contest {
+    font-size: larger;
+    transform: translateY(50%);
+    left: 12%;
   }
 }

@@ -80,7 +80,7 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String token) {
-
+        log.info("token : " + token);
         try{
             Jwts.parserBuilder()
                     .setSigningKey(key)

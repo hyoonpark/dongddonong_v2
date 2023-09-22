@@ -1,33 +1,5 @@
 package com.sit.dongddonong.config;
 
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//
-////        httpSecurity
-////                .csrf(Customizer.withDefaults())
-////                .formLogin(Customizer.withDefaults());
-//
-//        httpSecurity
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .formLogin(AbstractHttpConfigurer::disable);
-//
-//        return httpSecurity
-//                .authorizeHttpRequests(
-//                        authorize -> authorize
-////                                .requestMatchers("/users/**").permitAll()
-////                                .requestMatchers("/login").permitAll()
-//                                .requestMatchers("/**").permitAll()
-////                                .requestMatchers("/auth/**").permitAll()
-//                                .anyRequest().authenticated()
-//                )
-//                .build();
-//    }
-//}
-
 import com.sit.dongddonong.util.security.JwtProvider;
 import com.sit.dongddonong.util.security.CustomAccessDeniedHandler;
 import com.sit.dongddonong.util.security.CustomAuthenticationEntryPoint;
@@ -71,7 +43,8 @@ public class SecurityConfig {
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll() // CORS Preflight 방지
                 .requestMatchers("/","/user/login/**").permitAll()
-//                .requestMatchers("/", "/h2-console/**", "/member/login/**").permitAll()
+                .requestMatchers( "/","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
 
                 // JWT 토큰 예외처리부
