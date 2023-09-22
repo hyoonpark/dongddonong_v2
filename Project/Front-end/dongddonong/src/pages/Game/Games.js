@@ -1,7 +1,7 @@
 import Wrapper from "../../components/Wrapper";
-import practice from "../../assets/practice.png";
-import twoBound from "../../assets/two-bound.png";
-import game from "../../assets/game.png";
+import practice from "../../assets/icon/practice.png";
+import twoBound from "../../assets/icon/two-bound.png";
+import game from "../../assets/icon/game.png";
 
 const Games = () => {
   return (
