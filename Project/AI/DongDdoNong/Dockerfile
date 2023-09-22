@@ -2,10 +2,11 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.8
 WORKDIR /app
 
+RUN pip install uwsgi
+RUN pip install flask
+
 # Copy files
 COPY . .
-
-RUN pip install uwsgi
 
 # Install packages
 # RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
