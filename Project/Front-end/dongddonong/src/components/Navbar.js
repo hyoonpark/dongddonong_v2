@@ -13,6 +13,7 @@ import Wrapper from "../components/Wrapper";
 const Li = styled.li`
   position: relative;
   display: inline-block;
+  cursor: pointer;
   &:before {
     content: "";
     position: absolute;
@@ -73,6 +74,7 @@ const Navbar = () => {
             </>
           )}
           <button
+            className=""
             onClick={() => {
               setVideoModalOpen(true);
               videoRef.current.classList.toggle("scale-0");
