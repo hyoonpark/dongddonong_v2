@@ -192,13 +192,13 @@ const UploadModal = (props) => {
         <>
         {ReactDOM.createPortal(
         <Backdrop onConfirm={props.onConfirm} />,
-        document.getElementById('backdrop-root')
+        document.getElementById('backdrop')
       )}
       {ReactDOM.createPortal(
         <ModalOverlay
           onConfirm={props.onConfirm}
         />,
-        document.getElementById('overlay-root')
+        document.getElementById('overlays')
       )}
         </>
     )

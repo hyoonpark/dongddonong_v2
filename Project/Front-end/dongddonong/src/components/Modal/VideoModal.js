@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, memo } from "react";
+import { forwardRef, useEffect, useState, memo } from "react";
 
 import upload from "../../assets/icon/upload.png";
 import time from "../../assets/icon/time.png";
@@ -6,6 +6,11 @@ import check from "../../assets/icon/check.png";
 import UploadModal from "../UploadModal/UploadModal";
 
 const VideoModal = forwardRef((_, ref) => {
+  const [isOpen, setIsOpen] = useState(null)
+  const closeHandler = () => {
+    setIsOpen()
+  }
+
   const handleClickOutside = (event) => {
     if (event.target.alt === "업로드") return;
 
@@ -32,10 +37,15 @@ const VideoModal = forwardRef((_, ref) => {
         ref={ref}
         className="absolute z-10 w-64 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-0 top-14"
       >
-        <div className="py-3 border-b border-black">
+        <div onClick={()=>{setIsOpen(true)}} className="py-3 border-b border-black">
           <img className="inline h-6 pr-4" src={upload} alt="업로드" />
           영상 업로드
         </div>
+        {isOpen && (
+        <UploadModal
+          onConfirm={closeHandler}
+        />
+        )}
         <div className="py-3">
           최근 영상
           <div className="flex flex-col pt-3">
