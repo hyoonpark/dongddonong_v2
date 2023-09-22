@@ -41,31 +41,29 @@ const Recordroom = () => {
           <div></div>
         </div>
 
+        {/* 해당 결과 통계 데이터 */}
         <div className="flex flex-col h-56 border-solid border-2 border-gray-500 mt-4 bg-white">
-          <div className="flex h-1/3 flex-col justify-center items-center">
+          <div className="flex basis-1/3 flex-col justify-center items-center">
             <div>연습모드 총 득점</div>
-            <div className=" text-4xl font-semibold">2,332</div>
+            <div className="text-4xl font-semibold">2,332</div>
           </div>
+
           <div className="flex h-2/3">
-            <div className="flex items-center border-solid border-2 border-gray-500 w-2/5">
+            <div className="flex items-center w-2/5 justify-center">
               <Chart labels={["2점슛", "3점슛"]}></Chart>
-              <div></div>
             </div>
-            <div className="flex border-solid border-2 justify-center border-gray-500 w-3/5 gap-4">
-              <div className="flex flex-col w-1/3 justify-center">
-                <div className=" text-sm text-center -m-3">2점슛</div>
 
+            <div className="flex justify-center items-center w-3/5 gap-4">
+              <div className="flex flex-col w-1/3 justify-center">
                 <HalfChart></HalfChart>
-                <div className=" text-[3px] text-center">성공 / 시도</div>
-                <div className=" text-lg text-center">3/16회</div>
+                <div className="text-lg text-center">3/16회</div>
               </div>
-              <div className="w-1/8"></div>
-              <div className="flex flex-col w-1/3 justify-center">
-                <div className=" text-sm text-center -m-3">3점슛</div>
 
+              <div className="flex flex-col w-1/3 h-full  justify-center">
+                <div className=" text-sm text-center">3점슛</div>
                 <HalfChart></HalfChart>
-                <div className=" text-[3px] text-center">성공 / 시도</div>
-                <div className=" text-lg text-center">2/17회</div>
+                <div className="text-[3px] text-center">성공 / 시도</div>
+                <div className="text-lg text-center">2/17회</div>
               </div>
             </div>
           </div>
