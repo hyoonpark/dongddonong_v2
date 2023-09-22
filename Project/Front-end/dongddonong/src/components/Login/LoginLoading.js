@@ -7,7 +7,7 @@ const LoginLoading = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const navigator = useNavigate();
 
-  const { setLoggedUser, setLoggedIn } = useUserContext();
+  const { setLoggedUser } = useUserContext();
 
   useEffect(() => {
     axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`
@@ -15,6 +15,9 @@ const LoginLoading = () => {
     ).then((res) => {
       // console.log('성공!!', res.data);
       localStorage.setItem('token', res.data.data.accessToken)
+      localStorage.setItem('id', res.data.data.id)
+      localStorage.setItem('nickName', res.data.data.nickName)
+      localStorage.setItem('profileImgUrl', res.data.data.profileImgUrl)
       setLoggedUser(res.data.data);
       navigator('/') // 로그인 시도하던 페이지로 이동
   }).catch(error => {

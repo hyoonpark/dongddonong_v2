@@ -32,11 +32,15 @@ const Li = styled.li`
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const { loggedIn } = useUserContext();
+  const { loggedIn, setLoggedOut } = useUserContext();
   const videoRef = useRef(null);
 
   const handleLoginClick = () => {
     setIsModalOpen(true);
+  };
+
+  const handleLogoutClick = () => {
+    setLoggedOut()
   };
 
   return (
@@ -60,7 +64,7 @@ const Navbar = () => {
               <Link to="/recordroom">
                 <Li>기록실</Li>
               </Link>
-              <Li>로그아웃</Li>
+              <Li onClick={handleLogoutClick}>로그아웃</Li> 
             </>
           ) : (
             <>
