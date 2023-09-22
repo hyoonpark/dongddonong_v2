@@ -6,7 +6,6 @@ import styled from "styled-components";
 import KakaoLogin from "./../components/Login/KakaoLogin";
 import LoginModal from "./../components/Login/LoginModal";
 import { useUserContext } from "../constexts/userContext";
-
 import video from "../assets/icon/video.png";
 import VideoModal from "./Modal/VideoModal";
 import Wrapper from "../components/Wrapper";
@@ -65,7 +64,7 @@ const Navbar = () => {
               <Link to="/recordroom">
                 <Li>기록실</Li>
               </Link>
-              <Li onClick={handleLogoutClick}>로그아웃</Li> 
+              <Li onClick={handleLogoutClick}>로그아웃</Li>
             </>
           ) : (
             <>
