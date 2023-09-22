@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -30,8 +31,10 @@ const Li = styled.li`
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
   const { loggedIn, setLoggedOut } = useUserContext();
-  
+  const videoRef = useRef(null);
+
   const handleLoginClick = () => {
     setIsModalOpen(true);
   };
@@ -39,8 +42,6 @@ const Navbar = () => {
   const handleLogoutClick = () => {
     setLoggedOut()
   };
-
-  const videoRef = useRef(null);
 
   return (
     <nav className="h-20 border-b border-black">
@@ -54,7 +55,7 @@ const Navbar = () => {
             />
           </Link>
 
-          <div className="w-1/4 max-w-xs"></div>
+          <div className="w-1/12 max-w-xs md:w-1/4"></div>
           {loggedIn ? (
             <>
               <Link to="/game">
@@ -74,12 +75,16 @@ const Navbar = () => {
           )}
           <button
             onClick={() => {
+              setVideoModalOpen(true);
               videoRef.current.classList.toggle("scale-0");
             }}
           >
             <img className="w-8" src={video} alt="업로드" />
           </button>
-          <VideoModal ref={videoRef}></VideoModal>
+          <VideoModal
+            ref={videoRef}
+            videoModalOpen={videoModalOpen}
+          ></VideoModal>
         </div>
       </Wrapper>
       <LoginModal

@@ -3,8 +3,8 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-import calendar from "../../assets/calendar.png";
-import caret from "../../assets/caret.png";
+import calendar from "../../assets/icon/calendar.png";
+import caret from "../../assets/icon/caret.png";
 import "./Calderas.css";
 
 const Calendars = ({
