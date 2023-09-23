@@ -33,6 +33,7 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const { loggedIn, setLoggedOut } = useUserContext();
+  console.log('로그인여부', loggedIn)
   const videoRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -56,7 +57,13 @@ const Navbar = () => {
           </Link>
 
           <div className="w-1/12 max-w-xs md:w-1/4"></div>
-          {loggedIn ? (
+          {!loggedIn ? (
+            <>
+              <Li onClick={handleLoginClick}>경기</Li>
+              <Li onClick={handleLoginClick}>기록실</Li>
+              <Li onClick={handleLoginClick}>로그인</Li>
+            </>
+          ) : (
             <>
               <Link to="/game">
                 <Li>경기</Li>
@@ -65,12 +72,6 @@ const Navbar = () => {
                 <Li>기록실</Li>
               </Link>
               <Li onClick={handleLogoutClick}>로그아웃</Li>
-            </>
-          ) : (
-            <>
-              <Li onClick={handleLoginClick}>경기</Li>
-              <Li onClick={handleLoginClick}>기록실</Li>
-              <Li onClick={handleLoginClick}>로그인</Li>
             </>
           )}
           <button
