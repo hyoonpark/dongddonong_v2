@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import GamePage from './pages/Game/GamePage';
-import RecordRoom from './components/Recordroom/Recordroom';
+import Recordroom from './pages/Recordroom/Recordroom';
 import LoginLoading from './components/Login/LoginLoading';
 import { useUserContext } from './constexts/userContext';
 
@@ -22,7 +22,7 @@ function App() {
         />
         <Route
           path="/recordroom"
-          element={loggedIn ? <RecordRoom /> : <Navigate to="/" replace />}
+          element={loggedIn ? <Recordroom /> : <Navigate to="/" replace />}
         />
         <Route path="/oauth/callback/kakao" element={<LoginLoading />} />
       </Routes>

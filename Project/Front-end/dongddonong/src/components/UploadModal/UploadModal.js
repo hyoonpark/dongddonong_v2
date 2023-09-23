@@ -25,7 +25,7 @@ const ModalOverlay = (props) => {
     useEffect(() => {
         console.log(files); // 상태가 업데이트되면 실행됨
         console.log(gameTypes); //
-    }, [files,gameTypes]);
+    }, [files, gameTypes]);
 
     const buttonOptions = ["연습", "투바", "대전"]; // 멀티버튼 옵션 목록
 
@@ -124,7 +124,7 @@ const ModalOverlay = (props) => {
     return (
         <div className={`bg-white rounded-xl p-4 ${classes.modal}`}>
             <div className="flex justify-end">
-            <img onClick={props.onConfirm} className="w-6" src={off} alt='닫기버튼' />
+                <img onClick={props.onConfirm} className="w-6" src={off} alt='닫기버튼' />
             </div>
             <h2 className="mt-4 text-2xl font-bold text-center">동영상 업로드</h2>
             <GuideCarousel></GuideCarousel>
@@ -145,13 +145,13 @@ const ModalOverlay = (props) => {
                                     {file.type.startsWith("video/") && (
                                         <div className="flex justify-between">
                                             {/* <div>재생시간: {videoDurations[index]} 초   </div> */}
-                                                <MultiButton
-                                                    options={buttonOptions}
-                                                    selected={gameTypes[index]?.buttonInfo || ""}
-                                                    onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
-                                                />
-                                         
-                                            <img className=" ml-2 w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)}/>
+                                            <MultiButton
+                                                options={buttonOptions}
+                                                selected={gameTypes[index]?.buttonInfo || ""}
+                                                onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
+                                            />
+
+                                            <img className=" ml-2 w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)} />
                                         </div>
                                     )}
                                 </ul>
@@ -175,7 +175,7 @@ const ModalOverlay = (props) => {
 const Result = ({ status }) => {
     if (status === "success") {
         return (
-        <p>✅ Uploaded successfully!</p>)
+            <p>✅ Uploaded successfully!</p>)
     } else if (status === "fail") {
         return <p>❌ Upload failed!</p>;
     } else if (status === "uploading") {
@@ -188,20 +188,20 @@ const Result = ({ status }) => {
 
 
 const UploadModal = (props) => {
-    return(
+    return (
         <>
-        {ReactDOM.createPortal(
-        <Backdrop onConfirm={props.onConfirm} />,
-        document.getElementById('backdrop')
-      )}
-      {ReactDOM.createPortal(
-        <ModalOverlay
-          onConfirm={props.onConfirm}
-        />,
-        document.getElementById('overlays')
-      )}
+            {ReactDOM.createPortal(
+                <Backdrop onConfirm={props.onConfirm} />,
+                document.getElementById('backdrop')
+            )}
+            {ReactDOM.createPortal(
+                <ModalOverlay
+                    onConfirm={props.onConfirm}
+                />,
+                document.getElementById('overlays')
+            )}
         </>
     )
 }
-    
+
 export default UploadModal;
