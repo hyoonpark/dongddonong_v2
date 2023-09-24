@@ -6,7 +6,6 @@ import { useUserContext } from '../../contexts/userContext';
 const LoginLoading = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const navigator = useNavigate();
-
   const { setLoggedUser } = useUserContext();
 
   useEffect(() => {
@@ -14,7 +13,7 @@ const LoginLoading = () => {
     ).then((res) => {
       // console.log('성공!!', res.data);
       setLoggedUser(res.data.data);
-      navigator(-1) // 로그인 시도하던 페이지로 이동
+      navigator(-1) // 로그인 시도하던 페이지로 이동 -> 인데 안되네...
     }).catch(error => {
       console.log('실패!!!!!!', error);
     });
