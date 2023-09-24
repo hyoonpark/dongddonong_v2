@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useUserContext } from '../../constexts/userContext';
@@ -11,7 +11,6 @@ const LoginLoading = () => {
 
   useEffect(() => {
     axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`
-      // axios.get(`http://localhost:8589/user/login?code=${code}`
     ).then((res) => {
       // console.log('성공!!', res.data);
       setLoggedUser(res.data.data);

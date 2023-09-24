@@ -8,8 +8,8 @@ import { useUserContext } from "../constexts/userContext";
 
 const Home = () => {
   const { user, loggedIn } = useUserContext()
-  console.log(user)
-  console.log(loggedIn)
+  console.log('context 상태', loggedIn)
+  console.log('context user', user)
 
   const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();

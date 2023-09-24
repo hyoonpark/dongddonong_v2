@@ -32,8 +32,11 @@ const Li = styled.li`
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const { loggedIn, setLoggedOut } = useUserContext();
-  console.log('로그인여부', loggedIn)
+  const { setLoggedOut } = useUserContext();
+  // console.log('네비바 로그인여부', loggedIn)
+  const accessToken = localStorage.getItem('accessToken');
+  // console.log('네비바 로컬스토리지', loggedIn)
+
   const videoRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -57,7 +60,7 @@ const Navbar = () => {
           </Link>
 
           <div className="w-1/12 max-w-xs md:w-1/4"></div>
-          {!loggedIn ? (
+          {!accessToken ? (
             <>
               <Li onClick={handleLoginClick}>경기</Li>
               <Li onClick={handleLoginClick}>기록실</Li>
