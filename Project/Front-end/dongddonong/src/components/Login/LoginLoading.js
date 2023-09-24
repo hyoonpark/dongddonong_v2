@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useUserContext } from '../../context/userContext';
+import { useUserContext } from '../../contexts/userContext';
 
 const LoginLoading = () => {
   const code = new URL(window.location.href).searchParams.get('code');
