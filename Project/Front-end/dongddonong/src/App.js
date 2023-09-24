@@ -9,7 +9,10 @@ import { useUserContext } from './constexts/userContext';
 
 
 function App() {
+  // context 로그인 여부에 따라서 라우팅 접근을 제한한다. 
   const { loggedIn } = useUserContext();
+  // const accessToken = localStorage.getItem('accessToken');
+
 
   return (
     <BrowserRouter>
