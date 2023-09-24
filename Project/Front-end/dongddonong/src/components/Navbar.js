@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import KakaoLogin from "./../components/Login/KakaoLogin";
 import LoginModal from "./../components/Login/LoginModal";
-import { useUserContext } from "../constexts/userContext";
+import { useUserContext } from "../context/userContext";
 import video from "../assets/icon/video.png";
 import VideoModal from "./Modal/VideoModal";
 import Wrapper from "../components/Wrapper";
