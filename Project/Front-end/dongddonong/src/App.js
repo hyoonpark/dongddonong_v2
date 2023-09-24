@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import GamePage from './pages/Game/GamePage';
 import Recordroom from './pages/Recordroom/Recordroom';
 import LoginLoading from './components/Login/LoginLoading';
-import { useUserContext } from './constexts/userContext';
+import { useUserContext } from './context/userContext';
 
 
 function App() {
