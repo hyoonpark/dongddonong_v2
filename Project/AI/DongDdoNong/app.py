@@ -18,8 +18,11 @@ s3 = boto3.client(
     # config=Config(signature_version='s3v4')
 )
 
+@app.route('/')
+def index():
+    return "Hello World!"
 
-# 동영상 업로드
+
 @app.route('/ai/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
@@ -33,8 +36,3 @@ def upload_file():
         return 'File uploaded successfully', 200
 
     return 'No file selected', 404
-
-
-@app.route('/')
-def index():
-    return "Hello World!"

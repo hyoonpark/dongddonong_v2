@@ -3,81 +3,75 @@ import practice from "../../assets/icon/practice.png";
 import twoBound from "../../assets/icon/two-bound.png";
 import game from "../../assets/icon/game.png";
 
-const Games = () => {
-  const Dummy = [
-    {
-      id: 403,
-      userId: 3017361691,
-      gameDate: "2023-09-21 00:00:00",
-      createdAt: "2023-09-21T14:56:24.089+00:00",
-      isAssigned: false,
-      playerHistories: [
-        {
-          id: 354,
-          gameId: 403,
-          userId: 3019596583,
-          createdAt: "2023-09-21T14:56:24.089+00:00",
-          diffProfileImg: "string",
-          mode: "3",
-          twoPts: 7,
-          threePts: 3,
-          tryTwoPts: 15,
-          tryThreePts: 6,
-          total: 13,
-          xyUrl: "string",
-          playTime: 10,
-          win: true,
-        },
-        {
-          id: 355,
-          gameId: 403,
-          userId: 3017361691,
-          createdAt: "2023-09-21T14:56:24.089+00:00",
-          diffProfileImg: "string",
-          mode: "3",
-          twoPts: 8,
-          threePts: 4,
-          tryTwoPts: 15,
-          tryThreePts: 6,
-          total: 16,
-          xyUrl: "string",
-          playTime: 10,
-          win: false,
-        },
-      ],
-    },
-  ];
-
+const Games = ({ Data, user, selectedDate }) => {
   return (
     <Wrapper>
       <div className="flex flex-col gap-4 mt-6">
-        <div className="flex items-center justify-around text-center border border-black rounded-lg h-36">
-          <div className="text-center">
-            <img className="w-12" src={practice} alt="연습" />
-            <div>연습</div>
-          </div>
-          <div>
-            <div className="font-anton">10:15 AM</div>
-            <div className="text-sm text-secondary">5'32''</div>
-          </div>
-          <div className="text-2xl text-primary">WIN</div>
+        {Data.map((e) => {
+          const today = new Date(e.createdAt);
 
-          {Dummy.forEach((e) => {
-            console.log(e);
-          })}
-        </div>
+          if (
+            selectedDate.getMonth() !== today.getMonth() ||
+            selectedDate.getDate() !== today.getDate()
+          ) {
+            return null;
+          }
 
-        <div className="flex items-center justify-around text-center border border-black h-36">
-          <div>
-            <img className="w-12" src={game} alt="연습" />
-            <div>연습</div>
-          </div>
-          <div>
-            <div className="font-anton">10:15 AM</div>
-            <div className="text-sm text-secondary">5'32''</div>
-          </div>
-          <div className="text-2xl">LOSE</div>
-        </div>
+          const hours = today.getHours() % 12 ? today.getHours() % 12 : 12;
+          const minutes =
+            today.getMinutes() < 10
+              ? "0" + today.getMinutes()
+              : today.getMinutes();
+          const ampm = today.getHours() >= 12 ? "PM" : "AM";
+          const date = `${hours}:${minutes} ${ampm}`;
+
+          const myHistory = e.playerHistories.find(
+            (e) => e.userId === +user.id
+          );
+
+          let imgSrc;
+          let mode;
+          switch (myHistory.mode) {
+            case "1":
+              imgSrc = practice;
+              mode = "연습";
+              break;
+            case "2":
+              imgSrc = twoBound;
+              mode = "투바운드";
+              break;
+            case "3":
+              imgSrc = game;
+              mode = "경기";
+              break;
+
+            default:
+              break;
+          }
+
+          return (
+            <div
+              key={e.id}
+              className="flex items-center justify-around text-center border border-black h-36"
+            >
+              <div>
+                <img className="w-12" src={imgSrc} alt="모드" />
+                <div>{mode}</div>
+              </div>
+              <div>
+                <div className="font-anton">{date}</div>
+                <div className="text-sm text-secondary">
+                  {myHistory.playTime + "분"}
+                </div>
+              </div>
+              <div
+                className={`text-2xl ${myHistory.win ? "text-primary" : ""}`}
+              >
+                {myHistory.win ? "WIN" : "LOSE"}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Wrapper>
   );
