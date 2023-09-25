@@ -14,7 +14,7 @@ const LoginLoading = () => {
       // console.log('성공!!', res.data);
       // console.log('인가코드', code);
       setLoggedUser(res.data.data);
-      navigator(-1) // 로그인 시도하던 페이지로 이동 -> 인데 안되네...
+      navigator('/')
     }).catch(error => {
       console.log('실패!!!!!!', error);
     });
