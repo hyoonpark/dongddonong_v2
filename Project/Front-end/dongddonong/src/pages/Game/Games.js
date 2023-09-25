@@ -3,11 +3,17 @@ import practice from "../../assets/icon/practice.png";
 import twoBound from "../../assets/icon/two-bound.png";
 import game from "../../assets/icon/game.png";
 
-const Games = ({ Data, user, selectedDate }) => {
+const Games = ({ data, user, selectedDate }) => {
   return (
     <Wrapper>
       <div className="flex flex-col gap-4 mt-6">
-        {Data.map((e) => {
+        {data.map((e) => {
+          const myHistory = e.playerHistories.find(
+            (v) => v.userId === +user.id
+          );
+
+          if (myHistory === undefined) return null;
+
           const today = new Date(e.createdAt);
 
           if (
@@ -24,10 +30,6 @@ const Games = ({ Data, user, selectedDate }) => {
               : today.getMinutes();
           const ampm = today.getHours() >= 12 ? "PM" : "AM";
           const date = `${hours}:${minutes} ${ampm}`;
-
-          const myHistory = e.playerHistories.find(
-            (e) => e.userId === +user.id
-          );
 
           let imgSrc;
           let mode;
