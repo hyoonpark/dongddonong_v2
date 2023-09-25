@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class GameService {
     private final GameRepository gameRepository;
+    private final PlayerHistoryService playerHistoryService;
 
     private GameDto convertToDto(Game game) {
         return GameDto.fromEntity(game);
@@ -34,18 +35,25 @@ public class GameService {
         ));
 
         gameRepository.save(game);
+
+        if(game.getMode().equals("1")){
+            game.getPlayerHistories().forEach(playerHistory ->
+                    playerHistoryService.patchPlayerHistory(playerHistory.getId(), game.getUserId())
+            );
+        }
+
     }
 
     // 여러 작업을 묶어 작업해야 하기때문에 Transactional
 
-    public List<GameDto> getAllGamesByUser(long userId){
+    public List<GameDto> getAllGamesByUser(long userId) {
         List<Game> games = gameRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
         return games.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    public List<GameDto> getAllGames(){
+    public List<GameDto> getAllGames() {
         List<Game> games = gameRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
         return games.stream()
                 .map(this::convertToDto)
@@ -59,18 +67,20 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
-    public void checkGameUserAssigned(long gameId){
+    public void checkGameUserAssigned(long gameId) {
         GameDto gameDto = getGame(gameId);
         Game game = gameRepository.findById(String.valueOf(gameId))
-                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));;
+                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));
+        ;
         List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
         boolean allAssigned = playerHistories.stream()
                 .allMatch(ph -> ph.getUserId() != null);
-        if(allAssigned){
+        if (allAssigned) {
             game.updateGame(true);
         }
     }
-    public GameDto getGame(long gameId){
+
+    public GameDto getGame(long gameId) {
         return convertToDto(gameRepository.findById(String.valueOf(gameId)).orElse(null));
     }
 }

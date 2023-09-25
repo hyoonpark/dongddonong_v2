@@ -102,7 +102,7 @@ const ModalOverlay = (props) => {
             console.log(formData.get("files"));
             console.log(formData);
             try {
-                const result = await fetch("https://httpbin.org/post", {
+                const result = await fetch("http://j9e103:5000/ai/upload", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'multipart/form-data'

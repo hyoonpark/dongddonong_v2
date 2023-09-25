@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import KakaoLogin from "./../components/Login/KakaoLogin";
@@ -16,14 +16,17 @@ const Li = styled.li`
   &:before {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     margin-top: 0.25rem;
     background-color: var(--primary);
     width: 0;
     height: 2px;
-    transition: all 0.3s;
+    transition: all 0.4s;
   }
   &:hover:before {
+    width: 100%;
+  }
+  &.active:before {
     width: 100%;
   }
 `;
@@ -31,10 +34,9 @@ const Li = styled.li`
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const location = useLocation();
   const { setLoggedOut } = useUserContext();
-  // console.log('네비바 로그인여부', loggedIn)
   const accessToken = localStorage.getItem("accessToken");
-  // console.log('네비바 로컬스토리지', loggedIn)
 
   const videoRef = useRef(null);
 
@@ -68,10 +70,18 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/game">
-                <Li>경기</Li>
+                <Li className={location.pathname === "/game" ? "active" : ""}>
+                  경기
+                </Li>
               </Link>
               <Link to="/recordroom">
-                <Li>기록실</Li>
+                <Li
+                  className={
+                    location.pathname === "/recordroom" ? "active" : ""
+                  }
+                >
+                  기록실
+                </Li>
               </Link>
               <Li onClick={handleLogoutClick}>로그아웃</Li>
             </>
