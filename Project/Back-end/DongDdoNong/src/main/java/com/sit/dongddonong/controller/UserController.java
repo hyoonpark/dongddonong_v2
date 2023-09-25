@@ -7,6 +7,7 @@ import com.sit.dongddonong.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -32,5 +33,10 @@ public class UserController {
     public ApiResponse<UserDto> login(@RequestParam String code) throws Exception {
         UserDto user = userService.login(code);
         return ApiResponse.ok(user);
+    }
+
+    @PostMapping("/logout")
+    public ApiResponse<ResponseEntity<String>> logout(@RequestParam long userId) throws Exception {
+        return ApiResponse.ok(userService.logout(userId));
     }
 }
