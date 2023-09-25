@@ -27,7 +27,7 @@ public class GameDto {
     private Boolean isAssigned = false;
 //    private String location;
     private List<PlayerHistoryDto> playerHistories;
-
+    private String mode;
 
     public void updateAssignedTrue(){
         isAssigned = true;
@@ -46,6 +46,7 @@ public class GameDto {
                 .playerHistories(game.getPlayerHistories().stream()
                         .map(PlayerHistoryDto::fromEntity)
                         .collect(Collectors.toList()))
+                .mode(game.getMode())
                 .build();
     }
 }

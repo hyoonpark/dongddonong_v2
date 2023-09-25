@@ -2,7 +2,10 @@ package com.sit.dongddonong.dto;
 
 import com.sit.dongddonong.model.PlayerHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -15,6 +18,7 @@ public class PlayerHistoryDto {
     private Long id;
     @Schema(hidden = true)
     private Long gameId;
+    @Schema(hidden = true)
     private Long userId;
     @Schema(hidden = true)
     private Date createdAt;
@@ -30,6 +34,9 @@ public class PlayerHistoryDto {
     private int playTime;
     private Boolean win;
 
+    public void updateUserId(long userId){
+        this.userId = userId;
+    }
     public static PlayerHistoryDto fromEntity(PlayerHistory playerHistory) {
         PlayerHistoryDto playerHistoryDto = PlayerHistoryDto.builder()
                 .id(playerHistory.getId())
