@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import GamePage from "./pages/Game/GamePage";
 import Recordroom from "./pages/Recordroom/Recordroom";
 import LoginLoading from "./components/Login/LoginLoading";
