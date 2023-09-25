@@ -3,6 +3,7 @@ FROM tiangolo/uwsgi-nginx-flask:python3.8
 WORKDIR /app
 
 RUN pip install uwsgi
+RUN pip install boto3
 
 # Copy files
 COPY . .
