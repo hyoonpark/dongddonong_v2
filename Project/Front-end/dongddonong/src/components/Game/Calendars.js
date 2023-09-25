@@ -12,9 +12,11 @@ const Calendars = ({
   setSelectedDate,
   activeStartDate,
   setActiveStartDate,
+  calendarData,
 }) => {
   const [isClick, setIsClick] = useState(false);
   const [isRotated, setIsRotated] = useState(false);
+  const tileNumbers = {};
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -40,9 +42,25 @@ const Calendars = ({
     if (e.date.getMonth() !== e.activeStartDate.getMonth()) return "hide";
   };
 
-  const tileContentHandler = (e) => {
+  const tileContenctHandler = (e) => {
     if (e.date.getDate()) {
-      // 해당 날짜에 맞는 작업
+      for (const v of calendarData) {
+        if (
+          e.date.getMonth() === v.getMonth() &&
+          e.date.getDate() === v.getDate()
+        ) {
+          tileNumbers[e.date.toISOString()] =
+            ++tileNumbers[e.date.toISOString()] || 1;
+        }
+      }
+      return tileNumbers[e.date.toISOString()] ? (
+        <>
+          <div className="text-black font-bold">
+            {tileNumbers[e.date.toISOString()]}
+          </div>
+          <div className="relative text-[10px] -translate-y-px">경기</div>
+        </>
+      ) : null;
     }
 
     return null;
@@ -79,9 +97,9 @@ const Calendars = ({
         activeStartDate={activeStartDate}
         className={`${handleClassName} ${
           isClick ? "show" : ""
-        } absolute right-0 custom-calendar`}
+        } absolute right-0 custom-calendar z-10`}
         tileClassName={tileClassNameHandler}
-        tileContent={tileContentHandler}
+        tileContent={tileContenctHandler}
       />
     </>
   );
