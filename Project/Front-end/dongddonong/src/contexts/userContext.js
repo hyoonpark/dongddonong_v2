@@ -35,7 +35,6 @@ export function UserContextProvider({ children }) {
   const setLoggedOut = async () => {
     try {
       await getLogout(user.id);
-      console.log('로그아웃성공', user.id)
 
       setUser({
         id: null,
