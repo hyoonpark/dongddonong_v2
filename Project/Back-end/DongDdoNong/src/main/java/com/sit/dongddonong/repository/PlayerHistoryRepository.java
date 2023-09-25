@@ -15,13 +15,14 @@ public interface PlayerHistoryRepository extends JpaRepository<PlayerHistory,Str
     PlayerHistory findById(long playerHistoryId);
 
     @Query("SELECT ph FROM PlayerHistory ph " +
-            "WHERE (:mode = 0 OR ph.mode = :mode) " +
-            "AND ph.user.id = :userId " +
-            "AND (:startDate IS NULL OR ph.createdAt BETWEEN :startDate AND :endDate)")
+            "INNER JOIN ph.game g " +
+            "WHERE ph.user.id = :userId " +
+            "AND (g.gameDate BETWEEN :startDate AND :endDate OR :startDate IS NULL OR :endDate IS NULL) " +
+            "AND (:mode = '0' OR ph.mode = :mode)")
     List<PlayerHistory> findPlayerHistoriesByCondition(
             @Param("userId") Long userId,
-            @Param("mode") String mode,
             @Param("startDate") Date startDate,
-            @Param("endDate") Date endDate
+            @Param("endDate") Date endDate,
+            @Param("mode") String mode
     );
 }

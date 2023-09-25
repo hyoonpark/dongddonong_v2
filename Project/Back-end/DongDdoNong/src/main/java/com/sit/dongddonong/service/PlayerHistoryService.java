@@ -70,7 +70,7 @@ public class PlayerHistoryService {
         Date start = startDate != null ? format.parse(startDate) : null;
         Date end = endDate != null ? format.parse(endDate) : null;
 
-        List<PlayerHistory> playerHistories = playerHistoryRepository.findPlayerHistoriesByCondition(userId, mode, start, end);
+        List<PlayerHistory> playerHistories = playerHistoryRepository.findPlayerHistoriesByCondition(userId, start, end, mode);
         return playerHistories.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
