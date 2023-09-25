@@ -6,12 +6,10 @@ import Games from "./Games";
 import Week from "../../components/Game/Week";
 import Footer from "../../components/Footer";
 import Calendars from "../../components/Game/Calendars";
-import { getGameUserId } from "../../api/getGameUserIdApi";
 
 const GamePage = () => {
-  const user = {
-    id: 3017361691,
-  };
+  const { user } = useUserContext();
+
   const [data, setData] = useState([]);
   const [dates, setDates] = useState({
     selectedDate: new Date(),
@@ -23,12 +21,14 @@ const GamePage = () => {
   useEffect(() => {
     const currentMonth = activeStartDate.getMonth();
 
-    axios.get(`/game/assign/${user.id}`).then((resp) => {
-      setData(resp.data.data);
+    axios
+      .get(`/game/assign/${user.id}`, { params: { isAssigned: true } })
+      .then((resp) => {
+        setData(resp.data.data);
 
-      const arr = resp.data.data.map((e) => new Date(e.createdAt));
-      SetCalendarData(arr);
-    });
+        const arr = resp.data.data.map((e) => new Date(e.createdAt));
+        SetCalendarData(arr);
+      });
 
     setDates((prevState) => ({
       ...prevState,

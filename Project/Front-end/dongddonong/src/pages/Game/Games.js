@@ -12,7 +12,7 @@ const Games = ({ data, user, selectedDate }) => {
             (v) => v.userId === +user.id
           );
 
-          if (myHistory === undefined) return;
+          if (myHistory === undefined) return null;
 
           const today = new Date(e.createdAt);
 
