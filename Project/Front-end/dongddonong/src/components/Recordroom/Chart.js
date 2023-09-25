@@ -5,10 +5,14 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const data = {
+  labels: ["two", "three"],
   datasets: [
     {
+      label: "of Votes",
       data: [2, 3],
-      backgroundColor: ["#f8c2ac", "#ee6730"],
+      backgroundColor: ["#ee6730", "#f8c2ac"],
+      borderColor: ["#ee6730", "#f8c2ac"],
+      borderWidth: 1,
     },
   ],
 };

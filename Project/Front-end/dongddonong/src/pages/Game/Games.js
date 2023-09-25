@@ -62,56 +62,9 @@ const Games = () => {
           </div>
           <div className="text-2xl text-primary">WIN</div>
 
-<<<<<<< Updated upstream
           {Dummy.forEach((e) => {
             console.log(e);
           })}
-=======
-          console.log(myHistory);
-
-          return (
-            <div key={e.id} className="flex">
-              <div className="flex items-center justify-around text-center border border-black h-36 w-full md:w-1/2">
-                <div>
-                  <img className="w-12" src={mode.imgSrc} alt="모드" />
-                  <div>{mode.label}</div>
-                </div>
-                <div>
-                  <div className="font-anton">
-                    {formatDate(new Date(e.createdAt))}
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    {myHistory.playTime + "분"}
-                  </div>
-                </div>
-                <div
-                  className={`text-2xl ${myHistory.win ? "text-primary" : ""}`}
-                >
-                  {myHistory.win ? "WIN" : "LOSE"}
-                </div>
-              </div>
-
-              <div className="p-1 hidden items-center justify-around text-center border-black border-b border-r border-t w-1/2 h-36 md:flex">
-                <div className="w-14">
-                  <img src={myHistory.diffProfileImg} alt="프로필이미지" />
-                </div>
-                <div>총 득점: {myHistory.total}점</div>
-                <div>
-                  2점: {myHistory.twoPts}/{myHistory.tryTwoPts}
-                </div>
-                <div>
-                  3점: {myHistory.threePts}/{myHistory.tryThreePts}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {isEmpty && (
-        <div className="flex justify-center items-center h-60">
-          해당일에 경기가 없어요
->>>>>>> Stashed changes
         </div>
 
         <div className="flex items-center justify-around text-center border border-black h-36">
