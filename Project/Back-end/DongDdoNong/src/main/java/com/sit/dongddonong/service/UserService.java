@@ -180,7 +180,7 @@ public class UserService {
     }
 
     public ResponseEntity<String> logout(long userId) {
-        String reqURL = "https://kapi.kakao.com/v1/user/logout";
+        String reqURL = "https://kapi.kakao.com/v1/user/unlink";
 
         try {
             HttpHeaders headers = new HttpHeaders();
