@@ -7,9 +7,8 @@ const data = {
   datasets: [
     {
       data: [3, 10],
-      backgroundColor: ["#336699", "#99CCFF"],
+      backgroundColor: ["gray", "#e6e6e6"],
       display: true,
-      borderColor: "#D1D6DC",
     },
   ],
 };
@@ -21,7 +20,7 @@ const HalfChart = (props) => {
       options={{
         plugins: {
           legend: {
-            display: false,
+            display: true,
           },
           tooltip: {
             enabled: false,

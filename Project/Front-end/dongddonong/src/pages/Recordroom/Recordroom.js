@@ -1,5 +1,9 @@
 import { useUserContext } from "../../contexts/userContext";
+<<<<<<< Updated upstream
 import {useState, useEffect} from 'react'
+=======
+import { useState } from "react";
+>>>>>>> Stashed changes
 
 import user from "../../assets/player.png";
 import user2 from "../../assets/player2.jpg";
@@ -16,6 +20,7 @@ import getUserRecord from '../../api/getUserRecord'
 
 
 const Recordroom = () => {
+<<<<<<< Updated upstream
   // const { user } = useUserContext();
 
   const modes = ['연습모드','투바모드','대전모드']
@@ -72,6 +77,10 @@ const Recordroom = () => {
     console.log(match)
   },[match])
   
+=======
+  const { user } = useUserContext();
+  const [mode, setMode] = useState(1);
+>>>>>>> Stashed changes
 
   return (
     <Wrapper>
@@ -90,10 +99,11 @@ const Recordroom = () => {
               농구한 시간 : 10h
             </div>
             <div className="text-center text-lg row-start-4">
-              전체 득점 : 3,432
+              총 득점 : 3,432
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <div className="mt-4 h-10 bg-secondary flex text-center justify-evenly items-center">
             {modes.map((option, index) => (
                 <button
@@ -106,38 +116,70 @@ const Recordroom = () => {
                     {option}
                 </button>
             ))}
+=======
+        <div className="mt-6 h-12 bg-secondary flex text-center justify-evenly items-center">
+          <div
+            className={`${
+              mode === 1 ? "text-primary" : ""
+            } bg-white text-lg w-1/4 rounded cursor-pointer`}
+            onClick={() => setMode(1)}
+          >
+            연습
+          </div>
+          <div
+            className={`${
+              mode === 2 ? "text-primary" : ""
+            } bg-white text-lg w-1/4 rounded cursor-pointer`}
+            onClick={() => setMode(2)}
+          >
+            투바운드
+          </div>
+          <div
+            className={`${
+              mode === 3 ? "text-primary" : ""
+            } bg-white text-lg w-1/4 rounded cursor-pointer`}
+            onClick={() => setMode(3)}
+          >
+            경기
+          </div>
+          <div></div>
+>>>>>>> Stashed changes
         </div>
 
         {/* 해당 결과 통계 데이터 */}
-        <div className="flex flex-col h-56 border-solid border-2 border-gray-500 mt-4 bg-white">
+        <div className="flex flex-col h-60 border-solid border border-black mt-4 bg-white">
           <div className="flex basis-1/3 flex-col justify-center items-center">
             <div>연습모드 총 득점</div>
-            <div className="text-4xl font-semibold">2,332</div>
+            <div className="text-2xl font-bold">2,332</div>
           </div>
 
           <div className="flex h-2/3">
-            <div className="flex items-center w-2/5 justify-center">
+            <div className="flex items-center w-2/5 justify-center pb-2">
               <Chart labels={["2점슛", "3점슛"]}></Chart>
             </div>
 
-            <div className="flex justify-center items-center w-3/5 gap-4">
-              <div className="flex flex-col w-1/3 justify-center">
-                <HalfChart></HalfChart>
-                <div className="text-lg text-center">3/16회</div>
+            <div className="relative flex justify-between items-center w-3/5">
+              <div className="flex flex-col w-1/2 h-full  justify-center">
+                <div className="text-center h-1/5">2점슛</div>
+                <div className="flex justify-center items-center h-3/5">
+                  <HalfChart></HalfChart>
+                </div>
+                <div className="text-lg text-center h-1/5">3/16회</div>
               </div>
 
-              <div className="flex flex-col w-1/3 h-full  justify-center">
-                <div className=" text-sm text-center">3점슛</div>
-                <HalfChart></HalfChart>
-                <div className="text-[3px] text-center">성공 / 시도</div>
-                <div className="text-lg text-center">2/17회</div>
+              <div className="flex flex-col w-1/2 h-full  justify-center">
+                <div className="text-center h-1/5">3점슛</div>
+                <div className="flex justify-center items-center h-3/5">
+                  <HalfChart></HalfChart>
+                </div>
+                <div className="text-lg text-center h-1/5">3/16회</div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="flex flex-col mt-4 gap-3">
-          <div className="h-32 border-black rounded border-2">
+          <div className="h-32 border-black rounded border">
             <div className="h-4"></div>
             <div className="h-28 flex gap-1">
               <div className="flex flex-col items-center justify-evenly w-1/5">
@@ -175,7 +217,7 @@ const Recordroom = () => {
             </div>
           </div>
 
-          <div className="h-32 border-black rounded border-2">
+          <div className="h-32 border-black rounded border">
             <div className="h-4"></div>
             <div className="h-28 flex gap-1">
               <div className="flex flex-col items-center justify-evenly w-1/5">
