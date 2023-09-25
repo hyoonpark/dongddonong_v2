@@ -1,4 +1,4 @@
-import { useUserContext } from "../../constexts/userContext";
+import { useUserContext } from "../../contexts/userContext";
 
 import user from "../../assets/player.png";
 import user2 from "../../assets/player2.jpg";
