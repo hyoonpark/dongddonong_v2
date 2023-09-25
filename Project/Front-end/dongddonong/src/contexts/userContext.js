@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { getLogout } from './../api/userApi';
 
 const userContext = createContext();
 
@@ -31,21 +32,27 @@ export function UserContextProvider({ children }) {
     localStorage.setItem('profileImgUrl', userData.profileImgUrl)
   };
 
-  const setLoggedOut = () => {
-    setUser({
-      id: null,
-      type: null,
-      profileImgUrl: null,
-      name: null,
-      nickName: null,
-      email: null,
-      accessToken: null,
-    });
-    setLoggedIn(false);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('id');
-    localStorage.removeItem('profileImgUrl');
-    localStorage.removeItem('nickName');
+  const setLoggedOut = async () => {
+    try {
+      await getLogout(user.id);
+
+      setUser({
+        id: null,
+        type: null,
+        profileImgUrl: null,
+        name: null,
+        nickName: null,
+        email: null,
+        accessToken: null,
+      });
+      setLoggedIn(false);
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('id');
+      localStorage.removeItem('profileImgUrl');
+      localStorage.removeItem('nickName');
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
   };
 
   return (
