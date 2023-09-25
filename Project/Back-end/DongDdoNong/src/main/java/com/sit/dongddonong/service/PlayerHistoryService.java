@@ -1,10 +1,13 @@
 package com.sit.dongddonong.service;
 
 import com.sit.dongddonong.dto.PlayerHistoryDto;
+import com.sit.dongddonong.model.Game;
 import com.sit.dongddonong.model.PlayerHistory;
 import com.sit.dongddonong.model.User;
+import com.sit.dongddonong.repository.GameRepository;
 import com.sit.dongddonong.repository.PlayerHistoryRepository;
 import com.sit.dongddonong.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +19,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PlayerHistoryService {
     private final PlayerHistoryRepository playerHistoryRepository;
     private final UserRepository userRepository;
-    private final GameService gameService;
+    private final GameRepository gameRepository;
 
 
     public List<PlayerHistoryDto> getPlayerHistory(long userId){
@@ -45,10 +49,17 @@ public class PlayerHistoryService {
 
             // 부모 객체인 Game의 모든 유저가 할당 되어있는지 확인하고,
             // 할당 다 되었다면 isAssigned 를 true 로 변경
-            gameService.checkGameUserAssigned(playerHistory.getGame().getId());
+            checkGameUserAssigned(playerHistory.getGame().getId());
+        }
+    }
 
-
-
+    public void checkGameUserAssigned(long gameId) {
+        Game game = gameRepository.findById(String.valueOf(gameId))
+                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));
+        boolean allAssigned = game.getPlayerHistories().stream()
+                .allMatch(ph -> ph.getUser() != null);
+        if (allAssigned) {
+            game.updateGame(true);
         }
     }
 
@@ -59,7 +70,7 @@ public class PlayerHistoryService {
         Date start = startDate != null ? format.parse(startDate) : null;
         Date end = endDate != null ? format.parse(endDate) : null;
 
-        List<PlayerHistory> playerHistories = playerHistoryRepository.findPlayerHistoriesByCondition(userId, mode, start, end);
+        List<PlayerHistory> playerHistories = playerHistoryRepository.findPlayerHistoriesByCondition(userId, start, end, mode);
         return playerHistories.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

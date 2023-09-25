@@ -54,6 +54,10 @@ public class PlayerHistory {
         total = twoPts + threePts * 2;
     }
 
+    public void updateUser(User user){
+        this.user = user;
+    }
+
     public static PlayerHistory createPlayerHistory(PlayerHistoryDto playerHistoryDto, Game game) {
         return PlayerHistory.builder()
                 .game(game)

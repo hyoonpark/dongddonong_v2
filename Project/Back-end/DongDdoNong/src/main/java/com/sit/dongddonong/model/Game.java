@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +39,9 @@ public class Game {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Column
+    private String mode;
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
@@ -61,6 +63,7 @@ public class Game {
                 .gameDate(gameDate)
 //                .location(gameDto.getLocation())
                 .playerHistories(new ArrayList<>())
+                .mode(gameDto.getMode())
                 .build();
     }
 
