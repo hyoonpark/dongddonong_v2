@@ -1,14 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
-import { useUserContext } from "../../contexts/userContext";
 import axios from "../../api/axiosConfig";
-
 import Games from "./Games";
 import Week from "../../components/Game/Week";
 import Footer from "../../components/Footer";
 import Calendars from "../../components/Game/Calendars";
 
 const GamePage = () => {
-  const { user } = useUserContext();
+  const user = {
+    id: 3017361691,
+  };
 
   const [data, setData] = useState([]);
   const [dates, setDates] = useState({
@@ -16,25 +16,28 @@ const GamePage = () => {
     activeStartDate: new Date(),
   });
   const { selectedDate, activeStartDate } = dates;
-  const [calendarData, SetCalendarData] = useState([]);
+  const [calendarData, setCalendarData] = useState([]);
 
   useEffect(() => {
-    const currentMonth = activeStartDate.getMonth();
-
-    axios
-      .get(`/game/assign/${user.id}`, { params: { isAssigned: true } })
-      .then((resp) => {
+    const fetchData = async () => {
+      const currentMonth = activeStartDate.getMonth();
+      try {
+        const resp = await axios.get(`/game/assign/${user.id}`, {
+          params: { isAssigned: true },
+        });
         setData(resp.data.data);
-
         const arr = resp.data.data.map((e) => new Date(e.createdAt));
-        SetCalendarData(arr);
-      });
-
-    setDates((prevState) => ({
-      ...prevState,
-      currentMonth,
-    }));
-  }, [activeStartDate]);
+        setCalendarData(arr);
+        setDates((prevState) => ({
+          ...prevState,
+          currentMonth,
+        }));
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, [activeStartDate, user.id]);
 
   const handleDateChange = useCallback((v) => {
     setDates((prevState) => ({
@@ -42,6 +45,7 @@ const GamePage = () => {
       selectedDate: v,
     }));
   }, []);
+
   const handleActiveStartDateChange = useCallback((v) => {
     setDates((prevState) => ({
       ...prevState,
