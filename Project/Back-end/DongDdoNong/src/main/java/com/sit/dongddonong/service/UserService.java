@@ -12,9 +12,11 @@ import com.sit.dongddonong.util.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -31,6 +33,9 @@ public class UserService {
 
     @Value("${kakao.redirect-uri}")
     String redirectUri;
+
+    @Value("${kakao.admin-key}")
+    String adminKey;
 
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
@@ -59,7 +64,8 @@ public class UserService {
 
         return newUser;
     }
-    public String getAccessToken(String code) throws Exception{
+
+    public String getAccessToken(String code) throws Exception {
 
         String accessToken = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -97,8 +103,7 @@ public class UserService {
             log.info("access_token : " + accessToken);
 
             bw.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.info(e.getMessage());
             throw e;
         }
@@ -113,6 +118,7 @@ public class UserService {
 
         //access_token을 이용하여 사용자 정보 조회
         try {
+
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -171,5 +177,34 @@ public class UserService {
         headers.add("Authorization", tokenDto.getAccessToken());
 
         return headers;
+    }
+
+    public ResponseEntity<String> logout(long userId) {
+        String reqURL = "https://kapi.kakao.com/v1/user/logout";
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", "KakaoAK " + adminKey);
+
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("target_id_type", "user_id");
+            params.add("target_id", String.valueOf(userId));
+
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+
+            RestTemplate rt = new RestTemplate();
+
+            ResponseEntity<String> response = rt.exchange(
+                    reqURL,
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+            );
+            return response;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            throw e;
+        }
+
     }
 }

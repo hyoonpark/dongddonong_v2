@@ -24,6 +24,7 @@ kakao:
   client-id: 4e01b41f45f312031ef4c97ed183fa71
 #  redirect-uri: http://localhost:3000/oauth/callback/kakao
   redirect-uri: https://j9e103.p.ssafy.io/oauth/callback/kakao
+  admin-key : 9a40de37606df307425812076bbff7cf
 
 #서버
 server:
