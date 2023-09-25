@@ -12,6 +12,7 @@ const LoginLoading = () => {
     axios.get(`https://j9e103.p.ssafy.io:8589/user/login?code=${code}`
     ).then((res) => {
       // console.log('성공!!', res.data);
+      // console.log('인가코드', code);
       setLoggedUser(res.data.data);
       navigator(-1) // 로그인 시도하던 페이지로 이동 -> 인데 안되네...
     }).catch(error => {
