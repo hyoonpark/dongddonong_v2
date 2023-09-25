@@ -5,8 +5,7 @@ import styled from "styled-components";
 
 import KakaoLogin from "./../components/Login/KakaoLogin";
 import LoginModal from "./../components/Login/LoginModal";
-import { useUserContext } from "../constexts/userContext";
-
+import { useUserContext } from "../contexts/userContext";
 import video from "../assets/icon/video.png";
 import VideoModal from "./Modal/VideoModal";
 import Wrapper from "../components/Wrapper";
@@ -33,7 +32,11 @@ const Li = styled.li`
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const { loggedIn, setLoggedOut } = useUserContext();
+  const { setLoggedOut } = useUserContext();
+  // console.log('네비바 로그인여부', loggedIn)
+  const accessToken = localStorage.getItem('accessToken');
+  // console.log('네비바 로컬스토리지', loggedIn)
+
   const videoRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -57,7 +60,13 @@ const Navbar = () => {
           </Link>
 
           <div className="w-1/12 max-w-xs md:w-1/4"></div>
-          {loggedIn ? (
+          {!accessToken ? (
+            <>
+              <Li onClick={handleLoginClick}>경기</Li>
+              <Li onClick={handleLoginClick}>기록실</Li>
+              <Li onClick={handleLoginClick}>로그인</Li>
+            </>
+          ) : (
             <>
               <Link to="/game">
                 <Li>경기</Li>
@@ -65,13 +74,7 @@ const Navbar = () => {
               <Link to="/recordroom">
                 <Li>기록실</Li>
               </Link>
-              <Li onClick={handleLogoutClick}>로그아웃</Li> 
-            </>
-          ) : (
-            <>
-              <Li onClick={handleLoginClick}>경기</Li>
-              <Li onClick={handleLoginClick}>기록실</Li>
-              <Li onClick={handleLoginClick}>로그인</Li>
+              <Li onClick={handleLogoutClick}>로그아웃</Li>
             </>
           )}
           <button

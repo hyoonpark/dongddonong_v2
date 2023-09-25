@@ -61,12 +61,13 @@ public class GameService {
 
     public void checkGameUserAssigned(long gameId){
         GameDto gameDto = getGame(gameId);
+        Game game = gameRepository.findById(String.valueOf(gameId))
+                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));;
         List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
         boolean allAssigned = playerHistories.stream()
                 .allMatch(ph -> ph.getUserId() != null);
         if(allAssigned){
-            gameDto.updateAssignedTrue();
-            gameRepository.save(Game.createGame(gameDto));
+            game.updateGame(true);
         }
     }
     public GameDto getGame(long gameId){

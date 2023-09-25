@@ -4,11 +4,12 @@ import styles from "./Home.module.css";
 import Footer from "../components/Footer";
 import image from "../assets/image.png";
 import upArrow from "../assets/icon/up-arrow.png";
-import { useUserContext } from "../constexts/userContext";
+import { useUserContext } from "../contexts/userContext";
 
 const Home = () => {
-  const {user} = useUserContext()
-  console.log(user)
+  const { user, loggedIn } = useUserContext()
+  console.log('context 상태', loggedIn)
+  console.log('context user', user)
 
   const [showButton, setShowButton] = useState(false);
   const content1Ref = useRef();
@@ -160,9 +161,8 @@ const Home = () => {
 
       <button
         onClick={scrollToTop}
-        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${
-          showButton ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${showButton ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <img className="w-6" src={upArrow} alt="스크롤상단" />
       </button>

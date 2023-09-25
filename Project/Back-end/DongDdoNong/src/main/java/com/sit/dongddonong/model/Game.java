@@ -64,6 +64,10 @@ public class Game {
                 .build();
     }
 
+    public void updateGame(Boolean isAssigned) {
+        this.isAssigned = isAssigned;
+    }
+
     public void putPlayerHistory(PlayerHistory playerHistory) {
         this.playerHistories.add(playerHistory);
     }

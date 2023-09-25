@@ -33,7 +33,7 @@ public class PlayerHistoryService {
         return PlayerHistoryDto.fromEntity(playerHistory);
     }
 
-    public void putPlayerHistory(long playerHistoryId, long userId) {
+    public void patchPlayerHistory(long playerHistoryId, long userId) {
         PlayerHistory playerHistory = playerHistoryRepository.findById(playerHistoryId);
         User user = userRepository.findById(userId).orElse(null);
         if (playerHistory != null && user != null) {
