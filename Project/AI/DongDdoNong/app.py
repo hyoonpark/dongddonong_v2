@@ -30,13 +30,17 @@ def test():
 
 @app.route('/ai/upload', methods=['POST'])
 def upload_file():
-    file = request.files['file']
-    if file:
-        folder = 'video/'
-        filename = secure_filename(file.filename)
-        unique_filename = str(uuid.uuid4()) + os.path.splitext(filename)[1]
-        key = os.path.join(folder, unique_filename)
-        s3.upload_fileobj(file, 'dongddonong', key)
+    try:
+        files = request.files.getlist('files')
+
+        for file in files:
+            if file:
+                folder = 'video/'
+                filename = secure_filename(file.filename)
+                unique_filename = str(uuid.uuid4()) + os.path.splitext(filename)[1]
+                key = os.path.join(folder, unique_filename)
+                s3.upload_fileobj(file, 'dongddonong', key)
         return 'File uploaded successfully', 200
 
-    return 'No file selected', 404
+    except Exception as e:
+        return str(e), 500
