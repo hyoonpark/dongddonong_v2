@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -34,7 +33,7 @@ const Navbar = () => {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const { setLoggedOut } = useUserContext();
   // console.log('네비바 로그인여부', loggedIn)
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem("accessToken");
   // console.log('네비바 로컬스토리지', loggedIn)
 
   const videoRef = useRef(null);
@@ -44,7 +43,7 @@ const Navbar = () => {
   };
 
   const handleLogoutClick = () => {
-    setLoggedOut()
+    setLoggedOut();
   };
 
   return (
