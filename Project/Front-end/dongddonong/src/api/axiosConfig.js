@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 // Axios 인스턴스에 요청 전에 실행할 인터셉터 추가
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -20,10 +20,9 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log('엑세스 토큰 없음!')
+    console.log("엑세스 토큰 없음!");
     return Promise.reject(error);
   }
 );
-
 
 export default axiosInstance;

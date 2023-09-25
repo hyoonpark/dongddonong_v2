@@ -1,84 +1,74 @@
+import React from "react";
 import Wrapper from "../../components/Wrapper";
 import practice from "../../assets/icon/practice.png";
 import twoBound from "../../assets/icon/two-bound.png";
 import game from "../../assets/icon/game.png";
 
-const Games = () => {
-  const Dummy = [
-    {
-      id: 403,
-      userId: 3017361691,
-      gameDate: "2023-09-21 00:00:00",
-      createdAt: "2023-09-21T14:56:24.089+00:00",
-      isAssigned: false,
-      playerHistories: [
-        {
-          id: 354,
-          gameId: 403,
-          userId: 3019596583,
-          createdAt: "2023-09-21T14:56:24.089+00:00",
-          diffProfileImg: "string",
-          mode: "3",
-          twoPts: 7,
-          threePts: 3,
-          tryTwoPts: 15,
-          tryThreePts: 6,
-          total: 13,
-          xyUrl: "string",
-          playTime: 10,
-          win: true,
-        },
-        {
-          id: 355,
-          gameId: 403,
-          userId: 3017361691,
-          createdAt: "2023-09-21T14:56:24.089+00:00",
-          diffProfileImg: "string",
-          mode: "3",
-          twoPts: 8,
-          threePts: 4,
-          tryTwoPts: 15,
-          tryThreePts: 6,
-          total: 16,
-          xyUrl: "string",
-          playTime: 10,
-          win: false,
-        },
-      ],
-    },
-  ];
+const formatDate = (date) => {
+  const hours = date.getHours() % 12 || 12;
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const ampm = date.getHours() >= 12 ? "PM" : "AM";
+  return `${hours}:${minutes} ${ampm}`;
+};
+
+const Games = ({ data, user, selectedDate }) => {
+  const filteredData = data.filter((e) => {
+    const myHistory = e.playerHistories.find((v) => v.userId === +user.id);
+    if (!myHistory) return false;
+    const today = new Date(e.createdAt);
+    return (
+      selectedDate.getMonth() === today.getMonth() &&
+      selectedDate.getDate() === today.getDate()
+    );
+  });
+
+  const isEmpty = filteredData.length === 0;
 
   return (
     <Wrapper>
       <div className="flex flex-col gap-4 mt-6">
-        <div className="flex items-center justify-around text-center border border-black rounded-lg h-36">
-          <div className="text-center">
-            <img className="w-12" src={practice} alt="연습" />
-            <div>연습</div>
-          </div>
-          <div>
-            <div className="font-anton">10:15 AM</div>
-            <div className="text-sm text-secondary">5'32''</div>
-          </div>
-          <div className="text-2xl text-primary">WIN</div>
+        {filteredData.map((e) => {
+          const myHistory = e.playerHistories.find(
+            (v) => v.userId === +user.id
+          );
+          const mode = {
+            1: { imgSrc: practice, label: "연습" },
+            2: { imgSrc: twoBound, label: "투바운드" },
+            3: { imgSrc: game, label: "경기" },
+          }[myHistory.mode];
 
-          {Dummy.forEach((e) => {
-            console.log(e);
-          })}
-        </div>
-
-        <div className="flex items-center justify-around text-center border border-black h-36">
-          <div>
-            <img className="w-12" src={game} alt="연습" />
-            <div>연습</div>
-          </div>
-          <div>
-            <div className="font-anton">10:15 AM</div>
-            <div className="text-sm text-secondary">5'32''</div>
-          </div>
-          <div className="text-2xl">LOSE</div>
-        </div>
+          return (
+            <div
+              key={e.id}
+              className="flex items-center justify-around text-center border border-black h-36"
+            >
+              <div>
+                <img className="w-12" src={mode.imgSrc} alt="모드" />
+                <div>{mode.label}</div>
+              </div>
+              <div>
+                <div className="font-anton">
+                  {formatDate(new Date(e.createdAt))}
+                </div>
+                <div className="text-sm text-secondary">
+                  {myHistory.playTime + "분"}
+                </div>
+              </div>
+              <div
+                className={`text-2xl ${myHistory.win ? "text-primary" : ""}`}
+              >
+                {myHistory.win ? "WIN" : "LOSE"}
+              </div>
+            </div>
+          );
+        })}
       </div>
+
+      {isEmpty && (
+        <div className="flex justify-center items-center h-60">
+          해당일에 경기가 없어요
+        </div>
+      )}
     </Wrapper>
   );
 };
