@@ -1,9 +1,11 @@
 import os
 
 from flask import Flask, request, jsonify, send_file
+
 import boto3
 import uuid
 from werkzeug.utils import secure_filename  # 파일 가져오기
+
 
 
 app = Flask(__name__)
@@ -22,6 +24,9 @@ s3 = boto3.client(
 def index():
     return "Hello World!"
 
+@app.route('/ai', methods=['POST'])
+def test():
+    return "test"
 
 @app.route('/ai/upload', methods=['POST'])
 def upload_file():
@@ -36,3 +41,5 @@ def upload_file():
         return 'File uploaded successfully', 200
 
     return 'No file selected', 404
+
+

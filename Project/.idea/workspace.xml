@@ -52,7 +52,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< HEAD
+    "git-widget-placeholder": "dev/AI",
+=======
     "git-widget-placeholder": "feature/BE/11-AI",
+>>>>>>> 007102558ae99a9e703d734e11750760af11c679
     "last_opened_file_path": "C:/Users/SSAFY/Desktop/특화PJT/S09P22E103/Project/AI/DongDdoNong",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -131,7 +135,11 @@
       <workItem from="1695349233864" duration="467000" />
       <workItem from="1695349719697" duration="7460000" />
       <workItem from="1695601167674" duration="1792000" />
+<<<<<<< HEAD
+      <workItem from="1695605761988" duration="1898000" />
+=======
       <workItem from="1695605761988" duration="3157000" />
+>>>>>>> 007102558ae99a9e703d734e11750760af11c679
     </task>
     <servers />
   </component>
