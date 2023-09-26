@@ -33,7 +33,7 @@ s3 = boto3.client(
 def index():
     return "Hello World!"
 
-@app.route('/ai', methods=['POST'])
+@app.route('/ai')
 def test():
     return "test"
 
