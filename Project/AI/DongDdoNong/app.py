@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, redirect
 
 import boto3
 import uuid
@@ -20,11 +20,20 @@ s3 = boto3.client(
     # config=Config(signature_version='s3v4')
 )
 
+
+# @app.before_request
+# def before_request():
+#     if request.url.startswith('http://'):
+#         url = request.url.replace('http://', 'https://', 1)
+#         code = 301
+#         return redirect(url, code=code)
+
+
 @app.route('/')
 def index():
     return "Hello World!"
 
-@app.route('/ai', methods=['POST'])
+@app.route('/ai')
 def test():
     return "test"
 

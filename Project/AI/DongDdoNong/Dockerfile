@@ -5,6 +5,7 @@ WORKDIR /app
 RUN pip install uwsgi
 RUN pip install boto3
 
+
 # Copy files
 COPY . .
 
