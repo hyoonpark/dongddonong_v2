@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import thumbnail from '../../assets/thumbnail.png';
+// import thumbnail from '../../assets/thumbnail.png';
 import GuideCarousel from "./GuideCarousel";
 import MultiButton from './MultiButton';
 import axios from "axios";
@@ -21,19 +21,25 @@ const ModalOverlay = (props) => {
     const [videoDurations, setVideoDurations] = useState([]);
     const selectFile = useRef("");
     const [gameTypes, setGameTypes] = useState([]); // 업로드 데이터 배열 추가
+    const [error, setError] = useState(false);
+    const [gameDate, setGameDate] = useState()
 
     useEffect(() => {
         console.log(files); // 상태가 업데이트되면 실행됨
+        for (const file in files) { console.log(file); }
         console.log(gameTypes); //
     }, [files, gameTypes]);
 
+    // const videoMetadata = require("fast-video-metadata");
     const buttonOptions = ["연습", "투바", "대전"]; // 멀티버튼 옵션 목록
+
 
     const handleFileChange = (e) => {
         if (e.target.files) {
             setImagesSrc([]); // 다시 올리고 싶을 수도 있으니 전 상태를 비워
             setStatus("initial");
             setFiles(e.target.files);
+            // console.log(e.target.files);
             setVideoDurations([]); // 비디오 길이를 저장하는 배열 초기화
             setGameTypes([]); // 업로드 데이터 배열 초기화
 
@@ -42,19 +48,37 @@ const ModalOverlay = (props) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = () => {
-                    setImagesSrc((prevFiles) => [...prevFiles, reader.result]);
-                };
 
+                    //     const data = reader.result;
+                    //     const exif = Exifr.parse(data);
+                    //     setMetadata(exif);
+                    //     // setImagesSrc((prevFiles) => [...prevFiles, reader.result]);
+
+                };
+                // reader.readAsDataURL(file)
+                // const exif = metadata
+                // const date = exif.DateTimeOriginal
+                // console.log(exif)
+                // console.log(date)
                 // 비디오 길이 가져오기
+
                 if (file.type.startsWith("video/")) {
                     const video = document.createElement("video");
                     video.src = URL.createObjectURL(file);
+                    video.addEventListener('loadedmetadata', () => {
+                        // 촬영 날짜(생성 날짜)를 가져오기
+                        const creationDate = video.getAttribute('data-creation-date');
+
+                        console.log('촬영 날짜:', creationDate);
+                    })
+                    // console.log(video.currentTime)
                     video.onloadedmetadata = () => {
                         setVideoDurations((prevDurations) => [
                             ...prevDurations,
                             video.duration,
                         ]);
                     };
+
                 }
             });
         }
@@ -77,9 +101,19 @@ const ModalOverlay = (props) => {
         setGameTypes(updatedGameTypes);
     };
 
+    function gameModeToNumber(modename) {
+        let gameTypeNumber = null
+        if (modename === '연습') { gameTypeNumber = 1 }
+        else if (modename === '투바') { gameTypeNumber = 2 }
+        else if (modename === '대전') { gameTypeNumber = 3 }
+        return (gameTypeNumber)
+    }
+
     const handleButtonChange = (index, selectedValue) => {
         // 해당 버튼의 정보와 파일 제목을 객체로 묶어 업로드 데이터 배열에 추가
         const updatedGameTypes = [...gameTypes];
+        console.log(selectedValue)
+
         updatedGameTypes[index] = {
             buttonInfo: selectedValue,
             fileName: files[index].name,
@@ -91,32 +125,37 @@ const ModalOverlay = (props) => {
         if (files) {
             setStatus("uploading");
 
-            const formData = new FormData();
-            // [...files].forEach((file) => {
-            //     formData.append("files", file);
             for (let i = 0; i < files.length; i++) {
+                const formData = new FormData();
+                // [...files].forEach((file) => {
+                //     formData.append("files", file);
+                // console.log(gameModeToNumber(files[i]['gametypes']['buttonInfo']))
+                files[i]["mode"] = gameModeToNumber(gameTypes[i]['buttonInfo'])
                 formData.append('files', files[i]);
-                console.log(files[i]);
-            };
-            formData.append("gametypes", gameTypes);
-            console.log(formData.get("files"));
-            console.log(formData);
-            try {
-                const result = await fetch("http://j9e103.p.ssafy.io:5000/ai/upload", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    body: formData,
-                });
+                // console.log(gameModeToNumber(gameTypes[i]));
+                // console.log(gameModeToNumber(gameTypes[i]['buttonInfo']))
+                console.log(files[i])
+                console.log(files[i]['lastModifiedDate'])
+                    ;
+                // console.log(formData.get("files"));
+                // console.log(formData);
+                try {
+                    const result = await fetch("http://j9e103.p.ssafy.io:5000/ai/upload", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        },
+                        body: formData,
+                    });
 
-                const data = await result.json();
-                console.log(data);
-                setStatus("success");
-                setFiles(null)
-            } catch (error) {
-                console.error(error);
-                setStatus("fail");
+                    const data = await result.json();
+                    console.log(data);
+                    setStatus("success");
+                    setFiles(null)
+                } catch (error) {
+                    console.error(error);
+                    setStatus("fail");
+                }
             }
         }
     };
@@ -128,6 +167,7 @@ const ModalOverlay = (props) => {
             </div>
             <h2 className="mt-4 text-2xl font-bold text-center">동영상 업로드</h2>
             <GuideCarousel></GuideCarousel>
+            {error && error > 0 && <div>에러를 없애줘</div>}
             <div className="text-xl">영상 업로드</div>
             <div>최소 영상 화질 : 720p</div>
             <div>최대 영상 길이 : 15분</div>
@@ -141,15 +181,18 @@ const ModalOverlay = (props) => {
                         [...files].map((file, index) => (
                             <div className="h-30 col-start-1 sm:col-start-2 col-end-6 mt-2 gap-4" key={file.name}>
                                 <ul>
-                                    <li>제목: {file.name}</li>
+                                    <div className="flex justify-between">
+                                        <div>{file.name}</div><div className="">{videoDurations[index]}초</div>
+                                    </div>
                                     {file.type.startsWith("video/") && (
                                         <div className="flex justify-between">
-                                            {/* <div>재생시간: {videoDurations[index]} 초   </div> */}
-                                            <MultiButton
-                                                options={buttonOptions}
-                                                selected={gameTypes[index]?.buttonInfo || ""}
-                                                onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
-                                            />
+                                            {videoDurations[index] < 16 &&
+                                                <MultiButton
+                                                    options={buttonOptions}
+                                                    selected={gameTypes[index]?.buttonInfo || ""}
+                                                    onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
+                                                />}
+                                            {videoDurations[index] > 16 && <div className=" text-red-600 font-bold" >영상길이가 너무 깁니다.</div>}
 
                                             <img className=" ml-2 w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)} />
                                         </div>
@@ -160,13 +203,18 @@ const ModalOverlay = (props) => {
                 </div>
                 {files && files.length > 0 && ( // files.length > 0을 추가하니까 사라지네 왜지?
                     <div className="text-right row-start-7">
-                        <button onClick={handleUpload} className=" mr-6 mt-4 submit bg-primary text-white w-32 rounded-lg">
-                            Upload {files.length > 1 ? "files" : "a file"}
-                        </button>
+                        {videoDurations.some(duration => duration > 16) ? (
+                            <div className="text-red-600 font-bold">
+                                업로드 못하는 영상을 삭제해주세요
+                            </div>
+                        ) : (
+                            <button onClick={handleUpload} className="mr-6 mt-4 submit bg-primary text-white w-32 rounded-lg">
+                                Upload {files.length > 1 ? "files" : "a file"}
+                            </button>
+                        )}
                     </div>
                 )}
                 <Result onClear={setFiles} status={status} />
-                {/* <button onClick={props.onConfirm}>창닫기</button> */}
             </div>
         </div>
     );
