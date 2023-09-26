@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, redirect
 
 import boto3
 import uuid
@@ -19,6 +19,16 @@ s3 = boto3.client(
     aws_secret_access_key='3SLQJJ2w3LuC91LqbCW0L6yJRZRQ1lTO7tCBB6bZ',
     # config=Config(signature_version='s3v4')
 )
+
+
+@app.before_request
+def before_request():
+    scheme = request.headers.get('X-Forwarded-Proto')
+    if scheme and scheme == 'http' and request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
 
 @app.route('/')
 def index():
