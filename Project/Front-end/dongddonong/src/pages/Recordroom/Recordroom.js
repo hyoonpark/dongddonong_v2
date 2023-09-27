@@ -12,63 +12,75 @@ import rightArrow from "../../assets/icon/right-arrow.png";
 import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import getUserRecord from "../../api/getUserRecord";
+import RecordCard from "../../components/Recordroom/RecordCard";
 // import useUserContext from '../../contexts/userContext'
 
 const Recordroom = () => {
   // const { user } = useUserContext();
 
-  const modes = ["연습모드", "투바모드", "대전모드"];
-  const [mode, setMode] = useState();
-  let practice = [];
-  let twoBound = [];
-  let match = [];
-  // const userId = 3017361691
-  console.log(user);
+  const modes = ['연습모드', '투바모드', '대전모드']
+  const [mode, setMode] = useState()
+  const [games, setGames] = useState([])
 
-  axios
-    .get(
-      `https://j9e103.p.ssafy.io:8589/game/assign/${3017361691}?isAssigned=true`
-    )
+  function gameChangeHandler(option) {
+    if (option === '연습모드'){setGames([...practice])}
+    else if (option === '투바모드'){setGames([...twoBound])}
+    else if (option === '대전모드'){setGames([...match])}
+    
+  }
+  let practice = []
+  let twoBound = []
+  let match = []
+  // const userId = 3017361691
+  console.log(user)
+
+
+  axios.get(`https://j9e103.p.ssafy.io:8589/game/assign/${3017361691}?isAssigned=true`)
     .then((res) => {
-      console.log(res.data.data);
-      let game = [];
-      const gameList = res.data.data;
+      console.log(res.data.data)
+      let game = {}
+      const gameList = res.data.data
       for (let index = 0; index < gameList.length; index++) {
-        const tempGame = gameList[index]["playerHistories"]; //배열의 길이가 1,2인 두 선수 기록객체
-        console.log(gameList[index]["gameDate"]);
-        const gameDate = {};
-        gameDate["gameDate"] = gameList[index]["gameDate"];
-        game.push(gameDate);
-        for (let index = 0; index < tempGame.length; index++) {
-          const gameObj = {};
-          gameObj[tempGame[index]["userId"]] = tempGame[index];
-          game.push(gameObj);
+        const tempGame = gameList[index]['playerHistories'] //배열의 길이가 1,2인 두 선수 기록객체
+        // console.log(gameList[index]['gameDate'])
+
+        game['gameDate'] = gameList[index]['gameDate'] //key를 gameDate로 value를 해당 경기시작으로 객체를 만들고 game객체에 추가
+        // game.push(gameDate)
+
+        for (let index = 0; index < tempGame.length; index++) { // 현재게임의 인덱스를 순회하면서 해당유저의 아이디를 key로 value는 해당유저의 경기정보로 객체를 만들고 game객체에 추가
+          game[tempGame[index]['userId']] = tempGame[index];
           // console.log(tempGame[index]['userId'])
           // console.log(tempGame[index])
           // console.log(gameObj)
         }
-        console.log(game);
-        console.log(tempGame[0]["mode"]);
-        if (tempGame[0]["mode"] === "1") {
-          practice.push(game);
-          console.log("연습");
-        } else if (tempGame[0]["mode"] === "2") {
-          twoBound.push(game);
-          console.log("투바");
-        } else if (tempGame[0]["mode"] === "3") {
-          match.push(game);
-          console.log(3);
+        // console.log(game)
+        // console.log(tempGame[0]['mode'])
+        if (tempGame[0]['mode'] === '1') {
+          practice.push(game)
+          console.log('연습')
         }
-        game = [];
+        else if (tempGame[0]['mode'] === '2') {
+          twoBound.push(game)
+          console.log('투바')
+        }
+        else if (tempGame[0]['mode'] === '3') {
+          match.push(game)
+          console.log('대전')
+        }
+        game = {} //game초기화
+
       }
     })
     .catch((error) => {
-      console.log(error);
-    });
+      console.log(error)
+    })
 
   useEffect(() => {
-    console.log(match);
-  }, [match]);
+    console.log(practice) //각 배열의 첫번째는 해당 게임의 경기시각, 두번쨰, 세번째는 해당선수들의 기록
+    console.log(twoBound)
+    console.log(match)
+  }, [match])
+
 
   return (
     <Wrapper>
@@ -92,19 +104,17 @@ const Recordroom = () => {
           </div>
         </div>
         <div className="mt-4 h-10 bg-secondary flex text-center justify-evenly items-center">
-          {modes.map((option, index) => (
+        {modes.map((option, index) => (
             <button
               key={index}
-              className={
-                option === mode
-                  ? "bg-primary ml-2 w-20 drop-shadow-xl text-white rounded-md"
-                  : "ml-2 w-20 drop-shadow-xl text-primary bg-white rounded-md"
-              }
+              className={option === mode ? 'bg-primary ml-2 w-20 drop-shadow-xl text-white rounded-md' : 'ml-2 w-20 drop-shadow-xl text-primary bg-white rounded-md'}
               onClick={() => {
-                setMode(option);
-                console.log(option);
+                setMode(option)
+                gameChangeHandler(option)
+                console.log(option)
               }}
             >
+
               {option}
             </button>
           ))}
@@ -142,83 +152,11 @@ const Recordroom = () => {
           </div>
         </div>
 
-        <div className="flex flex-col mt-4 gap-3">
-          <div className="h-32 border-black rounded border">
-            <div className="h-4"></div>
-            <div className="h-28 flex gap-1">
-              <div className="flex flex-col items-center justify-evenly w-1/5">
-                <img
-                  src={user2}
-                  className="rounded-2xl w-14 h-16"
-                  alt="어웨이"
-                />
-                <div className="text-[12px]">Player 2</div>
-              </div>
-
-              <div className="flex items-center justify-center w-3/5 relative">
-                <div className="absolute top-0 text-sm">2022년 8월 12일</div>
-
-                <div className="h-1/2 flex items-center relative w-full">
-                  <div className="absolute left-0 text-xl">103</div>
-                  <div className="absolute right-10">
-                    <img
-                      className="w-3 -translate-y-px"
-                      src={rightArrow}
-                      alt=""
-                    />
-                  </div>
-                  <div className="absolute right-0 text-xl">104</div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-evenly w-1/5">
-                <img
-                  src={user2}
-                  className="rounded-2xl w-14 h-16"
-                  alt="어웨이"
-                />
-                <div className="text-[12px]">Player 2</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="h-32 border-black rounded border">
-            <div className="h-4"></div>
-            <div className="h-28 flex gap-1">
-              <div className="flex flex-col items-center justify-evenly w-1/5">
-                <img
-                  src={user2}
-                  className="rounded-2xl w-14 h-16"
-                  alt="어웨이"
-                />
-                <div className="text-[12px]">Player 2</div>
-              </div>
-
-              <div className="flex items-center justify-center w-3/5 relative">
-                <div className="absolute top-0 text-sm">2022년 8월 12일</div>
-
-                <div className="h-1/2 flex items-center relative w-full">
-                  <div className="absolute left-0 text-xl">103</div>
-                  <div className="absolute left-10">
-                    <img
-                      className="w-3 -translate-y-px"
-                      src={leftArrow}
-                      alt=""
-                    />
-                  </div>
-                  <div className="absolute right-0 text-xl">104</div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-evenly w-1/5">
-                <img
-                  src={user2}
-                  className="rounded-2xl w-14 h-16"
-                  alt="어웨이"
-                />
-                <div className="text-[12px]">Player 2</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      {games.map((game, index) => (
+        <RecordCard key={index} game={game}></RecordCard> //games 배열안에 game객체를 props로 준다. 각 game은 경기시각과 사용자별 기록을 갖고 있음
+      ))}
+       
+        
       </div>
     </Wrapper>
   );

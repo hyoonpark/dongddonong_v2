@@ -9,3 +9,17 @@ export const getGameAll = async () => {
     return err
   }
 };
+
+
+// 해당 경기 정보 가져오기
+export const getGameData = async (gameId) => {
+  try {
+    const res = await axiosInstance.get(`/game/${gameId}`);
+    // console.log('성공!', res)
+    return res.data;
+  }
+  catch (err) {
+    console.log('실패!!!!', err);
+    return err;
+  }
+};

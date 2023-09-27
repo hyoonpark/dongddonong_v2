@@ -10,6 +10,7 @@ import { useUserContext } from "./contexts/userContext";
 import TestPage from "./pages/TestPage";
 import DetailPractice from "./pages/Game/DetailPractice";
 import DetailGame from "./pages/Game/DetailGame";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
   // context 로그인 여부에 따라서 라우팅 접근을 제한한다.
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/result/:gameId" element={<ResultPage />} />
         <Route
           path="/game"
           element={loggedIn ? <GamePage /> : <Navigate to="/" replace />}
