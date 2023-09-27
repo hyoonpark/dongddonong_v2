@@ -3,18 +3,19 @@ import { Chart, ArcElement } from "chart.js";
 
 Chart.register(ArcElement);
 
-const data = {
-  datasets: [
-    {
-      data: [3, 10],
-      backgroundColor: ["gray", "#e6e6e6"],
-      display: true,
-      borderColor: "#D1D6DC",
-    },
-  ],
-};
+
 
 const HalfChart = (props) => {
+  const data = {
+    datasets: [
+      {
+        data: [props.PM, props.PA],
+        backgroundColor: ["gray", "#e6e6e6"],
+        display: true,
+        borderColor: "#D1D6DC",
+      },
+    ],
+  };
   return (
     <Doughnut
       data={data}

@@ -37,13 +37,22 @@ const RecordCard = (props) => {
 
           <div className="h-1/2 flex items-center relative w-full">
             <div className="absolute left-0 text-xl">{props.game[player1]['total']}</div>
-            <div className="absolute right-10">
+            {player2 && props.game[player2]['total'] < props.game[player1]['total'] &&
+            <div className="absolute left-10">
+              <img
+                className="w-3 -translate-y-px"
+                src={leftArrow}
+                alt=""
+              />
+            </div>}
+            {player2 && props.game[player2]['total'] > props.game[player1]['total'] &&
+              <div className="absolute right-10">
               <img
                 className="w-3 -translate-y-px"
                 src={rightArrow}
                 alt=""
               />
-            </div>
+            </div>}
             <div className="absolute right-0 text-xl">{player2 && props.game[player2]['total']}</div>
           </div>
         </div>
