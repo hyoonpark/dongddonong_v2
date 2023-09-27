@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Wrapper from "../../components/Wrapper";
 import practice from "../../assets/icon/practice.png";
 import twoBound from "../../assets/icon/two-bound.png";
@@ -12,7 +14,6 @@ const formatDate = (date) => {
 };
 
 const Games = ({ data, user, selectedDate }) => {
-  console.log(data);
   const filteredData = data.filter((e) => {
     const myHistory = e.playerHistories.find((v) => v.userId === +user.id);
     if (!myHistory) return false;
@@ -39,10 +40,15 @@ const Games = ({ data, user, selectedDate }) => {
           }[myHistory.mode];
 
           return (
-            <div className="flex">
+            <Link
+              to={`${
+                myHistory.mode === "1" ? `/practice/${e.id}` : `/game/${e.id}`
+              }`}
+              className="flex md:border-black md:rounded-lg border items-center"
+            >
               <div
                 key={e.id}
-                className="flex items-center justify-around text-center border border-black h-36 w-full md:w-3/5"
+                className="flex items-center justify-around text-center border border-black rounded-lg h-36 w-full md:w-3/5 md:border-none"
               >
                 <div>
                   <img className="w-12" src={mode.imgSrc} alt="모드" />
@@ -57,13 +63,17 @@ const Games = ({ data, user, selectedDate }) => {
                   </div>
                 </div>
                 <div
-                  className={`text-2xl ${myHistory.win ? "text-primary" : ""}`}
+                  className={`text-2xl font-anton ${
+                    myHistory.win ? "text-primary" : ""
+                  }`}
                 >
                   {myHistory.win ? "WIN" : "LOSE"}
                 </div>
               </div>
 
-              <div className="hidden w-2/5 h-36 border-r border-black border-t border-b justify-around md:flex items-center">
+              <div className="w-px h-20 bg-secondary"></div>
+
+              <div className="hidden w-2/5 h-36 justify-around md:flex items-center">
                 <div className="basis-1/5">
                   <img
                     className="rounded-full"
@@ -89,7 +99,7 @@ const Games = ({ data, user, selectedDate }) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

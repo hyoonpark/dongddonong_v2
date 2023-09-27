@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import image from "../../assets/image.png";
 import upArrow from "../../assets/icon/up-arrow.png";
 import { useUserContext } from "../../contexts/userContext";
-import { path, path1, path2 } from "../Home/Path";
+import { path, path1, path2 } from "./Path";
 
 const Home = () => {
   const { user, loggedIn } = useUserContext();
@@ -72,7 +72,7 @@ const Home = () => {
     <div className="overflow-x-hidden">
       <div className="mb-10 md:mb-0 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative mt-4 header top-12 max-w-7xl md:absolute md:top-0 md:left-32">
+          <div className="relative mt-4 left-12 header top-16 max-w-7xl md:absolute md:top-0 md:left-32">
             <div className="w-1/3 md:w-3/5 md:-translate-y-1/4">
               <h1 className="mb-4 text-3xl md:text-4xl font-bold">동또농</h1>
               <p>

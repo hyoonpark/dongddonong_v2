@@ -8,6 +8,8 @@ import Recordroom from "./pages/Recordroom/Recordroom";
 import LoginLoading from "./components/Login/LoginLoading";
 import { useUserContext } from "./contexts/userContext";
 import TestPage from "./pages/TestPage";
+import DetailPractice from "./pages/Game/DetailPractice";
+import DetailGame from "./pages/Game/DetailGame";
 
 function App() {
   // context 로그인 여부에 따라서 라우팅 접근을 제한한다.
@@ -23,6 +25,14 @@ function App() {
           path="/game"
           element={loggedIn ? <GamePage /> : <Navigate to="/" replace />}
         />
+        <Route
+          path="/practice/:id"
+          element={loggedIn ? <DetailPractice /> : <Navigate to="/" replace />}
+        ></Route>
+        <Route
+          path="/game/:id"
+          element={loggedIn ? <DetailGame /> : <Navigate to="/" replace />}
+        ></Route>
         <Route
           path="/recordroom"
           element={loggedIn ? <Recordroom /> : <Navigate to="/" replace />}
