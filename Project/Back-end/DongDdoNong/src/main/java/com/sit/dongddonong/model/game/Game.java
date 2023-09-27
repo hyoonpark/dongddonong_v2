@@ -53,6 +53,9 @@ public class Game {
     @Column
     private String videoLength;
 
+    @Column
+    private Boolean isAnalyzing;
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
@@ -75,6 +78,7 @@ public class Game {
                 .videoLength(uploadRequestDto.getVideoLength())
                 .fileName(uploadRequestDto.getFileName())
                 .mode(uploadRequestDto.getMode())
+                .isAnalyzing(true)
                 .build();
     }
 
