@@ -23,6 +23,7 @@ public class PlayerHistoryDto {
     @Schema(hidden = true)
     private Date createdAt;
     private String diffProfileImg;
+    @Schema(hidden = true)
     private String mode;
     private int twoPts;
     private int threePts;
@@ -43,7 +44,7 @@ public class PlayerHistoryDto {
                 .gameId(playerHistory.getGame().getId())
                 .createdAt(playerHistory.getCreatedAt())
                 .diffProfileImg(playerHistory.getDiffProfileImg())
-                .mode(playerHistory.getMode())
+                .mode(playerHistory.getGame().getMode())
                 .twoPts(playerHistory.getTwoPts())
                 .threePts(playerHistory.getThreePts())
                 .tryTwoPts(playerHistory.getTryTwoPts())
