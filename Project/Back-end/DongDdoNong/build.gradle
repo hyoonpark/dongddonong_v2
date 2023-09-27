@@ -47,6 +47,9 @@ dependencies {
 	// s3
 	implementation platform('software.amazon.awssdk:bom:2.20.56')
 	implementation 'software.amazon.awssdk:s3'
+
+	// 동영상 썸네일
+	implementation 'org.jcodec:jcodec-javase:0.2.5'
 }
 
 tasks.named('test') {

@@ -3,6 +3,7 @@ package com.sit.dongddonong.service;
 import com.sit.dongddonong.dto.upload.UploadRequestDto;
 import com.sit.dongddonong.model.game.Game;
 import com.sit.dongddonong.model.game.GameRepository;
+import com.sit.dongddonong.util.thumbnail.ThumbnailExtractor;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,15 +36,15 @@ public class UploadService {
     private String bucket;
 
     // MultipartFile을 전달받아 File로 전환한 후 S3에 업로드
-    public String upload(MultipartFile multipartFile, String dirName, long gameId) throws IOException {
-        File uploadFile = convert(multipartFile)
-                .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 전환 실패"));
-        return upload(uploadFile, dirName, gameId);
-    }
+//    public String upload(MultipartFile multipartFile, String dirName, String fileUniqueName) throws IOException {
+//        File uploadFile = convert(multipartFile)
+//                .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 전환 실패"));
+//        return upload(uploadFile, dirName, fileUniqueName);
+//    }
 
-    private String upload(File uploadFile, String dirName, long gameId) {
+    private String upload(File uploadFile, String dirName, String fileUniqueName) {
 //        String fileName = dirName + "/" + uploadFile.getName();
-        String fileName = dirName + "/" + gameId + "_" + uploadFile.getName();
+        String fileName = dirName + "/" + fileUniqueName + "_" + uploadFile.getName();
         String uploadUrl = putS3(uploadFile, fileName);
 
         removeNewFile(uploadFile);  // 로컬에 생성된 File 삭제 (MultipartFile -> File 전환 하며 로컬에 파일 생성됨)
@@ -77,29 +80,22 @@ public class UploadService {
         return String.valueOf(s3Client.utilities().getUrl(GetUrlRequest.builder().bucket(bucket).key(fileName).build()));
     }
     @Transactional
-    public void saveFileAndCreateGame(UploadRequestDto uploadRequestDto) throws IOException {
-        String thumbnail = "";
+    public long saveFileAndCreateGame(UploadRequestDto uploadRequestDto) throws Exception {
+        File uploadFile = convert(uploadRequestDto.getFile())
+                .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 전환 실패"));
+        File thumbnailFile = ThumbnailExtractor.extract(uploadFile);
+
+        String thumbnail = (upload(thumbnailFile, "thumbnail", String.valueOf(UUID.randomUUID())));
         long gameId = createGame(uploadRequestDto, thumbnail);
 
-        log.error(upload(uploadRequestDto.getFile(), "video", gameId));
+        upload(uploadFile, "video", String.valueOf(gameId));
 
-//        String s3Path = "/video/" + multipartFile.getOriginalFilename();
-//
-//        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-//                .bucket(bucket)
-//                .key(s3Path)
-//                .acl(ObjectCannedACL.BUCKET_OWNER_FULL_CONTROL)
-//                .build();
-//
-//        File file = convertMultipartFileToFile(multipartFile);
-//
-//        s3Client.putObject(putObjectRequest, file);
-
-//        s3Client.putObject(putObjectRequest, RequestBody.fromFile(multipartFile));
+        return gameId;
     }
 
     public long createGame(UploadRequestDto uploadRequestDto, String thumbNail) {
         Game game = gameRepository.save(Game.createGame(uploadRequestDto, thumbNail));
         return game.getId();
     }
+
 }
