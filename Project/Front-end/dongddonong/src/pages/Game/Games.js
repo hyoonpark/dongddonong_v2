@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Wrapper from "../../components/Wrapper";
 import practice from "../../assets/icon/practice.png";
 import twoBound from "../../assets/icon/two-bound.png";
@@ -38,28 +40,66 @@ const Games = ({ data, user, selectedDate }) => {
           }[myHistory.mode];
 
           return (
-            <div
-              key={e.id}
-              className="flex items-center justify-around text-center border border-black h-36"
+            <Link
+              to={`${
+                myHistory.mode === "1" ? `/practice/${e.id}` : `/game/${e.id}`
+              }`}
+              className="flex md:border-black md:rounded-lg border items-center"
             >
-              <div>
-                <img className="w-12" src={mode.imgSrc} alt="모드" />
-                <div>{mode.label}</div>
-              </div>
-              <div>
-                <div className="font-anton">
-                  {formatDate(new Date(e.createdAt))}
-                </div>
-                <div className="text-sm text-secondary">
-                  {myHistory.playTime + "분"}
-                </div>
-              </div>
               <div
-                className={`text-2xl ${myHistory.win ? "text-primary" : ""}`}
+                key={e.id}
+                className="flex items-center justify-around text-center border border-black rounded-lg h-36 w-full md:w-3/5 md:border-none"
               >
-                {myHistory.win ? "WIN" : "LOSE"}
+                <div>
+                  <img className="w-12" src={mode.imgSrc} alt="모드" />
+                  <div>{mode.label}</div>
+                </div>
+                <div>
+                  <div className="font-anton">
+                    {formatDate(new Date(e.createdAt))}
+                  </div>
+                  <div className="text-sm text-secondary">
+                    {myHistory.playTime + "분"}
+                  </div>
+                </div>
+                <div
+                  className={`text-2xl font-anton ${
+                    myHistory.win ? "text-primary" : ""
+                  }`}
+                >
+                  {myHistory.win ? "WIN" : "LOSE"}
+                </div>
               </div>
-            </div>
+
+              <div className="w-px h-20 bg-secondary"></div>
+
+              <div className="hidden w-2/5 h-36 justify-around md:flex items-center">
+                <div className="basis-1/5">
+                  <img
+                    className="rounded-full"
+                    src={myHistory.diffProfileImg}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col basis-3/5 max-w-xs text-center">
+                  <div className="flex justify-between">
+                    <div className="basis-10">득점</div>
+                    <div className="basis-10">2점</div>
+                    <div className="basis-10">3점</div>
+                  </div>
+
+                  <div className="flex justify-between font-bold">
+                    <div className="basis-10">{myHistory.total}</div>
+                    <div className="basis-10">
+                      {myHistory.twoPts}/{myHistory.tryTwoPts}
+                    </div>
+                    <div className="basis-10">
+                      {myHistory.threePts}/{myHistory.tryThreePts}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
           );
         })}
       </div>

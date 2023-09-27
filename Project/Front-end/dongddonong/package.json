@@ -2,6 +2,7 @@
   "name": "dongddonong",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://j9e103.p.ssafy.io:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +13,7 @@
     "react-bootstrap": "^2.8.0",
     "react-calendar": "^4.6.0",
     "react-chartjs-2": "^5.2.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.16.0",

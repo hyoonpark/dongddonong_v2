@@ -1,7 +1,7 @@
 package com.sit.dongddonong.controller;
 
-import com.sit.dongddonong.dto.GameDto;
-import com.sit.dongddonong.dto.PlayerHistoryDto;
+import com.sit.dongddonong.dto.game.GameDto;
+import com.sit.dongddonong.dto.game.PlayerHistoryDto;
 import com.sit.dongddonong.service.GameService;
 import com.sit.dongddonong.service.PlayerHistoryService;
 import com.sit.dongddonong.util.ApiResponse;

@@ -6,6 +6,8 @@ module.exports = {
       colors: {
         primary: "#EE6730",
         secondary: "#e6e6e6",
+        analogy: "#eec630",
+        complement: "#30b7ee",
       },
       strokeWidth: {
         3: "3px",

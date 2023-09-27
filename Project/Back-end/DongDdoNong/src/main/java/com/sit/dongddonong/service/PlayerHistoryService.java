@@ -1,12 +1,12 @@
 package com.sit.dongddonong.service;
 
-import com.sit.dongddonong.dto.PlayerHistoryDto;
-import com.sit.dongddonong.model.Game;
-import com.sit.dongddonong.model.PlayerHistory;
-import com.sit.dongddonong.model.User;
-import com.sit.dongddonong.repository.GameRepository;
-import com.sit.dongddonong.repository.PlayerHistoryRepository;
-import com.sit.dongddonong.repository.UserRepository;
+import com.sit.dongddonong.dto.game.PlayerHistoryDto;
+import com.sit.dongddonong.model.game.Game;
+import com.sit.dongddonong.model.game.PlayerHistory;
+import com.sit.dongddonong.model.user.User;
+import com.sit.dongddonong.model.game.GameRepository;
+import com.sit.dongddonong.model.game.PlayerHistoryRepository;
+import com.sit.dongddonong.model.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
