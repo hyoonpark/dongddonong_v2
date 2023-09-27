@@ -24,9 +24,9 @@ public class GameService {
         return GameDto.fromEntity(game);
     }
 
-    public void createGameAndPlayerHistories(GameDto gameDto) {
-
-        Game game = Game.createGame(gameDto);
+    public void patchGame(GameDto gameDto) {
+        Game game = gameRepository.findById(String.valueOf(gameDto.getId()))
+                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameDto.getId()));
 
         List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
 
@@ -71,12 +71,11 @@ public class GameService {
         GameDto gameDto = getGame(gameId);
         Game game = gameRepository.findById(String.valueOf(gameId))
                 .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));
-        ;
         List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
         boolean allAssigned = playerHistories.stream()
                 .allMatch(ph -> ph.getUserId() != null);
         if (allAssigned) {
-            game.updateGame(true);
+            game.updateGameIsAssigned(true);
         }
     }
 

@@ -41,10 +41,10 @@ public class PlayerHistoryService {
         PlayerHistory playerHistory = playerHistoryRepository.findById(playerHistoryId);
         User user = userRepository.findById(userId).orElse(null);
         if (playerHistory != null && user != null) {
-
             playerHistory = playerHistory.toBuilder()
                     .user(user)
                     .build();
+
             playerHistoryRepository.save(playerHistory);
 
             // 부모 객체인 Game의 모든 유저가 할당 되어있는지 확인하고,
@@ -59,7 +59,7 @@ public class PlayerHistoryService {
         boolean allAssigned = game.getPlayerHistories().stream()
                 .allMatch(ph -> ph.getUser() != null);
         if (allAssigned) {
-            game.updateGame(true);
+            game.updateGameIsAssigned(true);
         }
     }
 

@@ -18,13 +18,13 @@ public class UploadController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> uploadFile(@ModelAttribute UploadRequestDto uploadRequestDto) {
-        String userId = "";
+        String gameId = "";
         try{
-            userId = String.valueOf(uploadService.saveFileAndCreateGame(uploadRequestDto));
+            gameId = String.valueOf(uploadService.saveFileAndCreateGame(uploadRequestDto));
         }
         catch (Exception e){
             return ApiResponse.ok(e.getMessage());
         }
-        return ApiResponse.ok("userId : " + userId);
+        return ApiResponse.ok("gameId : " + gameId);
     }
 }

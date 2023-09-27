@@ -15,27 +15,27 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @ToString
 public class GameDto {
-    @Schema(hidden = true)
     private Long id;
+    @Schema(hidden = true)
     private Long userId;
+    @Schema(hidden = true)
     private String gameDate;
     @Schema(hidden = true)
     private Date createdAt;
     @Schema(hidden = true)
     private Boolean isAssigned = false;
-    @Schema(hidden = true)
     private List<PlayerHistoryDto> playerHistories;
+    @Schema(hidden = true)
     private String mode;
     @Schema(hidden = true)
     private String thumbnail;
+    @Schema(hidden = true)
     private String fileName;
+    @Schema(hidden = true)
     private String videoLength;
     @Schema(hidden = true)
     private Boolean isAnalyzing;
 
-    public void updateAssignedTrue(){
-        isAssigned = true;
-    }
     public static GameDto fromEntity(Game game) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String gameDate = format.format(game.getGameDate());
@@ -43,14 +43,17 @@ public class GameDto {
         return GameDto.builder()
                 .id(game.getId())
                 .userId(game.getUserId())
-                .isAssigned(game.getIsAssigned())
-                .createdAt(game.getCreatedAt())
                 .gameDate(gameDate)
-//                .location(game.getLocation())
+                .createdAt(game.getCreatedAt())
+                .isAssigned(game.getIsAssigned())
                 .playerHistories(game.getPlayerHistories().stream()
                         .map(PlayerHistoryDto::fromEntity)
                         .collect(Collectors.toList()))
                 .mode(game.getMode())
+                .thumbnail(game.getThumbnail())
+                .fileName(game.getFileName())
+                .videoLength(game.getVideoLength())
+                .isAnalyzing(game.getIsAnalyzing())
                 .build();
     }
 }

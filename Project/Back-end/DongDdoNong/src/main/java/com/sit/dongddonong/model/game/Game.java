@@ -1,6 +1,5 @@
 package com.sit.dongddonong.model.game;
 
-import com.sit.dongddonong.dto.game.GameDto;
 import com.sit.dongddonong.dto.upload.UploadRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -78,31 +77,14 @@ public class Game {
                 .videoLength(uploadRequestDto.getVideoLength())
                 .fileName(uploadRequestDto.getFileName())
                 .mode(uploadRequestDto.getMode())
+                .isAssigned(false)
                 .isAnalyzing(true)
-                .build();
-    }
-
-    public static Game createGame(GameDto gameDto) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-
-        Date gameDate;
-        try{
-            gameDate = format.parse(gameDto.getGameDate());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        return Game.builder()
-                .userId(gameDto.getUserId())
-                .isAssigned(gameDto.getIsAssigned())
-                .gameDate(gameDate)
-//                .location(gameDto.getLocation())
                 .playerHistories(new ArrayList<>())
-                .mode(gameDto.getMode())
                 .build();
     }
 
-    public void updateGame(Boolean isAssigned) {
+
+    public void updateGameIsAssigned(Boolean isAssigned) {
         this.isAssigned = isAssigned;
     }
 

@@ -37,9 +37,9 @@ public class GameController {
     }
 
     @Operation(summary = "영상 분석 데이터(분석 데이터 넣기)", description = "영상 분석 데이터를 우리 서버에 넣습니다.")
-    @PostMapping
-    public ApiResponse<String> createGameAndPlayerHistories(@RequestBody GameDto gameDto) {
-        gameService.createGameAndPlayerHistories(gameDto);
+    @PatchMapping
+    public ApiResponse<String> patchGame(@RequestBody GameDto gameDto) {
+        gameService.patchGame(gameDto);
         return ApiResponse.ok("성공");
     }
 
@@ -79,5 +79,4 @@ public class GameController {
         List<PlayerHistoryDto> result = playerHistoryService.getPlayerHistoriesByCondition(userId, mode, startDate, endDate);
         return ApiResponse.ok(result);
     }
-
 }
