@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useUserContext } from "../../contexts/userContext";
+
 // import thumbnail from '../../assets/thumbnail.png';
 import GuideCarousel from "./GuideCarousel";
 import MultiButton from './MultiButton';
@@ -8,26 +10,24 @@ import classes from './ErrorModal.module.css'
 import ReactDOM from 'react-dom';
 import off from '../../assets/off.png'
 
-
-//푸쉬용
 const Backdrop = (props) => {
     return <div className={classes.backdrop}></div>
 }
 
 const ModalOverlay = (props) => {
     const [files, setFiles] = useState(null);
-    const [imagesSrc, setImagesSrc] = useState([]);
     const [status, setStatus] = useState("initial");
     const [videoDurations, setVideoDurations] = useState([]);
     const selectFile = useRef("");
     const [gameTypes, setGameTypes] = useState([]); // 업로드 데이터 배열 추가
     const [error, setError] = useState(false);
-    const [gameDate, setGameDate] = useState()
+    const { user } = useUserContext();
+    const [userId, setUserId] = useState(user.id)
 
     useEffect(() => {
         console.log(files); // 상태가 업데이트되면 실행됨
         for (const file in files) { console.log(file); }
-        console.log(gameTypes); //
+        // console.log(gameTypes); //
     }, [files, gameTypes]);
 
     // const videoMetadata = require("fast-video-metadata");
@@ -35,8 +35,7 @@ const ModalOverlay = (props) => {
 
 
     const handleFileChange = (e) => {
-        if (e.target.files) {
-            setImagesSrc([]); // 다시 올리고 싶을 수도 있으니 전 상태를 비워
+        if (e.target.files) { // 다시 올리고 싶을 수도 있으니 전 상태를 비워
             setStatus("initial");
             setFiles(e.target.files);
             // console.log(e.target.files);
@@ -69,7 +68,6 @@ const ModalOverlay = (props) => {
                         // 촬영 날짜(생성 날짜)를 가져오기
                         const creationDate = video.getAttribute('data-creation-date');
 
-                        console.log('촬영 날짜:', creationDate);
                     })
                     // console.log(video.currentTime)
                     video.onloadedmetadata = () => {
@@ -108,11 +106,23 @@ const ModalOverlay = (props) => {
         else if (modename === '대전') { gameTypeNumber = 3 }
         return (gameTypeNumber)
     }
+    function formatDate(inputDate) {
+        const date = new Date(inputDate);
+      
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 만듭니다.
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+      
+        const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return formattedDate;
+      }
 
     const handleButtonChange = (index, selectedValue) => {
         // 해당 버튼의 정보와 파일 제목을 객체로 묶어 업로드 데이터 배열에 추가
         const updatedGameTypes = [...gameTypes];
-        console.log(selectedValue)
 
         updatedGameTypes[index] = {
             buttonInfo: selectedValue,
@@ -127,24 +137,33 @@ const ModalOverlay = (props) => {
 
             for (let i = 0; i < files.length; i++) {
                 const formData = new FormData();
-                // [...files].forEach((file) => {
-                //     formData.append("files", file);
-                // console.log(gameModeToNumber(files[i]['gametypes']['buttonInfo']))
+                
+
                 files[i]["mode"] = gameModeToNumber(gameTypes[i]['buttonInfo'])
-                formData.append('files', files[i]);
+                formData.append('file', files[i]);
+                formData.append('gameDate',formatDate(files[i]['lastModifiedDate']))
+                formData.append('userId',userId)
+                formData.append('mode', files[i]["mode"])
+                formData.append('fileName', files[i].name)
+                formData.append('videoLength',videoDurations[i])
+                console.log(formData.get('mode'));
+                console.log(formData.get('userId'));
+                console.log(formData.get('gameDate'));
+                console.log(formatDate(files[i]['lastModifiedDate']),userId,files[i]["mode"],files[i].name,videoDurations[i])
                 // console.log(gameModeToNumber(gameTypes[i]));
                 // console.log(gameModeToNumber(gameTypes[i]['buttonInfo']))
-                console.log(files[i])
-                console.log(files[i]['lastModifiedDate'])
+                // console.log(files[i])
+                // console.log(formatDate(files[i]['lastModifiedDate']))
+                // console.log(files[i]['lastModifiedDate'])
                     ;
                 // console.log(formData.get("files"));
                 // console.log(formData);
                 try {
-                    const result = await fetch("http://j9e103.p.ssafy.io:5000/ai/upload", {
+                    const result = await fetch("https://j9e103.p.ssafy.io:8589/game/upload", {
                         method: "POST",
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        },
+                        // headers: {
+                        //     'Content-Type': 'multipart/form-data'
+                        // },
                         body: formData,
                     });
 
