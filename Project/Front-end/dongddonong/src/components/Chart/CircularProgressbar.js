@@ -3,7 +3,7 @@ import ball from "../../assets/ball.png";
 
 const CircularProgressbar = ({ data }) => {
   return (
-    <div className="max-w-xs">
+    <div className="max-w-[200px]">
       <CircularProgressbarWithChildren
         value={data}
         strokeWidth={12}

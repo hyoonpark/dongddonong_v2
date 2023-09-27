@@ -97,7 +97,7 @@ const Calendars = ({
         activeStartDate={activeStartDate}
         className={`${handleClassName} ${
           isClick ? "show" : ""
-        } absolute right-0 custom-calendar z-10`}
+        } absolute right-0 custom-calendar z-10 rounded-lg`}
         tileClassName={tileClassNameHandler}
         tileContent={tileContenctHandler}
       />
