@@ -1,4 +1,4 @@
-package com.sit.dongddonong.dto;
+package com.sit.dongddonong.dto.user;
 
 import lombok.*;
 

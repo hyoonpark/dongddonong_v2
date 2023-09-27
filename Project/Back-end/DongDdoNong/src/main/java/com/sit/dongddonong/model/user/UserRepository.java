@@ -1,6 +1,6 @@
-package com.sit.dongddonong.repository;
+package com.sit.dongddonong.model.user;
 
-import com.sit.dongddonong.model.User;
+import com.sit.dongddonong.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 @Repository

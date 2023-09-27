@@ -1,7 +1,7 @@
 package com.sit.dongddonong.controller;
 
 
-import com.sit.dongddonong.dto.UserDto;
+import com.sit.dongddonong.dto.user.UserDto;
 import com.sit.dongddonong.service.UserService;
 import com.sit.dongddonong.util.ApiResponse;
 import lombok.RequiredArgsConstructor;

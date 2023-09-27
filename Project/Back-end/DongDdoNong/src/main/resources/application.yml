@@ -20,6 +20,10 @@ spring:
       ddl-auto: update
   jwt:
     secret: secretJiHongHaYoonDongJuDaEunJungWooBulHoeWeAreTogetherSecret*@#$^&&@$3
+  servlet:
+    multipart:
+      max-file-size: 750MB
+      max-request-size: 750MB
 kakao:
   client-id: 4e01b41f45f312031ef4c97ed183fa71
 #  redirect-uri: http://localhost:3000/oauth/callback/kakao
@@ -27,11 +31,11 @@ kakao:
   admin-key : 9a40de37606df307425812076bbff7cf
 
 #서버
-server:
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: 1234
-    key-store-type: PKCS12
+#server:
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: 1234
+#    key-store-type: PKCS12
 
 springdoc:
   packages-to-scan: com.sit.dongddonong.controller
@@ -43,3 +47,14 @@ springdoc:
     display-request-duration: true
     operations-sorter: alpha
 
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIATFUDLW4NBSNG2SR7
+      secretKey: 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
+    s3:
+      bucket: dongddonong
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

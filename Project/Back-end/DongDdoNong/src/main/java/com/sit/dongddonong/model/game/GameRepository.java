@@ -1,6 +1,6 @@
-package com.sit.dongddonong.repository;
+package com.sit.dongddonong.model.game;
 
-import com.sit.dongddonong.model.Game;
+import com.sit.dongddonong.model.game.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,7 @@
-package com.sit.dongddonong.model;
+package com.sit.dongddonong.model.game;
 
-import com.sit.dongddonong.dto.PlayerHistoryDto;
+import com.sit.dongddonong.dto.game.PlayerHistoryDto;
+import com.sit.dongddonong.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

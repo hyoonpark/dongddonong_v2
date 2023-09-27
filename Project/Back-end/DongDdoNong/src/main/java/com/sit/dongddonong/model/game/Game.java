@@ -1,6 +1,7 @@
-package com.sit.dongddonong.model;
+package com.sit.dongddonong.model.game;
 
-import com.sit.dongddonong.dto.GameDto;
+import com.sit.dongddonong.dto.game.GameDto;
+import com.sit.dongddonong.dto.upload.UploadRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,9 +44,42 @@ public class Game {
     @Column
     private String mode;
 
+    @Column
+    private String thumbnail;
+
+    @Column
+    private String fileName;
+
+    @Column
+    private String videoLength;
+
+    @Column
+    private Boolean isAnalyzing;
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    public static Game createGame(UploadRequestDto uploadRequestDto, String thumbnail) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date gameDate;
+        try{
+            gameDate = format.parse(uploadRequestDto.getGameDate());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Game.builder()
+                .userId(uploadRequestDto.getUserId())
+                .gameDate(gameDate)
+                .thumbnail(thumbnail)
+                .videoLength(uploadRequestDto.getVideoLength())
+                .fileName(uploadRequestDto.getFileName())
+                .mode(uploadRequestDto.getMode())
+                .isAnalyzing(true)
+                .build();
     }
 
     public static Game createGame(GameDto gameDto) {

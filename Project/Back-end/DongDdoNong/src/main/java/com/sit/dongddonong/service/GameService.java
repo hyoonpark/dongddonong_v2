@@ -1,10 +1,10 @@
 package com.sit.dongddonong.service;
 
-import com.sit.dongddonong.dto.GameDto;
-import com.sit.dongddonong.dto.PlayerHistoryDto;
-import com.sit.dongddonong.model.Game;
-import com.sit.dongddonong.model.PlayerHistory;
-import com.sit.dongddonong.repository.GameRepository;
+import com.sit.dongddonong.dto.game.GameDto;
+import com.sit.dongddonong.dto.game.PlayerHistoryDto;
+import com.sit.dongddonong.model.game.Game;
+import com.sit.dongddonong.model.game.PlayerHistory;
+import com.sit.dongddonong.model.game.GameRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
