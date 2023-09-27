@@ -1,6 +1,6 @@
 package com.sit.dongddonong.util.security;
 
-import com.sit.dongddonong.dto.TokenDto;
+import com.sit.dongddonong.dto.token.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;

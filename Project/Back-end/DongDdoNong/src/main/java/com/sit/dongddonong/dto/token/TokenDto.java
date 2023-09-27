@@ -1,4 +1,4 @@
-package com.sit.dongddonong.dto;
+package com.sit.dongddonong.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

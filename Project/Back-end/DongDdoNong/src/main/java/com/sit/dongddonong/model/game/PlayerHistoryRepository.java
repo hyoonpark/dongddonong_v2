@@ -1,6 +1,6 @@
-package com.sit.dongddonong.repository;
+package com.sit.dongddonong.model.game;
 
-import com.sit.dongddonong.model.PlayerHistory;
+import com.sit.dongddonong.model.game.PlayerHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,11 +1,8 @@
-package com.sit.dongddonong.dto;
+package com.sit.dongddonong.dto.game;
 
-import com.sit.dongddonong.model.Game;
+import com.sit.dongddonong.model.game.Game;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +13,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class GameDto {
     @Schema(hidden = true)
     private Long id;
@@ -25,9 +23,15 @@ public class GameDto {
     private Date createdAt;
     @Schema(hidden = true)
     private Boolean isAssigned = false;
-//    private String location;
+    @Schema(hidden = true)
     private List<PlayerHistoryDto> playerHistories;
     private String mode;
+    @Schema(hidden = true)
+    private String thumbnail;
+    private String fileName;
+    private String videoLength;
+    @Schema(hidden = true)
+    private Boolean isAnalyzing;
 
     public void updateAssignedTrue(){
         isAssigned = true;

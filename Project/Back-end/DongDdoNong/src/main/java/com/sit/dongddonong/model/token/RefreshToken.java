@@ -1,4 +1,4 @@
-package com.sit.dongddonong.model;
+package com.sit.dongddonong.model.token;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
-package com.sit.dongddonong.dto;
+package com.sit.dongddonong.dto.game;
 
-import com.sit.dongddonong.model.PlayerHistory;
+import com.sit.dongddonong.model.game.PlayerHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

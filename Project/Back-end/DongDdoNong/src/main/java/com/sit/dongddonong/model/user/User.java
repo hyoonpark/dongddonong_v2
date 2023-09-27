@@ -1,6 +1,6 @@
-package com.sit.dongddonong.model;
+package com.sit.dongddonong.model.user;
 
-import com.sit.dongddonong.dto.UserDto;
+import com.sit.dongddonong.dto.user.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 

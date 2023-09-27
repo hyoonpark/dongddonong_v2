@@ -2,12 +2,12 @@ package com.sit.dongddonong.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.sit.dongddonong.dto.TokenDto;
-import com.sit.dongddonong.dto.UserDto;
-import com.sit.dongddonong.model.RefreshToken;
-import com.sit.dongddonong.model.User;
-import com.sit.dongddonong.repository.RefreshTokenRepository;
-import com.sit.dongddonong.repository.UserRepository;
+import com.sit.dongddonong.dto.token.TokenDto;
+import com.sit.dongddonong.dto.user.UserDto;
+import com.sit.dongddonong.model.token.RefreshToken;
+import com.sit.dongddonong.model.user.User;
+import com.sit.dongddonong.model.token.RefreshTokenRepository;
+import com.sit.dongddonong.model.user.UserRepository;
 import com.sit.dongddonong.util.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
