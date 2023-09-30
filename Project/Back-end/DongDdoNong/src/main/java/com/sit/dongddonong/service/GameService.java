@@ -34,6 +34,9 @@ public class GameService {
                 PlayerHistory.createPlayerHistory(playerHistory, game)
         ));
 
+        if(!playerHistories.isEmpty()){
+            game.updateIsAnalyzing(false);
+        }
         gameRepository.save(game);
 
         if(game.getMode().equals("1")){
