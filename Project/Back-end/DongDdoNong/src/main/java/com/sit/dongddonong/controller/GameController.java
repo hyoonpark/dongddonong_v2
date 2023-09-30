@@ -79,4 +79,10 @@ public class GameController {
         List<PlayerHistoryDto> result = playerHistoryService.getPlayerHistoriesByCondition(userId, mode, startDate, endDate);
         return ApiResponse.ok(result);
     }
+
+    @Operation(summary = "분석중인 경기 가져오기", description = "분석 중인 경기들을 가져옵니다.")
+    @GetMapping("/analyze/{userId}")
+    public ApiResponse<List<GameDto>> getAnalyzingGame(@PathVariable long userId, @RequestParam boolean isAnalyzing) {
+        return ApiResponse.ok(gameService.getAnalyzingGame(userId, isAnalyzing));
+    }
 }

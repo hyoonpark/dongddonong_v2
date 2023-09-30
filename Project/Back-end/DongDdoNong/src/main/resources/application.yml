@@ -7,10 +7,10 @@ spring:
     # password: ssafy
 
     # 서버
-    url: jdbc:mariadb://j9e103.p.ssafy.io:3306/dong_ddo_nong
+    url: jdbc:mariadb://j9e103.p.ssafy.io:3309/dong_ddo_nong
     driver-class-name: org.mariadb.jdbc.Driver
     username: ssafyE103
-    password: 1793
+    password: hanmo1793
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     open-in-view: false
