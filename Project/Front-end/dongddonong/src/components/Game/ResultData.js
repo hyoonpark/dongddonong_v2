@@ -2,7 +2,7 @@ import CircularProgressbar from "../../components/Chart/CircularProgressbar";
 
 const ResultData = ({ playerHistories }) => {
   return (
-    <div className="flex items-center gap-2 md:h-60">
+    <div className="flex items-center gap-2 h-48">
       <div className="w-1/3">
         <CircularProgressbar
           data={

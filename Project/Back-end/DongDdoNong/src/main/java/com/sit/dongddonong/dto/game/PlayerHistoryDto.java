@@ -34,6 +34,7 @@ public class PlayerHistoryDto {
     private String xyUrl;
     private int playTime;
     private Boolean win;
+    private String highlightUrl;
 
     public void updateUserId(long userId){
         this.userId = userId;
@@ -53,6 +54,7 @@ public class PlayerHistoryDto {
                 .xyUrl(playerHistory.getXyUrl())
                 .playTime(playerHistory.getPlayTime())
                 .win(playerHistory.getWin())
+                .highlightUrl(playerHistory.getHighlightUrl())
                 .build();
         if(playerHistory.getUser()!=null){
             playerHistoryDto = playerHistoryDto

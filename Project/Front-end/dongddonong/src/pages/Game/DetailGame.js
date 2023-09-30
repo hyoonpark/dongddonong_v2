@@ -5,6 +5,8 @@ import axios from "../../api/axiosConfig";
 import Wrapper from "../../components/Wrapper";
 import court from "../../assets/court.png";
 import ResultData from "../../components/Game/ResultData";
+import ScoreBoard from "../../components/Game/ScoreBoard";
+import Classification from "../../components/Game/Classification";
 
 const DetailGame = () => {
   const param = useParams();
@@ -12,6 +14,7 @@ const DetailGame = () => {
   const Day = new Date(data.createdAt);
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const [playerHistories, setPlayerHistories] = useState([]);
+  const [classificationIsOpen, SetClassificationIsOpen] = useState(true);
 
   useEffect(() => {
     axios.get(`/game/${param.id}`).then((resp) => {
@@ -20,8 +23,19 @@ const DetailGame = () => {
     });
   }, [param.id]);
 
+  const closeClassificationHandler = () => {
+    SetClassificationIsOpen(false);
+  };
+
   return (
     <div className="relative">
+      {classificationIsOpen && (
+        <Classification
+          playerHistories={playerHistories}
+          onClose={closeClassificationHandler}
+        />
+      )}
+
       <div>
         <div className="text-white pt-4 pl-4 absolute z-10 left-0">
           {Day.getFullYear()}-{Day.getMonth() + 1}-{Day.getDate()} (
@@ -40,48 +54,11 @@ const DetailGame = () => {
 
       <Wrapper>
         <div className="font-bold text-xl mt-5">스코어</div>
-        <div className="flex flex-col gap-2 mt-2">
-          <div className="flex text-center border-b">
-            <div className="w-1/4">플레이어</div>
-            <div className="w-3/4 flex justify-around text-center">
-              <div className="basis-1/5">득점</div>
-              <div className="basis-1/5">2점</div>
-              <div className="basis-1/5">2점%</div>
-              <div className="basis-1/5">3점</div>
-              <div className="basis-1/5">3점%</div>
-            </div>
-          </div>
-          {playerHistories.map((e) => {
-            return (
-              <div className="flex h-32 items-center justify-between">
-                <div className="flex w-1/4 items-center justify-center">
-                  <img
-                    className="h-28 max-w-[100px] rounded-full"
-                    src={e.diffProfileImg}
-                    alt=""
-                  />
-                </div>
-
-                <div className="w-3/4 flex justify-around text-center">
-                  <div className="basis-1/5">{e.total}</div>
-                  <div className="basis-1/5">{e.twoPts}</div>
-                  <div className="basis-1/5">
-                    {e.twoPts}/{e.tryTwoPts}
-                  </div>
-                  <div className="basis-1/5">{e.threePts}</div>
-                  <div className="basis-1/5">
-                    {e.threePts}/{e.tryThreePts}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <ScoreBoard playerHistories={playerHistories}></ScoreBoard>
 
         <div className="mt-6">
           <div className="font-bold text-xl">결과</div>
           {playerHistories.map((e, i) => {
-            console.log(e);
             return (
               <div key={i} className="md:flex md:gap-4 mb-4">
                 <div className="md:w-1/2">
