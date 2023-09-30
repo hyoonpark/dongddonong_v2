@@ -49,6 +49,8 @@ public class PlayerHistory {
     private int playTime;
     @Column
     private Boolean win;
+    @Column
+    private String highlightUrl;
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
@@ -72,6 +74,7 @@ public class PlayerHistory {
                 .xyUrl(playerHistoryDto.getXyUrl())
                 .playTime(playerHistoryDto.getPlayTime())
                 .win(playerHistoryDto.getWin())
+                .highlightUrl(playerHistoryDto.getHighlightUrl())
                 .build();
     }
 }

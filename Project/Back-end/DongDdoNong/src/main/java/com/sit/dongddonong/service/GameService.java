@@ -44,15 +44,6 @@ public class GameService {
 
     }
 
-    // 여러 작업을 묶어 작업해야 하기때문에 Transactional
-
-    public List<GameDto> getAllGamesByUser(long userId) {
-        List<Game> games = gameRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
-        return games.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-    }
-
     public List<GameDto> getAllGames() {
         List<Game> games = gameRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
         return games.stream()
@@ -67,19 +58,26 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
-    public void checkGameUserAssigned(long gameId) {
-        GameDto gameDto = getGame(gameId);
-        Game game = gameRepository.findById(String.valueOf(gameId))
-                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));
-        List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
-        boolean allAssigned = playerHistories.stream()
-                .allMatch(ph -> ph.getUserId() != null);
-        if (allAssigned) {
-            game.updateGameIsAssigned(true);
-        }
-    }
+//    public void checkGameUserAssigned(long gameId) {
+//        GameDto gameDto = getGame(gameId);
+//        Game game = gameRepository.findById(String.valueOf(gameId))
+//                .orElseThrow(() -> new IllegalArgumentException("해당 경기가 없습니다. gameId=" + gameId));
+//        List<PlayerHistoryDto> playerHistories = gameDto.getPlayerHistories();
+//        boolean allAssigned = playerHistories.stream()
+//                .allMatch(ph -> ph.getUserId() != null);
+//        if (allAssigned) {
+//            game.updateGameIsAssigned(true);
+//        }
+//    }
 
     public GameDto getGame(long gameId) {
         return convertToDto(gameRepository.findById(String.valueOf(gameId)).orElse(null));
+    }
+
+    public List<GameDto> getAnalyzingGame(long userId, boolean isAnalyzing) {
+        List<Game> games = gameRepository.findGamesByUserIdAndIsAnalyzingOrderByCreatedAtDesc(userId, isAnalyzing);
+        return games.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 }
