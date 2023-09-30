@@ -60,6 +60,10 @@ public class Game {
         createdAt = new Date();
     }
 
+    public void updateIsAnalyzing(boolean isAnalyzing){
+        this.isAnalyzing = isAnalyzing;
+    }
+
     public static Game createGame(UploadRequestDto uploadRequestDto, String thumbnail) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
