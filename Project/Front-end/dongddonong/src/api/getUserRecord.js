@@ -1,8 +1,7 @@
 import axiosInstance from "./axiosConfig";
 
 // 유저가 참여한 경기 데이터 가져오기
-
-const getUserRecord = async (userId) => {
+export const getUserRecord = async (userId) => {
   try {
     const res = await axiosInstance.get(`/game/assign/${userId}`);
     console.log('요청성공!', res.data)
@@ -11,4 +10,3 @@ const getUserRecord = async (userId) => {
     return err
   }
 };
-export default getUserRecord

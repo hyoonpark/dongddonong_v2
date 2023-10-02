@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { getGameAll } from '../api/gameApi';
-import getUserRecord from '../api/getUserRecord';
+import { getUserRecord } from '../api/getUserRecord';
 import { useUserContext } from "../contexts/userContext"
 
 
@@ -30,8 +30,8 @@ const TestPage = () => {
   useEffect(() => {
     const getRecordInfo = async () => {
       try {
-        const recordInfo = await getUserRecord();
-        setRecordInfo(recordInfo);
+        const userRecord = await getUserRecord(userId);
+        setRecordInfo(userRecord);
         console.log('기록실정보요청 성공!', recordInfo)
       } catch (error) {
         console.error('기록실 정보를 가져오는 중 오류 발생:', error);
