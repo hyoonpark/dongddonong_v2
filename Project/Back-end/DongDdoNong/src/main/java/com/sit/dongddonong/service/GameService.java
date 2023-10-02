@@ -61,6 +61,13 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
+    public List<GameDto> getAllGamesByUserId(long userId) {
+        List<Game> games = gameRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
+        return games.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
 //    public void checkGameUserAssigned(long gameId) {
 //        GameDto gameDto = getGame(gameId);
 //        Game game = gameRepository.findById(String.valueOf(gameId))

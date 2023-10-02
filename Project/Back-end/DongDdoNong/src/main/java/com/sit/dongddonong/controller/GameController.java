@@ -55,9 +55,14 @@ public class GameController {
         return ApiResponse.ok(gameService.getAllGames());
     }
 
+    @Operation(summary = "해당 유저 경기 모두 가져오기", description = "userId에 해당하는 게임들을 가져온다.")
+    @GetMapping("/all/{userId}")
+    public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId) {
+        return ApiResponse.ok(gameService.getAllGamesByUserId(userId));
+    }
     @Operation(summary = "할당 여부에 따라 경기 가져오기(미할당된 경기 할당 필요)", description = "isAssigned 여부에 따라 경기를 가져온다. ")
     @GetMapping("/assign/{userId}")
-    public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId, @RequestParam(defaultValue = "false") boolean isAssigned) {
+    public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
         return ApiResponse.ok(gameService.getAllByAssignedGames(userId, isAssigned));
     }
 
