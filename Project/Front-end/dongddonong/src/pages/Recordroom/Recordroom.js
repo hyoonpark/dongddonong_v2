@@ -1,5 +1,7 @@
 import { useUserContext } from "../../contexts/userContext";
 import { useState, useEffect } from "react";
+import { getUserRecord } from "../../api/getUserRecord";
+
 
 import user from "../../assets/player.png";
 import user2 from "../../assets/player2.jpg";
@@ -11,7 +13,6 @@ import leftArrow from "../../assets/icon/left-arrow.png";
 import rightArrow from "../../assets/icon/right-arrow.png";
 import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import getUserRecord from "../../api/getUserRecord";
 import RecordCard from "../../components/Recordroom/RecordCard";
 // import useUserContext from '../../contexts/userContext'
 
@@ -60,14 +61,11 @@ const Recordroom = () => {
   
 
   useEffect(()=>{
-  axios.get(`https://j9e103.p.ssafy.io:8589/game/assign/${userId}?isAssigned=true`)
-    .then((res) => {
-      console.log(res.data.data)
+      const gameList = getUserRecord(userId)
       let game = {}
       const practice = []
       const twoBound = []
       const match = []
-      const gameList = res.data.data
       for (let index = 0; index < gameList.length; index++) {
         const tempGame = gameList[index]['playerHistories'] //배열의 길이가 1,2인 두 선수 기록객체
         // console.log(gameList[index]['gameDate'])
@@ -104,11 +102,9 @@ const Recordroom = () => {
       setMatch(match)
       setMode('연습모드')
       gameChangeHandler('연습모드')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  },[total]); //의존성을 practice나 다른 걸로 두니까 아마 이루프에 있는 const practice의 영향을 받는듯
+    }
+
+  ,[total]); //의존성을 practice나 다른 걸로 두니까 아마 이루프에 있는 const practice의 영향을 받는듯
   //하다 total은 여기서 한번
 
   useEffect(() => {
