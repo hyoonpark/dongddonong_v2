@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { getGameAll } from '../api/gameApi';
-import getUserRecord from '../api/getUserRecord';
+import { getUserRecord } from '../api/getUserRecord';
 import { useUserContext } from "../contexts/userContext"
 
 
