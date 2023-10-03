@@ -220,8 +220,9 @@ const ModalOverlay = (props) => {
                             </div>
                         ))}
                 </div>
+                
                 {files && files.length > 0 && ( // files.length > 0을 추가하니까 사라지네 왜지?
-                    <div className="text-right row-start-7">
+                    <div className=" text-right row-start-7">
                         {videoDurations.some(duration => duration > 16) ? (
                             <div className="text-red-600 font-bold">
                                 업로드 못하는 영상을 삭제해주세요

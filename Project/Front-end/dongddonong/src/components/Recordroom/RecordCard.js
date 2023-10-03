@@ -1,9 +1,11 @@
 import user2 from '../../assets/player2.jpg'
 import rightArrow from '../../assets/icon/right-arrow.png'
 import leftArrow from '../../assets/icon/left-arrow.png'
+import { useUserContext } from "../../contexts/userContext";
 
 const RecordCard = (props) => {
     const players = []
+    const { user } = useUserContext();
     let player1 = null
     let player2 = null
     console.log('버튼',props.game)
@@ -23,9 +25,9 @@ const RecordCard = (props) => {
     <div className="h-32 border-black rounded border-2">
       <div className="h-4"></div>
       <div className="h-28 flex gap-1">
-        <div className="flex flex-col items-center justify-evenly w-1/5">
+        <div className="flex flex-col items-center justify-evenly ml-2 w-1/5">
           <img
-            src={user2}
+            src={user.profileImgUrl}
             className="rounded-2xl w-14 h-16"
             alt="어웨이"
           />
@@ -56,14 +58,14 @@ const RecordCard = (props) => {
             <div className="absolute right-0 text-xl">{player2 && props.game[player2]['total']}</div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-evenly w-1/5">
+         {player2 && <div className="flex flex-col items-center justify-evenly mr-2 w-1/5">
           <img
             src={user2}
             className="rounded-2xl w-14 h-16"
             alt="어웨이"
           />
           <div className="text-[12px]">{player2}</div>
-        </div>
+        </div>}
       </div>
     </div>
   </div>
