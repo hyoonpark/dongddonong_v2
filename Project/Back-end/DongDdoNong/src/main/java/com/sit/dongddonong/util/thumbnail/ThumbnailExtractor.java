@@ -19,7 +19,8 @@ import java.util.UUID;
 public class ThumbnailExtractor {
 
     private static final String EXTENSION = "png";
-    private static final String DEFAULT_IMAGE_PATH = "src/main/resources/static/images/default-thumbnail.png";
+
+//    private static final String DEFAULT_IMAGE_PATH = "src/main/resources/static/images/default-thumbnail.png";
 
     public static File extract(File source) throws IOException {
         // 썸네일 파일 생성
@@ -43,7 +44,9 @@ public class ThumbnailExtractor {
 
         } catch (Exception e) {
             // 실패했을 경우에 기본 이미지를 사용
-            File defaultImage = new File(DEFAULT_IMAGE_PATH);
+
+            ClassLoader classLoader = ThumbnailExtractor.class.getClassLoader();
+            File defaultImage = new File(classLoader.getResource("static/images/default-thumbnail.png").getFile());
 
             try {
                 FileUtil.copyFile(defaultImage, thumbnail);
