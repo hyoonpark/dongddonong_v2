@@ -1,6 +1,6 @@
 import { useUserContext } from "../../contexts/userContext";
 import { useState, useEffect } from "react";
-import { getUserRecord } from "../../api/getUserRecord";
+import { getUserRecord }from "../../api/getUserRecord";
 
 
 import user from "../../assets/player.png";
@@ -18,7 +18,7 @@ import RecordCard from "../../components/Recordroom/RecordCard";
 
 const Recordroom = () => {
   const { user } = useUserContext();
-  const userId = user.id
+  const userId = 3017361691
 
   const modes = ['연습모드', '투바모드', '대전모드']
   const [mode, setMode] = useState()
@@ -27,6 +27,7 @@ const Recordroom = () => {
   const [practice, setPractice] = useState([])
   const [twoBound, setTwoBound] = useState([])
   const [match, setMatch] = useState([])
+  const [gameList, setGameList] = useState('')
   
   function gameChangeHandler(option) {
     if (option === '연습모드'){setGames([...practice])}
@@ -61,16 +62,24 @@ const Recordroom = () => {
   
 
   useEffect(()=>{
-      const gameList = getUserRecord(userId)
+      const promise = getUserRecord(userId)
+      // let gameList = []
+      promise.then(data => { // data로 풀어해친다음 딱히 방법이 안보이면 그냥 data를 쓰자 어디할당하지말자
+          console.log(data)
+          setGameList(data)
+
+
+          
+      // const gameList = promise
       let game = {}
       const practice = []
       const twoBound = []
       const match = []
-      for (let index = 0; index < gameList.length; index++) {
-        const tempGame = gameList[index]['playerHistories'] //배열의 길이가 1,2인 두 선수 기록객체
-        // console.log(gameList[index]['gameDate'])
+      for (let index = 0; index < data.length; index++) {
+        const tempGame = data[index]['playerHistories'] //배열의 길이가 1,2인 두 선수 기록객체
+        // console.log(data[index]['gameDate'])
 
-        game['gameDate'] = gameList[index]['gameDate'] //key를 gameDate로 value를 해당 경기시작으로 객체를 만들고 game객체에 추가
+        game['gameDate'] = data[index]['gameDate'] //key를 gameDate로 value를 해당 경기시작으로 객체를 만들고 game객체에 추가
         // game.push(gameDate)
 
         for (let index = 0; index < tempGame.length; index++) { // 현재게임의 인덱스를 순회하면서 해당유저의 아이디를 key로 value는 해당유저의 경기정보로 객체를 만들고 game객체에 추가
@@ -102,6 +111,8 @@ const Recordroom = () => {
       setMatch(match)
       setMode('연습모드')
       gameChangeHandler('연습모드')
+        })
+      
     }
 
   ,[total]); //의존성을 practice나 다른 걸로 두니까 아마 이루프에 있는 const practice의 영향을 받는듯
