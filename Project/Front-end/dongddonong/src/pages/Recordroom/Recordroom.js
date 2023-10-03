@@ -1,6 +1,6 @@
 import { useUserContext } from "../../contexts/userContext";
 import { useState, useEffect } from "react";
-import getUserRecord from "../../api/getUserRecord";
+import { getUserRecord }from "../../api/getUserRecord";
 
 
 import user from "../../assets/player.png";
