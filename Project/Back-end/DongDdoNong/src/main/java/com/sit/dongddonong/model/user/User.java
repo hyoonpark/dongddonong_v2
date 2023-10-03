@@ -27,6 +27,8 @@ public class User {
     private String email;
     @Column
     private String accessToken;
+    @Column
+    private String kakaoAccessToken;
 
     public static User userToEntity(UserDto userDto){
         return User.builder()
@@ -38,6 +40,7 @@ public class User {
 //                .playTime(userDto.getPlayTime())
                 .profileImgUrl(userDto.getProfileImgUrl())
                 .accessToken(userDto.getAccessToken())
+                .kakaoAccessToken(userDto.getKakaoAccessToken())
                 .build();
     }
 
