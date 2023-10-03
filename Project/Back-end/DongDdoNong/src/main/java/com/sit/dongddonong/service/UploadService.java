@@ -44,6 +44,7 @@ public class UploadService {
 
     private String upload(File uploadFile, String dirName, String fileUniqueName) {
 //        String fileName = dirName + "/" + uploadFile.getName();
+
         String fileName = dirName + "/" + fileUniqueName + "_" + uploadFile.getName();
         String uploadUrl = putS3(uploadFile, fileName);
 
@@ -52,6 +53,8 @@ public class UploadService {
         return uploadUrl;      // 업로드된 파일의 S3 URL 주소 반환
     }
     private void removeNewFile(File targetFile) {
+        System.gc();
+        System.runFinalization();
         if(targetFile.delete()) {
             log.info("파일이 삭제되었습니다.");
         }else {
@@ -60,7 +63,10 @@ public class UploadService {
     }
 
     private Optional<File> convert(MultipartFile file) throws  IOException {
-        File convertFile = new File(file.getOriginalFilename());
+        String fileName = file.getOriginalFilename();
+        String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+        File convertFile = new File(UUID.randomUUID()+"."+ext);
         if(convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                 fos.write(file.getBytes());
