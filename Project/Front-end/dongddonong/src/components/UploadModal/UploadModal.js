@@ -216,9 +216,9 @@ const ModalOverlay = (props) => {
                                                     selected={gameTypes[index]?.buttonInfo || ""}
                                                     onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
                                                 />}
-                                            {videoDurations[index] > 16 && <div className=" text-red-600 font-bold" >영상길이가 너무 깁니다.</div>}
+                                            {videoDurations[index] > 16 && <div className=" text-red-600 font-bold pointer-events-none" >영상길이가 너무 깁니다.</div>}
 
-                                            <img className=" ml-2 w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)} />
+                                            <img className=" ml-2 cursor-pointer w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)} />
                                         </div>
                                     )}
                                 </ul>
@@ -228,7 +228,7 @@ const ModalOverlay = (props) => {
                 {files && files.length > 0 && ( // files.length > 0을 추가하니까 사라지네 왜지?
                     <div className="text-right row-start-7">
                         {videoDurations.some(duration => duration > 16) ? (
-                            <div className="text-red-600 font-bold">
+                            <div className="text-red-600 font-bold pointer-events-none">
                                 업로드 못하는 영상을 삭제해주세요
                             </div>
                         ) : (
