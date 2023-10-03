@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useUserContext } from "../../contexts/userContext";
+import { gameUpload } from "../../api/gameUpload";
 
 // import thumbnail from '../../assets/thumbnail.png';
 import GuideCarousel from "./GuideCarousel";
@@ -158,12 +159,16 @@ const ModalOverlay = (props) => {
                     ;
                 // console.log(formData.get("files"));
                 // console.log(formData);
+                // gameUpload(formData)
+                const accessToken = localStorage.getItem("accessToken")
+                console.log(accessToken)
                 try {
                     const result = await fetch("https://j9e103.p.ssafy.io:8589/game/upload", {
                         method: "POST",
-                        // headers: {
-                        //     'Content-Type': 'multipart/form-data'
-                        // },
+                        headers: {
+                            // 'Content-Type': 'multipart/form-data',
+                        'Authorization': 'Bearer ' + accessToken
+                        },
                         body: formData,
                     });
 
