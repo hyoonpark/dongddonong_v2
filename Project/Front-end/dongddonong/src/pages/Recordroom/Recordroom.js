@@ -18,7 +18,7 @@ import RecordCard from "../../components/Recordroom/RecordCard";
 
 const Recordroom = () => {
   const { user } = useUserContext();
-  const userId = 3017361691
+  const userId = user.id
 
   const modes = ['연습모드', '투바모드', '대전모드']
   const [mode, setMode] = useState()
@@ -150,7 +150,7 @@ const Recordroom = () => {
         {modes.map((option, index) => (
             <button
               key={index}
-              className={option === mode ? 'bg-primary ml-2 w-20 drop-shadow-xl text-white rounded-md' : 'ml-2 w-20 drop-shadow-xl text-primary bg-white rounded-md'}
+              className={option === mode ? ' sm:w-40 bg-primary ml-2 w-20 drop-shadow-xl text-white rounded-md' : 'sm:w-40 ml-2 w-20 drop-shadow-xl text-primary bg-white rounded-md'}
               onClick={() => {
                 setMode(option)
                 gameChangeHandler(option)
