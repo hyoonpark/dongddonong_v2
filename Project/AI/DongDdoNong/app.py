@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, request, jsonify, send_file, redirect
+from flask import Flask, request, jsonify, send_file, redirect, requests
+import joblib
 
 import boto3
 import opencv
@@ -42,9 +43,11 @@ def analyze_video(ID):
         # 동영상 분석 로직 구현
         # 여기에서 동영상 프레임을 처리하고 분석 작업
         # 예를 들어, 프레임별로 얼굴 인식, 객체 추적
+        clf = joblib.load("저장된 모델.pkl 경로")  # 모델 로드
+        prediction = clf.predict(video_frame)  # 예측값
 
         # 분석 결과 반환
-        analysis_result = "Hi"  # ex) 카카오톡 ID 1/1, 50, 60
+        analysis_result = prediction  # ex) 카카오톡 ID 1/1, 50, 60
         highlight = highlight_video(analysis_result, video_data)
         return jsonify({'result': analysis_result}), 200
     except Exception as e:
