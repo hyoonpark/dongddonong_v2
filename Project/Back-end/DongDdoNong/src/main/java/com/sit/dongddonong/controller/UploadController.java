@@ -23,7 +23,7 @@ public class UploadController {
             gameId = String.valueOf(uploadService.saveFileAndCreateGame(uploadRequestDto));
         }
         catch (Exception e){
-            return ApiResponse.ok(e.getMessage());
+            return ApiResponse.fail(500, e.getMessage());
         }
         return ApiResponse.ok("gameId : " + gameId);
     }

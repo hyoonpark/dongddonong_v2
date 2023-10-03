@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -22,8 +23,8 @@ public class ThumbnailExtractor {
 
     public static File extract(File source) throws IOException {
         // 썸네일 파일 생성
-        File thumbnail = new File(source.getParent(), source.getName().split("\\.")[0] + "." + EXTENSION);
-
+//        File thumbnail = new File(source.getParent(), source.getName().split("\\.")[0] + "." + EXTENSION);
+        File thumbnail = new File(UUID.randomUUID() + "." + EXTENSION);
         try {
             if (!source.exists()) {
                 System.out.println("파일이 존재하지 않습니다.");
