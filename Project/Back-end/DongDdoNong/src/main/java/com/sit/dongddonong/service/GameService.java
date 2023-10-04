@@ -90,17 +90,18 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
-    public List<GameIdDto> getStatusModalAnalyzingGame(long userId, boolean isAnalyzing) {
+    public GameIdDto getStatusModalAnalyzingGame(long userId, boolean isAnalyzing) {
         List<Game> games = gameRepository.findGamesByUserIdAndIsAnalyzingOrderByCreatedAtDesc(userId, isAnalyzing);
-        return games.stream()
-                .map(game -> GameIdDto.builder().gameId(game.getId()).build())
-                .toList();
+
+        return GameIdDto.builder()
+                .gameIdList(games.stream().map(Game::getId).collect(Collectors.toList()))
+                .build();
     }
 
-    public List<GameIdDto> getStatusModalAssignedGames(long userId, boolean isAssigned) {
+    public GameIdDto getStatusModalAssignedGames(long userId, boolean isAssigned) {
         List<Game> games = gameRepository.findAllByUserIdAndIsAssignedOrderByCreatedAtDesc(userId, isAssigned);
-        return games.stream()
-                .map(game -> GameIdDto.builder().gameId(game.getId()).build())
-                .toList();
+        return GameIdDto.builder()
+                .gameIdList(games.stream().map(Game::getId).collect(Collectors.toList()))
+                .build();
     }
 }

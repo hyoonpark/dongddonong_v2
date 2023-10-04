@@ -99,13 +99,13 @@ public class GameController {
 
     @Operation(summary = "분석중인 경기 가져오기 (status-modal)", description = "분석 중인 경기들의 id를 가져옵니다.")
     @GetMapping("/status-modal/analyze/{userId}")
-    public ApiResponse<List<GameIdDto>> getStatusModalAnalyzingGame(@PathVariable long userId, @RequestParam boolean isAnalyzing) {
+    public ApiResponse<GameIdDto> getStatusModalAnalyzingGame(@PathVariable long userId, @RequestParam boolean isAnalyzing) {
         return ApiResponse.ok(gameService.getStatusModalAnalyzingGame(userId, isAnalyzing));
     }
 
     @Operation(summary = "할당 여부에 따라 경기 가져오기(미할당된 경기 할당 필요)", description = "isAssigned 여부에 따라 경기를 가져온다. ")
     @GetMapping("/status-modal/assign/{userId}")
-    public ApiResponse<List<GameIdDto>> getStatusModalAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
+    public ApiResponse<GameIdDto> getStatusModalAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
         return ApiResponse.ok(gameService.getStatusModalAssignedGames(userId, isAssigned));
     }
 }
