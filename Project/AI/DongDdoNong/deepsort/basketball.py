@@ -1,4 +1,7 @@
 import os
+import sys
+sys.path.append("/models")
+sys.path.append("/utils")
 
 import argparse
 import time
@@ -31,6 +34,7 @@ from collections import deque
 import numpy as np
 palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
 data_deque = {}
+
 
 class Player:
     def __init__(self, id):
