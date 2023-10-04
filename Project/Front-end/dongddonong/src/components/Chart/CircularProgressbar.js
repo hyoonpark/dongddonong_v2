@@ -5,7 +5,7 @@ const CircularProgressbar = ({ data }) => {
   return (
     <div className="max-w-[200px]">
       <CircularProgressbarWithChildren
-        value={data}
+        value={isNaN(data) ? 50 : data}
         strokeWidth={12}
         styles={{
           path: {
@@ -23,7 +23,9 @@ const CircularProgressbar = ({ data }) => {
           alt="다은"
         />
         <div className="text-center">
-          <strong className="text-2xl">{parseInt(data)}%</strong>
+          <strong className="text-2xl">
+            {isNaN(parseInt(data)) ? " - " : parseInt(data)}%
+          </strong>
           <div>슛 성공률</div>
         </div>
       </CircularProgressbarWithChildren>

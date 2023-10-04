@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { useUserContext } from "../../contexts/userContext";
 import axios from "../../api/axiosConfig";
 import Wrapper from "../../components/Wrapper";
 import court from "../../assets/court.png";
 import ResultData from "../../components/Game/ResultData";
+import ScoreBoard from "../../components/Game/ScoreBoard";
 
 const DetailPractice = () => {
+  const { user } = useUserContext();
   const param = useParams();
   const [data, setData] = useState({});
   const Day = new Date(data.createdAt);
@@ -33,6 +37,13 @@ const DetailPractice = () => {
       </div>
       <Wrapper>
         <div className="mt-6">
+          {data.playerHistories && (
+            <ScoreBoard
+              playerHistories={data.playerHistories}
+              userId={user.id}
+            ></ScoreBoard>
+          )}
+
           <div className="md:flex md:gap-4">
             <div className="md:w-1/2">
               <div className="font-bold mb-1">결과</div>

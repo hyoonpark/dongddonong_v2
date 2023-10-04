@@ -12,6 +12,7 @@ const ScoreBoard = ({ playerHistories, userId }) => {
           <div className="basis-1/5">3점%</div>
         </div>
       </div>
+
       {playerHistories.map((e, i) => {
         return (
           <div className="flex h-32 items-center justify-between relative">
