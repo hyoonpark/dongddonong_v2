@@ -28,9 +28,14 @@ const ResultData = ({ playerHistories }) => {
               </div>
               <div className="font-bold">
                 {playerHistories &&
-                  parseInt(
-                    (playerHistories.twoPts / playerHistories.tryTwoPts) * 100
-                  )}
+                parseInt(
+                  (playerHistories.twoPts / playerHistories.tryTwoPts) * 100
+                )
+                  ? playerHistories &&
+                    parseInt(
+                      (playerHistories.twoPts / playerHistories.tryTwoPts) * 100
+                    )
+                  : " - "}
                 %
               </div>
             </div>
@@ -62,10 +67,14 @@ const ResultData = ({ playerHistories }) => {
               </div>
               <div className="font-bold">
                 {playerHistories &&
-                  parseInt(
-                    (playerHistories.threePts / playerHistories.tryThreePts) *
-                      100
-                  )}
+                parseInt(
+                  (playerHistories.threePts / playerHistories.tryThreePts) * 100
+                )
+                  ? parseInt(
+                      (playerHistories.threePts / playerHistories.tryThreePts) *
+                        100
+                    )
+                  : " - "}
                 %
               </div>
             </div>
