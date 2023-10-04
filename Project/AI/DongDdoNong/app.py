@@ -1,3 +1,9 @@
+import os
+import sys
+NOW_DIR = os.getcwd()
+sys.path.append(NOW_DIR + '\\deepsort')
+
+
 from flask import Flask, request, jsonify, send_file, redirect
 # , requests)
 
