@@ -166,8 +166,6 @@ class LoadImages:  # for inference
             raise StopIteration
         path = self.files[self.count]
 
-        # 나는 영상으로 작업..!
-        # count가 반복 횟수인건가..?
         if self.video_flag[self.count]:
             # Read video
             self.mode = 'video'
@@ -185,14 +183,6 @@ class LoadImages:  # for inference
             self.frame += 1
             print(f'video {self.count + 1}/{self.nf} ({self.frame}/{self.nframes}) {path}: ', end='')
 
-#         else:
-#             # Read image
-#             self.count += 1
-#             img0 = cv2.imread(path)  # BGR
-#             assert img0 is not None, 'Image Not Found ' + path
-#             #print(f'image {self.count}/{self.nf} {path}: ', end='')
-
-        # Padded resize
         img = letterbox(img0, self.img_size, stride=self.stride)[0]
 
         # Convert
@@ -217,9 +207,7 @@ class LoadWebcam:  # for inference
 
         if pipe.isnumeric():
             pipe = eval(pipe)  # local camera
-        # pipe = 'rtsp://192.168.1.64/1'  # IP camera
-        # pipe = 'rtsp://username:password@192.168.1.64/1'  # IP camera with login
-        # pipe = 'http://wmccpinetop.axiscam.net/mjpg/video.mjpg'  # IP golf camera
+
 
         self.pipe = pipe
         self.cap = cv2.VideoCapture(pipe)  # video capture object
