@@ -157,9 +157,8 @@ const Home = () => {
 
       <button
         onClick={scrollToTop}
-        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${
-          showButton ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${showButton ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <img className="w-6" src={upArrow} alt="스크롤상단" />
       </button>
