@@ -131,10 +131,10 @@ const Recordroom = () => {
 
           <div className=" h-24 grid grid-rows-5 col-start-3 col-end-7 bg-secondary rounded-3xl">
             <div className="text-center text-lg row-start-2 font-sans">
-              농구한 시간 : {gamesTotalTime}h
+              경기 시간 : {gamesTotalTime}h
             </div>
-            <div className="text-center text-lg row-start-4">
-              전체 득점 : {total}
+            <div className="text-center text-lg row-start-4 font-sans">
+              전체 득점 : {total}점
             </div>
           </div>
         </div>
