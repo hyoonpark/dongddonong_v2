@@ -2,6 +2,7 @@ package com.sit.dongddonong.controller;
 
 
 import com.sit.dongddonong.dto.user.UserDto;
+import com.sit.dongddonong.dto.user.UserResponseDto;
 import com.sit.dongddonong.service.UserService;
 import com.sit.dongddonong.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,10 @@ public class UserController {
     @PostMapping("/logout")
     public ApiResponse<ResponseEntity<String>> logout(@RequestParam long userId) throws Exception {
         return ApiResponse.ok(userService.logout(userId));
+    }
+
+    @GetMapping("/info")
+    public ApiResponse<UserResponseDto> getUserInfo(@RequestParam long userId) {
+        return ApiResponse.ok(userService.getUserInfo(userId));
     }
 }
