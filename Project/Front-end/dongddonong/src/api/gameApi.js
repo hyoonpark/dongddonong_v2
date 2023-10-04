@@ -15,7 +15,7 @@ export const getGameAll = async () => {
 export const getGameData = async (gameId) => {
   try {
     const res = await axiosInstance.get(`/game/${gameId}`);
-    // console.log('성공!', res)
+    // console.log('경기 정보 가져오기 성공!', res)
     return res.data;
   }
   catch (err) {
