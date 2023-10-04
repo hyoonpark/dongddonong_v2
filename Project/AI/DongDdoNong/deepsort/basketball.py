@@ -1,7 +1,7 @@
 import os
 import sys
-sys.path.append("/models")
-sys.path.append("/utils")
+sys.path.append("/deepsort/models")
+sys.path.append("/deepsort/utils")
 
 import argparse
 import time
