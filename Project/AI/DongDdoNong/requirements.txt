@@ -14,6 +14,7 @@ colorama==0.4.6
 contourpy==1.1.1
 cycler==0.12.0
 decorator==4.4.2
+easydict==1.10
 executing==2.0.0
 filelock==3.12.4
 Flask==2.2.5
