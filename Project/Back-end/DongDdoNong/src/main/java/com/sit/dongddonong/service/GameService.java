@@ -99,7 +99,7 @@ public class GameService {
     }
 
     public GameIdDto getStatusModalAssignedGames(long userId, boolean isAssigned) {
-        List<Game> games = gameRepository.findAllByUserIdAndIsAssignedOrderByCreatedAtDesc(userId, isAssigned);
+        List<Game> games = gameRepository.findAllByUserIdAndIsAssignedAndIsAnalyzingOrderByCreatedAtDesc(userId, isAssigned, false);
         return GameIdDto.builder()
                 .gameIdList(games.stream().map(Game::getId).collect(Collectors.toList()))
                 .build();

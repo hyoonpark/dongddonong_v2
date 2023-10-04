@@ -9,6 +9,9 @@ import java.util.List;
 public interface GameRepository extends JpaRepository<Game,String> {
     List<Game> findAllByUserIdOrderByCreatedAtDesc(Long userId);
     List<Game> findAllByUserIdAndIsAssignedOrderByCreatedAtDesc(Long userId, boolean isAssigned);
+    List<Game> findAllByUserIdAndIsAssignedAndIsAnalyzingOrderByCreatedAtDesc(
+            Long userId, boolean isAssigned, boolean isAnalyzing);
+
     List<Game> findGamesByUserIdAndIsAnalyzingOrderByCreatedAtDesc(Long userId, boolean isAnalyzing);
 
 }
