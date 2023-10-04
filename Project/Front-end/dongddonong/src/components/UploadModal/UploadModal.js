@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useUserContext } from "../../contexts/userContext";
-import { gameUpload } from "../../api/gameUpload";
+// import { gameUpload } from "../../api/gameUpload";
 
 // import thumbnail from '../../assets/thumbnail.png';
 import GuideCarousel from "./GuideCarousel";
 import MultiButton from './MultiButton';
-import axios from "axios";
+// import axios from "axios";
 import trashbin from "../../assets/trashbin.png"
 import classes from './ErrorModal.module.css'
 import ReactDOM from 'react-dom';
@@ -136,6 +136,7 @@ const ModalOverlay = (props) => {
 
     useEffect(() => {
         // localStorage.setItem('gameId', JSON.stringify(gameId));
+        // 배열로 저장하지 않고 하나의 문자열로 저장한다. 
         localStorage.setItem('gameId', gameId);
         // console.log(localStorage.getItem('gameId'))
     }, [gameId])

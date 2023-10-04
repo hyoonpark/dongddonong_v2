@@ -1,8 +1,8 @@
 import { forwardRef, useEffect, useState, memo } from "react";
 
 import upload from "../../assets/icon/upload.png";
-import time from "../../assets/icon/time.png";
-import check from "../../assets/icon/check.png";
+// import time from "../../assets/icon/time.png";
+// import check from "../../assets/icon/check.png";
 import UploadModal from "../UploadModal/UploadModal";
 import StatusList from "../Status/StatusList";
 
@@ -24,10 +24,6 @@ const VideoModal = forwardRef((_, ref) => {
     }
   };
 
-  //모달이 열릴 때 getStatusList axios 요청하기
-  // localStorage에서 업로드한 영상 gameId 목록 가져오기
-  // const uploadedList = [255, 12]
-
   //로컬스토리지에 저장된 분석 중 gamdId 목록을 가져온다.
   const gameIdInLocal = localStorage.getItem('gameId');
   // console.log('로컬 게임 아이디', gameIdInLocal)
@@ -40,10 +36,6 @@ const VideoModal = forwardRef((_, ref) => {
   // console.log('정수 변환됐나', uploadedList)
 
 
-
-
-
-
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
@@ -52,13 +44,12 @@ const VideoModal = forwardRef((_, ref) => {
     };
   }, []);
 
-
   return (
     <>
       <div
         ref={ref}
         className="absolute z-10 w-64 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-0 top-14"
-      >
+        style={{ maxHeight: '400px', overflowY: 'auto' }} >
         <div onClick={() => { setIsOpen(true) }} className="py-3 border-b border-black">
           <img className="inline h-6 pr-4" src={upload} alt="업로드" />
           영상 업로드
@@ -72,7 +63,7 @@ const VideoModal = forwardRef((_, ref) => {
           <strong>분석실</strong>
           <StatusList uploadedList={uploadedList} />
         </div>
-      </div >
+      </div>
     </>
   );
 });
