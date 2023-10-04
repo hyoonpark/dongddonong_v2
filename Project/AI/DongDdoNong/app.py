@@ -1,18 +1,17 @@
-import os
-
-from flask import Flask, request, jsonify, send_file, redirect, requests
-import joblib
+from flask import Flask, request, jsonify, send_file, redirect
+# , requests)
 
 import boto3
-import opencv
-from scenedetect import open_video, SceneManager
-from scenedetect.detectors import ContentDetector
-from scenedetect.scene_manager import save_images
-from scenedetect.video_splitter import split_video_ffmpeg
+# import opencv
+# from scenedetect import open_video, SceneManager
+# from scenedetect.detectors import ContentDetector
+# from scenedetect.scene_manager import save_images
+# from scenedetect.video_splitter import split_video_ffmpeg
 from moviepy.editor import VideoFileClip, concatenate_videoclips, vfx, AudioFileClip, afx
 from deepsort import basketball
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from moviepy.editor import VideoFileClip, AudioFileClip
+import torch
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 app = Flask(__name__)
