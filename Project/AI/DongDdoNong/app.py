@@ -33,12 +33,12 @@ def test():
     return "test"
 
 
-@app.route('ai/analysis/{ID}', method=['POST'])
+@app.route('ai/analysis/<ID>', method=['POST'])
 def analyze_video(ID):
     try:
         # Lambda 함수로부터 전달된 동영상 데이터 받기
         video_data = request.data
-        result = basketball.detect(save_img=False, video_data, ID)
+        result = basketball.detect(video_data, ID)
 
         # 동영상 데이터를 메모리에서 읽기
         # nparr = np.fromstring(video_data, np.uint8)
