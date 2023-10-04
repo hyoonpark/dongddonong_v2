@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.sit.dongddonong.dto.token.TokenDto;
 import com.sit.dongddonong.dto.user.UserDto;
+import com.sit.dongddonong.dto.user.UserResponseDto;
 import com.sit.dongddonong.model.game.Game;
 import com.sit.dongddonong.model.token.RefreshToken;
 import com.sit.dongddonong.model.token.RefreshTokenRepository;
@@ -264,5 +265,14 @@ public class UserService {
         }
 
 
+    }
+
+    public UserResponseDto getUserInfo(long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. userId=" + userId));
+        return UserResponseDto.builder()
+                .profileImgUrl(user.getProfileImgUrl())
+                .nickName(user.getNickName())
+                .build();
     }
 }
