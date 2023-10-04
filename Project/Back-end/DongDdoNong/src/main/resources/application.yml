@@ -31,11 +31,11 @@ kakao:
   admin-key: 9a40de37606df307425812076bbff7cf
 
 #서버
-#server:
-#  ssl:
-#    key-store: classpath:keystore.p12
-#    key-store-password: 1234
-#    key-store-type: PKCS12
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 1234
+    key-store-type: PKCS12
 
 springdoc:
   packages-to-scan: com.sit.dongddonong.controller

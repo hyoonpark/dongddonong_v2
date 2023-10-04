@@ -75,4 +75,8 @@ public class PlayerHistoryService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    public void savePlayerHistory(PlayerHistory playerHistory){
+        playerHistoryRepository.save(playerHistory);
+    }
 }
