@@ -1,35 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import StatusItem from './StatusItem';
 import { getGameData } from '../../api/gameApi';
-
-
+import StatusAnalzeItem from './StatusAnalyzeItem';
+import StatusNotAssignedItem from './StatusNotAssignedItem';
 
 const StatusList = (props) => {
-  const { uploadedList } = props;
-  // console.log('업로드 리스트 잘 오고 잇나', uploadedList)
+  const { analyzingData, notAssignedData } = props;
 
-  const [gameDataList, setGameDataList] = useState([]);
+  const [analyzingGameDataList, setAnalyzingGameDataList] = useState([]);
+
+  const [notAssignedGameDataList, setNotAssignedGameDataList] = useState([]);
 
   useEffect(() => {
-    // console.log('게임데이터', gameDataList)
     Promise.all(
-      uploadedList.map((gameId) => getGameData(gameId))
+      analyzingData.map((gameId) => getGameData(gameId))
     )
       .then((responses) => {
         const data = responses.map((res) => res.data).filter(Boolean);
         // console.log('데이터 잘 오고 잇나!!!', data)
-        setGameDataList(data);
+        setAnalyzingGameDataList(data);
       })
       .catch((err) => {
         console.error(`실패!`, err);
       });
-  }, [uploadedList]);
+  }, [analyzingData]);
+
+  useEffect(() => {
+    Promise.all(
+      notAssignedData.map((gameId) => getGameData(gameId))
+    )
+      .then((responses) => {
+        const data = responses.map((res) => res.data).filter(Boolean);
+        // console.log('데이터 잘 오고 잇나!!!', data)
+        setNotAssignedGameDataList(data);
+      })
+      .catch((err) => {
+        console.error(`실패!`, err);
+      });
+  }, [notAssignedData]);
 
 
   return (
     <div>
-      {gameDataList.map((gameData, index) => (
-        <StatusItem key={index} data={gameData} />
+      {analyzingGameDataList.map((gameData, index) => (
+        <StatusAnalzeItem
+          key={index}
+          data={gameData}
+        />
+      ))}
+
+      {notAssignedGameDataList.map((gameData, index) => (
+        <StatusNotAssignedItem
+          key={index}
+          data={gameData}
+        />
       ))}
     </div>
   );
