@@ -72,12 +72,18 @@ const Home = () => {
     <div className="overflow-x-hidden">
       <div className="mb-10 md:mb-0 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative mt-4 left-12 header top-16 max-w-7xl md:absolute md:top-0 md:left-32">
-            <div className="w-1/3 md:w-3/5 md:-translate-y-1/4">
-              <h1 className="mb-4 text-3xl md:text-4xl font-bold">동또농</h1>
+          <div className="relative mt-4 left-12 header top-16 max-w-7xl md:absolute md:top-0 md:left-12">
+            <div className="w-5/12 md:w-3/5 md:-translate-y-1/4">
+              <h1 className="mb-2 text-3xl md:text-4xl font-bold whitespace-nowrap">
+                동또농
+              </h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                libero porro natus, omnis tenetur molestiae quibusdam.
+                인공지능 기술이 적절히 적용되었을 때, 불편했던 부분들이 개선되고
+                편리해질 수 있는 영역이 많습니다.
+              </p>
+              <p>
+                그 중 저희는 AI 영상처리기술을 이용하여 동네, 동호회에서 또
+                농구를 하고 있는 농구인들을 위해 분석 서비스를 제공합니다.
               </p>
             </div>
           </div>

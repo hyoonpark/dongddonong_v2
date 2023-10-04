@@ -44,7 +44,7 @@ const DetailGame = () => {
           {Day.getFullYear()}-{Day.getMonth() + 1}-{Day.getDate()} (
           {daysOfWeek[Day.getDay()]}) {Day.getHours()}:{Day.getMinutes()}
         </div>
-        <div className="text-white pt-10 pl-4 absolute z-10 left-0 font-sans">
+        <div className="text-white pt-10 pl-4 absolute z-10 left-0 font-sans text-xl">
           {playerHistories.length &&
             `P1 ${playerHistories[0].total}  :  ${playerHistories[1].total} P2`}
         </div>
@@ -57,7 +57,10 @@ const DetailGame = () => {
 
       <Wrapper>
         <div className="font-bold text-xl mt-5">스코어</div>
-        <ScoreBoard playerHistories={playerHistories}></ScoreBoard>
+        <ScoreBoard
+          playerHistories={playerHistories}
+          userId={user.id}
+        ></ScoreBoard>
 
         <div className="mt-6">
           <div className="font-bold text-xl">결과</div>
