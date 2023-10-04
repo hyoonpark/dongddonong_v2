@@ -1,6 +1,7 @@
 package com.sit.dongddonong.service;
 
 import com.sit.dongddonong.dto.game.GameDto;
+import com.sit.dongddonong.dto.game.GameIdDto;
 import com.sit.dongddonong.dto.game.PlayerHistoryDto;
 import com.sit.dongddonong.model.game.Game;
 import com.sit.dongddonong.model.game.GameRepository;
@@ -87,5 +88,19 @@ public class GameService {
         return games.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<GameIdDto> getStatusModalAnalyzingGame(long userId, boolean isAnalyzing) {
+        List<Game> games = gameRepository.findGamesByUserIdAndIsAnalyzingOrderByCreatedAtDesc(userId, isAnalyzing);
+        return games.stream()
+                .map(game -> GameIdDto.builder().gameId(game.getId()).build())
+                .toList();
+    }
+
+    public List<GameIdDto> getStatusModalAssignedGames(long userId, boolean isAssigned) {
+        List<Game> games = gameRepository.findAllByUserIdAndIsAssignedOrderByCreatedAtDesc(userId, isAssigned);
+        return games.stream()
+                .map(game -> GameIdDto.builder().gameId(game.getId()).build())
+                .toList();
     }
 }
