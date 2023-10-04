@@ -1,5 +1,5 @@
 # Image Download
-FROM tiangolo/uwsgi-nginx-flask:python3.8
+FROM tiangolo/uwsgi-nginx-flask:python3.9
 WORKDIR /app
 
 RUN pip install uwsgi
