@@ -5,6 +5,7 @@ WORKDIR /app
 RUN pip install uwsgi
 RUN pip install boto3
 RUN pip install torch torchvision opencv-python
+RUN pip install mediapipe
 RUN apt-get update && apt-get -y install libgl1-mesa-glx
 
 
