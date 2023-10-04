@@ -3,6 +3,18 @@ import sys
 sys.path.append("models")
 sys.path.append("utils")
 
+from utils.datasets import LoadStreams, LoadImages
+from models.experimental import attempt_load
+from utils.general import check_imshow, non_max_suppression, \
+    scale_coords, strip_optimizer, set_logging, increment_path
+from utils.plots import plot_one_box
+from utils.torch_utils import select_device, time_synchronized, TracedModel
+
+from pose.pose_estimation import pose
+
+from deep_sort_pytorch.utils.parser import get_config
+from deep_sort_pytorch.deep_sort import DeepSort
+
 import argparse
 import time
 from pathlib import Path
@@ -18,19 +30,6 @@ from PIL import Image
 import itertools
 
 
-
-from utils.datasets import LoadStreams, LoadImages
-from models.experimental import attempt_load
-from utils.general import check_imshow, non_max_suppression, \
-    scale_coords, strip_optimizer, set_logging, increment_path
-from utils.plots import plot_one_box
-from utils.torch_utils import select_device, time_synchronized, TracedModel
-
-from pose.pose_estimation import pose
-
-from deep_sort_pytorch.utils.parser import get_config
-from deep_sort_pytorch.deep_sort import DeepSort
-
 import numpy as np
 palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
 data_deque = {}
@@ -39,10 +38,10 @@ data_deque = {}
 class Player:
     def __init__(self, id):
         self.id = id
-        self.st2=0
-        self.st3=0
-        self.sg2=0
-        self.sg3=0
+        self.st2 = 0
+        self.st3 = 0
+        self.sg2 = 0
+        self.sg3 = 0
         self.ballTime = 0
         self.pose = 0
         self.goalTime = []
@@ -102,7 +101,7 @@ def detect(video, ID):
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)
 
     cfg_deep = get_config()
-    cfg_deep.merge_from_file("deep_sort_pytorch\configs\deep_sort.yaml")
+    cfg_deep.merge_from_file("deep_sort_pytorch/configs/deep_sort.yaml")
     deepsort = DeepSort(cfg_deep.DEEPSORT.REID_CKPT,
                         max_dist=cfg_deep.DEEPSORT.MAX_DIST, min_confidence=cfg_deep.DEEPSORT.MIN_CONFIDENCE,
                         nms_max_overlap=cfg_deep.DEEPSORT.NMS_MAX_OVERLAP, max_iou_distance=cfg_deep.DEEPSORT.MAX_IOU_DISTANCE,
