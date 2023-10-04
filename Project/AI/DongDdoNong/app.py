@@ -5,7 +5,7 @@ sys.path.append(NOW_DIR + '/deepsort')
 
 
 from flask import Flask, request, jsonify, send_file, redirect
-# , requests)
+import requests
 
 import boto3
 # import opencv
@@ -40,6 +40,7 @@ def test():
 
 @app.route('/ai/analysis/{ID}', methods=['POST'])
 def analyze_video(ID):
+    spring_url = f'https://j9e103.p.ssafy.io:8589/game'
     try:
         # Lambda 함수로부터 전달된 동영상 데이터 받기
         video_data = request.data
@@ -51,38 +52,20 @@ def analyze_video(ID):
 
         # 분석 결과 반환
         # highlight = highlight_video(result, video_data)
+        try:
+            # Spring Boot 서버로 POST 요청을 보냅니다.
+            response = requests.post(spring_url, jsonify({'result': result}))
 
+            # 응답 확인
+            if response.status_code == 200:
+                result = response.json()
+                print("Analysis Result:", result['result'])
+            else:
+                print("Error:", response.status_code, response.text)
+
+        except Exception as e:
+            print("Error:", str(e))
 
         return jsonify({'result': result}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-# def highlight_video(result, video_data):
-#     for _ in range(len(result["playerHistories"])):
-#         # 각 슛 장면 주변 2초씩 가져오기
-#         highlight_duration = 2  # 2초
-#         for frame in result["playerHistories"].get("goalTime"):
-#             start_time = max(frame - highlight_duration, 0)
-#             end_time = frame + highlight_duration
-#             output_file = f'highlight_{frame}.mp4'
-#
-#             # 동영상의 해당 부분 추출
-#             ffmpeg_extract_subclip(video_data, start_time, end_time, targetname=output_file)
-#
-#             # 추출된 하이라이트 동영상에 배경 음악 추가
-#             highlight_clip = VideoFileClip(output_file)
-#             bgm_clip = AudioFileClip(bgm_path)
-#
-#             # 무음 오디오 클립 생성
-#             silence_clip = AudioFileClip("", fps=44100, duration=highlight_clip.duration)
-#
-#             # 하이라이트 동영상에 배경 음악을 무음 오디오 클립과 함께 합치기
-#             final_clip = highlight_clip.set_audio(silence_clip).set_audio(bgm_clip)
-#
-#             # 하이라이트 동영상 저장
-#             final_clip.write_videofile(output_file)
-#
-#         clips = [VideoFileClip(f'highlight_{frame}.mp4') for frame in shot_frames]
-#         final_video = concatenate_videoclips(clips)
-#         final_video.write_videofile('highlight_summary.mp4')
