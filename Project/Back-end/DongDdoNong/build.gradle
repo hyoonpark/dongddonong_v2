@@ -50,6 +50,9 @@ dependencies {
 
 	// 동영상 썸네일
 	implementation 'org.jcodec:jcodec-javase:0.2.5'
+
+	// json
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 tasks.named('test') {

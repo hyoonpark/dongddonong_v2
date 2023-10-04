@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+
+import { useUserContext } from "../../contexts/userContext";
 import axios from "../../api/axiosConfig";
 import Games from "./Games";
 import Week from "../../components/Game/Week";
@@ -6,10 +8,7 @@ import Footer from "../../components/Footer";
 import Calendars from "../../components/Game/Calendars";
 
 const GamePage = () => {
-  const user = {
-    id: 3017361691,
-  };
-
+  const { user } = useUserContext();
   const [data, setData] = useState([]);
   const [dates, setDates] = useState({
     selectedDate: new Date(),
@@ -26,6 +25,7 @@ const GamePage = () => {
           params: { isAssigned: true },
         });
         setData(resp.data.data);
+
         const arr = resp.data.data.map((e) => new Date(e.createdAt));
         setCalendarData(arr);
         setDates((prevState) => ({

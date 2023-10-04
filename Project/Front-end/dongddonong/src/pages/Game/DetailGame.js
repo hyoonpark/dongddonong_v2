@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import { useUserContext } from "../../contexts/userContext";
 import axios from "../../api/axiosConfig";
 import Wrapper from "../../components/Wrapper";
 import court from "../../assets/court.png";
@@ -9,6 +10,7 @@ import ScoreBoard from "../../components/Game/ScoreBoard";
 import Classification from "../../components/Game/Classification";
 
 const DetailGame = () => {
+  const { user } = useUserContext();
   const param = useParams();
   const [data, setData] = useState({});
   const Day = new Date(data.createdAt);
@@ -32,6 +34,7 @@ const DetailGame = () => {
       {classificationIsOpen && (
         <Classification
           playerHistories={playerHistories}
+          userId={user.id}
           onClose={closeClassificationHandler}
         />
       )}

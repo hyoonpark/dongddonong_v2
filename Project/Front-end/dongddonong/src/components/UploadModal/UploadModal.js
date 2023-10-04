@@ -24,6 +24,8 @@ const ModalOverlay = (props) => {
     const [error, setError] = useState(false);
     const { user } = useUserContext();
     const [userId, setUserId] = useState(user.id)
+    const [gameId, setGameId] = useState([])
+
 
     useEffect(() => {
         console.log(files); // 상태가 업데이트되면 실행됨
@@ -42,7 +44,7 @@ const ModalOverlay = (props) => {
             // console.log(e.target.files);
             setVideoDurations([]); // 비디오 길이를 저장하는 배열 초기화
             setGameTypes([]); // 업로드 데이터 배열 초기화
-
+            
 
             [...e.target.files].forEach((file, index) => {
                 const reader = new FileReader();
@@ -132,6 +134,10 @@ const ModalOverlay = (props) => {
         setGameTypes(updatedGameTypes);
     };
 
+    useEffect(() => {
+        localStorage.setItem('gameId',JSON.stringify(gameId));
+        console.log(localStorage.getItem('gameId'))
+    },[gameId])
     const handleUpload = async () => {
         if (files) {
             setStatus("uploading");
@@ -172,8 +178,10 @@ const ModalOverlay = (props) => {
                         body: formData,
                     });
 
-                    const data = await result.json();
-                    console.log(data);
+                    const res = await result.json();
+
+                    console.log(res);
+                    setGameId((prev)=>[...prev, res['data']])
                     setStatus("success");
                     setFiles(null)
                 } catch (error) {
