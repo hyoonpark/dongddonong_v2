@@ -38,7 +38,7 @@ def test():
     return "test"
 
 
-@app.route('ai/analysis/<ID>', method=['POST'])
+@app.route('/ai/analysis/{ID}', methods=['POST'])
 def analyze_video(ID):
     try:
         # Lambda 함수로부터 전달된 동영상 데이터 받기
