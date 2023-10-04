@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN pip install uwsgi
 RUN pip install boto3
-RUN pip install torch+cu117
+RUN pip install torch
 
 
 # Copy files
