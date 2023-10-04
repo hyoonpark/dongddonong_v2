@@ -25,6 +25,6 @@ public class UploadController {
         catch (Exception e){
             return ApiResponse.fail(500, e.getMessage());
         }
-        return ApiResponse.ok("gameId : " + gameId);
+        return ApiResponse.ok(gameId);
     }
 }
