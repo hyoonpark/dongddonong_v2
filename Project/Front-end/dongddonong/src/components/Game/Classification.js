@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+
+import { UserMapping } from "../../api/userMapping";
+import Modal from "../Modal/Modal";
 import "./Classification.css";
 
-import Modal from "../Modal/Modal";
-
-const Classification = ({ playerHistories, onClose }) => {
+const Classification = ({ playerHistories, userId, onClose }) => {
   const frameRef = useRef();
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [initialized, setInitialized] = useState(false);
+  const [completeClassify, setCompleteClassify] = useState(true);
 
   let current =
     frameRef.current && frameRef.current.querySelector(".card:last-child");
@@ -16,7 +18,10 @@ const Classification = ({ playerHistories, onClose }) => {
     moveY = 0;
 
   playerHistories.forEach((e) => {
-    frameRef.current && appendCard(e);
+    if (!e.id) {
+      setCompleteClassify(false);
+      frameRef.current && appendCard(e);
+    }
   });
 
   useEffect(() => {
@@ -27,7 +32,9 @@ const Classification = ({ playerHistories, onClose }) => {
     if (!initialized && playerHistories.length > 0) {
       setInitialized(true);
     }
-  }, [initialized, current]);
+
+    if (completeClassify) onClose();
+  }, [initialized, current, completeClassify]);
 
   function appendCard(data) {
     if (
@@ -113,12 +120,19 @@ const Classification = ({ playerHistories, onClose }) => {
     const flyY = (moveY / moveX) * flyX;
     setTransform(flyX, flyY, (flyX / innerWidth) * 50, innerWidth);
 
+    if (flyX < 0) UserMapping(playerHistories.id, userId);
+
     const prev = current;
     const next = current.previousElementSibling;
 
-    if (next) initCard(next);
-    current = next;
-    setTimeout(() => frameRef.current.removeChild(prev), innerWidth);
+    if (next) {
+      initCard(next);
+      current = next;
+      setTimeout(() => frameRef.current.removeChild(prev), 100);
+    } else {
+      onClose();
+      return;
+    }
   }
 
   function cancel() {
@@ -128,9 +142,9 @@ const Classification = ({ playerHistories, onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <div class="absolute right-2" onClick={onClose}>
+      {/* <div class="absolute right-2" onClick={onClose}>
         ✖
-      </div>
+      </div> */}
       <div className="frame" ref={frameRef}></div>
     </Modal>
   );
