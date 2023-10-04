@@ -24,6 +24,8 @@ const ModalOverlay = (props) => {
     const [error, setError] = useState(false);
     const { user } = useUserContext();
     const [userId, setUserId] = useState(user.id)
+    const [gameId, setGameId] = useState([])
+
 
     useEffect(() => {
         console.log(files); // 상태가 업데이트되면 실행됨
@@ -42,7 +44,7 @@ const ModalOverlay = (props) => {
             // console.log(e.target.files);
             setVideoDurations([]); // 비디오 길이를 저장하는 배열 초기화
             setGameTypes([]); // 업로드 데이터 배열 초기화
-
+            
 
             [...e.target.files].forEach((file, index) => {
                 const reader = new FileReader();
@@ -121,6 +123,14 @@ const ModalOverlay = (props) => {
         return formattedDate;
       }
 
+      function formatTime(second) {
+        const seconds = Math.round(second)
+        // const hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);
+        const min = parseInt((seconds%3600)/60) < 10 ? '0'+ parseInt((seconds%3600)/60) : parseInt((seconds%3600)/60);
+        const sec = seconds % 60 < 10 ? '0'+seconds % 60 : seconds % 60;
+        const time = `${min}:${sec}`
+        return time
+      }
     const handleButtonChange = (index, selectedValue) => {
         // 해당 버튼의 정보와 파일 제목을 객체로 묶어 업로드 데이터 배열에 추가
         const updatedGameTypes = [...gameTypes];
@@ -132,6 +142,10 @@ const ModalOverlay = (props) => {
         setGameTypes(updatedGameTypes);
     };
 
+    useEffect(() => {
+        localStorage.setItem('gameId',JSON.stringify(gameId));
+        console.log(localStorage.getItem('gameId'))
+    },[gameId])
     const handleUpload = async () => {
         if (files) {
             setStatus("uploading");
@@ -172,8 +186,10 @@ const ModalOverlay = (props) => {
                         body: formData,
                     });
 
-                    const data = await result.json();
-                    console.log(data);
+                    const res = await result.json();
+
+                    console.log(res);
+                    setGameId((prev)=>[...prev, res['data']])
                     setStatus("success");
                     setFiles(null)
                 } catch (error) {
@@ -197,7 +213,7 @@ const ModalOverlay = (props) => {
             <div>최대 영상 길이 : 15분</div>
             <div className="h-[260px] grid grid-rows-9">
                 <div className="mt-4 text-center row-start-1">
-                    <button onClick={() => selectFile.current.click()} className=" sm:w-72 border-2 w-48 text-primary rounded-lg border-primary ">업로드할 영상 선택하기</button>
+                    <button onClick={() => selectFile.current.click()} className=" sm:w-72 border-2 w-48 hover:text-white hover:bg-primary text-primary rounded-lg border-primary ">업로드할 영상 선택하기</button>
                     <input className="hidden mt-5" ref={selectFile} id="file" accept="video/*" type="file" multiple onChange={handleFileChange} />
                 </div>
                 <div className="mt-4 row-start-2 row-end-6 grid grid-cols-6 overflow-auto">
@@ -206,17 +222,17 @@ const ModalOverlay = (props) => {
                             <div className="h-30 col-start-1 sm:col-start-2 col-end-6 mt-2 gap-4" key={file.name}>
                                 <ul>
                                     <div className="flex justify-between">
-                                        <div>{file.name}</div><div className="">{videoDurations[index]}초</div>
+                                        <div>{file.name}</div><div className="">{formatTime(videoDurations[index])}</div>
                                     </div>
                                     {file.type.startsWith("video/") && (
                                         <div className="flex justify-between">
-                                            {videoDurations[index] < 16 &&
+                                            {videoDurations[index] < 900 &&
                                                 <MultiButton
                                                     options={buttonOptions}
                                                     selected={gameTypes[index]?.buttonInfo || ""}
                                                     onChange={(selectedValue) => handleButtonChange(index, selectedValue)}
                                                 />}
-                                            {videoDurations[index] > 16 && <div className=" text-red-600 font-bold pointer-events-none" >영상길이가 너무 깁니다.</div>}
+                                            {videoDurations[index] > 900 && <div className=" text-red-600 font-bold pointer-events-none" >영상길이가 너무 깁니다.</div>}
 
                                             <img className=" ml-2 cursor-pointer w-5 h-5" src={trashbin} onClick={() => handleDeleteVideo(index)} />
                                         </div>
@@ -228,13 +244,13 @@ const ModalOverlay = (props) => {
                 
                 {files && files.length > 0 && ( // files.length > 0을 추가하니까 사라지네 왜지?
                     <div className=" text-right row-start-7">
-                        {videoDurations.some(duration => duration > 16) ? (
+                        {videoDurations.some(duration => duration > 900) ? (
                             <div className="text-red-600 font-bold pointer-events-none">
                                 업로드 못하는 영상을 삭제해주세요
                             </div>
                         ) : (
-                            <button onClick={handleUpload} className="mr-6 mt-4 submit bg-primary text-white w-32 rounded-lg">
-                                Upload {files.length > 1 ? "files" : "a file"}
+                            <button onClick={handleUpload} className={`${files.length === gameTypes.length ? null : 'pointer-events-none'} mr-6 mt-4 submit bg-primary text-white  w-32 rounded-lg`}>
+                                {files.length === gameTypes.length ? '업로드' : '모드 선택필요'}
                             </button>
                         )}
                     </div>

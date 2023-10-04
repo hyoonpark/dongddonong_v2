@@ -16,6 +16,7 @@ public class UserDto {
 //    private long playTime;
     private String email;
     private String accessToken;
+    private String kakaoAccessToken;
 
 //    public static UserDto userToDto(User user){
 //        return UserDto.builder()
