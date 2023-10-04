@@ -4,6 +4,7 @@ WORKDIR /app
 
 RUN pip install uwsgi
 RUN pip install boto3
+RUN pip install torch torchvision
 
 
 # Copy files
