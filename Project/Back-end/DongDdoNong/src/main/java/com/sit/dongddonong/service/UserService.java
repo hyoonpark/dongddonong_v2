@@ -143,6 +143,7 @@ public class UserService {
             userDto.setNickName(profile.getAsJsonObject().get("nickname").getAsString());
             userDto.setProfileImgUrl(profile.getAsJsonObject().get("profile_image_url").getAsString());
             userDto.setType("user");
+            userDto.setKakaoAccessToken(token);
 
 
             log.info(userDto.toString());

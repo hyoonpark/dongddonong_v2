@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class GameController {
 
     @Operation(summary = "영상 분석 데이터(분석 데이터 넣기)", description = "영상 분석 데이터를 우리 서버에 넣습니다.")
     @PatchMapping
-    public ApiResponse<String> patchGame(@RequestBody GameDto gameDto) {
+    public ApiResponse<String> patchGame(@RequestBody GameDto gameDto) throws IOException {
         gameService.patchGame(gameDto);
         return ApiResponse.ok("성공");
     }

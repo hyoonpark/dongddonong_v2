@@ -12,18 +12,20 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @Component
 public class ThumbnailExtractor {
 
     private static final String EXTENSION = "png";
-    private static final String DEFAULT_IMAGE_PATH = "src/main/resources/static/images/default-thumbnail.png";
+
+//    private static final String DEFAULT_IMAGE_PATH = "src/main/resources/static/images/default-thumbnail.png";
 
     public static File extract(File source) throws IOException {
         // 썸네일 파일 생성
-        File thumbnail = new File(source.getParent(), source.getName().split("\\.")[0] + "." + EXTENSION);
-
+//        File thumbnail = new File(source.getParent(), source.getName().split("\\.")[0] + "." + EXTENSION);
+        File thumbnail = new File(UUID.randomUUID() + "." + EXTENSION);
         try {
             if (!source.exists()) {
                 System.out.println("파일이 존재하지 않습니다.");
@@ -42,7 +44,9 @@ public class ThumbnailExtractor {
 
         } catch (Exception e) {
             // 실패했을 경우에 기본 이미지를 사용
-            File defaultImage = new File(DEFAULT_IMAGE_PATH);
+
+            ClassLoader classLoader = ThumbnailExtractor.class.getClassLoader();
+            File defaultImage = new File(classLoader.getResource("static/images/default-thumbnail.png").getFile());
 
             try {
                 FileUtil.copyFile(defaultImage, thumbnail);
