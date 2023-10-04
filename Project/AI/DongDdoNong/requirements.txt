@@ -74,7 +74,6 @@ stack-data==0.6.3
 sympy==1.12
 tensorboard==2.14.0
 tensorboard-data-server==0.7.1
-torchvision==0.15.0
 tqdm==4.66.1
 traitlets==5.11.2
 typing_extensions==4.7.1
