@@ -1,13 +1,20 @@
 import os
 
-from flask import Flask, request, jsonify, send_file, redirect
+from flask import Flask, request, jsonify, send_file, redirect, requests
+import joblib
 
 import boto3
-import uuid
-from werkzeug.utils import secure_filename  # 파일 가져오기
+import opencv
+from scenedetect import open_video, SceneManager
+from scenedetect.detectors import ContentDetector
+from scenedetect.scene_manager import save_images
+from scenedetect.video_splitter import split_video_ffmpeg
+from moviepy.editor import VideoFileClip, concatenate_videoclips, vfx, AudioFileClip, afx
+from deepsort import basketball
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+from moviepy.editor import VideoFileClip, AudioFileClip
 
-
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 app = Flask(__name__)
 
 
@@ -21,32 +28,56 @@ s3 = boto3.client(
 )
 
 
-# @app.before_request
-# def before_request():
-#     if request.url.startswith('http://'):
-#         url = request.url.replace('http://', 'https://', 1)
-#         code = 301
-#         return redirect(url, code=code)
-
-
-@app.route('/')
-def index():
-    return "Hello World!"
-
 @app.route('/ai')
 def test():
     return "test"
 
-@app.route('/ai/upload', methods=['POST'])
-def upload_file():
-    file = request.files['file']
-    if file:
-        folder = 'video/'
-        filename = secure_filename(file.filename)
-        unique_filename = str(uuid.uuid4()) + os.path.splitext(filename)[1]
-        key = os.path.join(folder, unique_filename)
-        # s3.upload_fileobj(file, app.config['S3_BUCKET_NAME'], filename)
-        s3.upload_fileobj(file, 'dongddonong', key)
-        return 'File uploaded successfully', 200
 
-    return 'No file selected', 404
+@app.route('ai/analysis/{ID}', method=['POST'])
+def analyze_video(ID):
+    try:
+        # Lambda 함수로부터 전달된 동영상 데이터 받기
+        video_data = request.data
+        result = basketball.detect(save_img=False, video_data, ID)
+
+        # 동영상 데이터를 메모리에서 읽기
+        # nparr = np.fromstring(video_data, np.uint8)
+        # video_frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+        # 분석 결과 반환
+        # highlight = highlight_video(result, video_data)
+
+
+        return jsonify({'result': result}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+def highlight_video(result, video_data):
+    for _ in range(len(result["playerHistories"])):
+        # 각 슛 장면 주변 2초씩 가져오기
+        highlight_duration = 2  # 2초
+        for frame in result["playerHistories"].get("goalTime"):
+            start_time = max(frame - highlight_duration, 0)
+            end_time = frame + highlight_duration
+            output_file = f'highlight_{frame}.mp4'
+
+            # 동영상의 해당 부분 추출
+            ffmpeg_extract_subclip(video_data, start_time, end_time, targetname=output_file)
+
+            # 추출된 하이라이트 동영상에 배경 음악 추가
+            highlight_clip = VideoFileClip(output_file)
+            bgm_clip = AudioFileClip(bgm_path)
+
+            # 무음 오디오 클립 생성
+            silence_clip = AudioFileClip("", fps=44100, duration=highlight_clip.duration)
+
+            # 하이라이트 동영상에 배경 음악을 무음 오디오 클립과 함께 합치기
+            final_clip = highlight_clip.set_audio(silence_clip).set_audio(bgm_clip)
+
+            # 하이라이트 동영상 저장
+            final_clip.write_videofile(output_file)
+
+        clips = [VideoFileClip(f'highlight_{frame}.mp4') for frame in shot_frames]
+        final_video = concatenate_videoclips(clips)
+        final_video.write_videofile('highlight_summary.mp4')
