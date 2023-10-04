@@ -6,7 +6,7 @@ COPY ./requirements.txt /app/requirements.txt
 
 RUN apt-get update
 RUN apt-get -y install libgl1-mesa-glx
-RUN pip install --upgrade pip && pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir --upgrade -r /app/requirements.txt
 RUN pip install uwsgi
 RUN pip install boto3
 RUN pip install torch torchvision opencv-python
