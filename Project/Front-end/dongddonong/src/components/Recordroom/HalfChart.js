@@ -7,7 +7,7 @@ const HalfChart = (props) => {
   const data = {
     datasets: [
       {
-        data: [props.PM, props.PA],
+        data: [props.PM, props.PA-props.PM],
         backgroundColor: ["gray", "#e6e6e6"],
         display: true,
         borderColor: "white",
