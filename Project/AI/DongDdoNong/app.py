@@ -7,7 +7,7 @@ import boto3
 # from scenedetect.detectors import ContentDetector
 # from scenedetect.scene_manager import save_images
 # from scenedetect.video_splitter import split_video_ffmpeg
-from moviepy.editor import VideoFileClip, concatenate_videoclips, vfx, AudioFileClip, afx
+# from moviepy.editor import VideoFileClip, concatenate_videoclips, vfx, AudioFileClip, afx
 from deepsort import basketball
 # from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 # from moviepy.editor import VideoFileClip, AudioFileClip
