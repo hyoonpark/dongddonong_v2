@@ -4,13 +4,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.sit.dongddonong.dto.token.TokenDto;
 import com.sit.dongddonong.dto.user.UserDto;
+import com.sit.dongddonong.model.game.Game;
 import com.sit.dongddonong.model.token.RefreshToken;
-import com.sit.dongddonong.model.user.User;
 import com.sit.dongddonong.model.token.RefreshTokenRepository;
+import com.sit.dongddonong.model.user.User;
 import com.sit.dongddonong.model.user.UserRepository;
 import com.sit.dongddonong.util.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -206,6 +208,61 @@ public class UserService {
             log.info(e.getMessage());
             throw e;
         }
+
+    }
+
+    public void kakaoAlert(Game game) throws IOException {
+        User user = userRepository.findById(game.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. userId=" + game.getUserId()));
+
+        String accessToken = user.getKakaoAccessToken();
+        String reqURL = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+        String web_url = "https://j9e103.p.ssafy.io/game/" + game.getId();
+
+        try {
+
+
+            JSONObject linkObj = new JSONObject();
+            linkObj.put("web_url", web_url);
+            linkObj.put("mobile_web_url", web_url);
+
+            JSONObject templateObj = new JSONObject();
+            templateObj.put("object_type", "text");
+            templateObj.put("text", "분석이 완료 되었습니다.");
+            templateObj.put("link", linkObj);
+            templateObj.put("button_title", "바로 확인");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + accessToken);
+
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("template_object", templateObj.toString());
+
+            log.info(templateObj.toString());
+            log.info(params.toString());
+
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+
+            RestTemplate rt = new RestTemplate();
+
+            ResponseEntity<String> response = rt.exchange(
+                    reqURL,
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                log.info("메시지를 성공적으로 보냈습니다.");
+            } else {
+                log.error("메시지를 성공적으로 보내지 못했습니다. 응답 코드: " + response.getStatusCode());
+            }
+        }
+        catch (Exception e){
+            log.error("카카오 메시지를 보내는 도중 에러가 있습니다.");
+            throw e;
+        }
+
 
     }
 }

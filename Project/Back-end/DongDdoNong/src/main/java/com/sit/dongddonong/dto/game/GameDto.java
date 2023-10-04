@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class GameDto {
     private Long id;
     @Schema(hidden = true)
