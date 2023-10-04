@@ -1,7 +1,10 @@
 import os
 import sys
-sys.path.append("models")
-sys.path.append("utils")
+NOW_DIR = os.getcwd()
+sys.path.append(NOW_DIR + '\\utils')
+sys.path.append(NOW_DIR + '\\models')
+sys.path.append(NOW_DIR + '\\pose')
+sys.path.append(NOW_DIR + '\\deep_sort_pytorch')
 
 from utils.datasets import LoadStreams, LoadImages
 from models.experimental import attempt_load
