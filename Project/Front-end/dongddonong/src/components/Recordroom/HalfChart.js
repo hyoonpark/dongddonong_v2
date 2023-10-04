@@ -3,8 +3,6 @@ import { Chart, ArcElement } from "chart.js";
 
 Chart.register(ArcElement);
 
-
-
 const HalfChart = (props) => {
   const data = {
     datasets: [
@@ -12,7 +10,7 @@ const HalfChart = (props) => {
         data: [props.PM, props.PA],
         backgroundColor: ["gray", "#e6e6e6"],
         display: true,
-        borderColor: "#D1D6DC",
+        borderColor: "white",
       },
     ],
   };

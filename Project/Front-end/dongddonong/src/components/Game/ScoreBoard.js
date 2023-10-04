@@ -1,4 +1,4 @@
-const ScoreBoard = ({ playerHistories }) => {
+const ScoreBoard = ({ playerHistories, userId }) => {
   return (
     <div className="flex flex-col gap-2 mt-2">
       <div className="flex text-center border-b">
@@ -15,7 +15,14 @@ const ScoreBoard = ({ playerHistories }) => {
       {playerHistories.map((e, i) => {
         return (
           <div className="flex h-32 items-center justify-between relative">
-            <div className="flex w-2/5 items-center justify-center">
+            <div className="flex w-2/5 items-center justify-center relative">
+              {e.userId === +userId ? (
+                <div className="absolute top-0 right-[10%] bg-black text-white rounded-full p-1 px-2 rotate-6">
+                  내 기록
+                </div>
+              ) : (
+                ""
+              )}
               <div>P{i + 1}</div>
               <img
                 className="h-28 max-w-[100px] rounded-full ml-4"
