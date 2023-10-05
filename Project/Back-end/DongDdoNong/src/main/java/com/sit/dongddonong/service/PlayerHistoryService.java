@@ -65,7 +65,7 @@ public class PlayerHistoryService {
 
     public List<PlayerHistoryDto> getPlayerHistoriesByCondition(long userId, String mode, String startDate, String endDate) throws ParseException {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Date start = startDate != null ? format.parse(startDate) : null;
         Date end = endDate != null ? format.parse(endDate) : null;

@@ -104,4 +104,17 @@ public class GameService {
                 .gameIdList(games.stream().map(Game::getId).collect(Collectors.toList()))
                 .build();
     }
+
+    public List<GameDto> getUserAssignedGames(long userId) {
+        List<Game> games = gameRepository.findAllByIsAnalyzingFalse();
+
+        List<Game> filteredGames = games.stream()
+                .filter(game -> game.getPlayerHistories().stream()
+                        .anyMatch(history -> history.getUser() != null && history.getUser().getId().equals(userId)))
+                .toList();
+
+        return filteredGames.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 }

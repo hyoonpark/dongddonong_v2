@@ -109,9 +109,9 @@ public class GameController {
         return ApiResponse.ok(gameService.getStatusModalAssignedGames(userId, isAssigned));
     }
 
-//    @Operation(summary = "해당 유저가 할당", description = "isAssigned 여부에 따라 경기를 가져온다. ")
-//    @GetMapping("/status-modal/assign/{userId}")
-//    public ApiResponse<GameIdDto> getStatusModalAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
-//        return ApiResponse.ok(gameService.getStatusModalAssignedGames(userId, isAssigned));
-//    }
+    @Operation(summary = "해당 유저가 할당되어 있는 경기 가져오기", description = "해당 유저의 할당이 완료된 경기를 가져온다.")
+    @GetMapping("/assign/user/{userId}")
+    public ApiResponse<List<GameDto>> getUserAssignedGames(@PathVariable("userId") long userId) {
+        return ApiResponse.ok(gameService.getUserAssignedGames(userId));
+    }
 }
