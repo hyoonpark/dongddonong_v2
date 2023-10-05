@@ -96,6 +96,7 @@ const DetailGame = () => {
           <div className="flex overflow-x-auto gap-4 mb-4">
             {playerHistories.length &&
               playerHistories.map((e) => {
+                console.log("하이라이트", e);
                 <HighLight videoURL={e.highlightUrl}></HighLight>;
               })}
           </div>

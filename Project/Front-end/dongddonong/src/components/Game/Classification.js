@@ -9,7 +9,6 @@ const Classification = ({ playerHistories, userId, onClose }) => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [initialized, setInitialized] = useState(false);
   const [completeClassify, setCompleteClassify] = useState(true);
-  const arr = [];
 
   let current =
     frameRef.current && frameRef.current.querySelector(".card:last-child");
@@ -20,7 +19,6 @@ const Classification = ({ playerHistories, userId, onClose }) => {
 
   useEffect(() => {
     for (const e of playerHistories) {
-      arr.push(playerHistories.indexOf(e));
       frameRef.current && appendCard(e);
     }
 
@@ -74,9 +72,17 @@ const Classification = ({ playerHistories, userId, onClose }) => {
       <div class="info">
         <span>${data.total}</span>
         <span>${data.twoPts}</span>
-        <span>${parseInt((data.twoPts / data.tryTwoPts) * 100)}%</span>
+        <span>${
+          parseInt((data.twoPts / data.tryTwoPts) * 100)
+            ? parseInt((data.twoPts / data.tryTwoPts) * 100)
+            : "-"
+        }%</span>
         <span>${data.threePts}</span>
-        <span>${parseInt((data.threePts / data.tryThreePts) * 100)}%</span>
+        <span>${
+          parseInt((data.threePts / data.tryThreePts) * 100)
+            ? parseInt((data.threePts / data.tryThreePts) * 100)
+            : "-"
+        }%</span>
       </div>
     </div>
   `;
