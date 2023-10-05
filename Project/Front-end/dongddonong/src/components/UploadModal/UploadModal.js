@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useUserContext } from "../../contexts/userContext";
-import { gameUpload } from "../../api/gameUpload";
+// import { gameUpload } from "../../api/gameUpload";
 
 // import thumbnail from '../../assets/thumbnail.png';
 import GuideCarousel from "./GuideCarousel";
 import MultiButton from './MultiButton';
-import axios from "axios";
+// import axios from "axios";
 import trashbin from "../../assets/trashbin.png"
 import classes from './ErrorModal.module.css'
 import ReactDOM from 'react-dom';
@@ -44,7 +44,7 @@ const ModalOverlay = (props) => {
             // console.log(e.target.files);
             setVideoDurations([]); // 비디오 길이를 저장하는 배열 초기화
             setGameTypes([]); // 업로드 데이터 배열 초기화
-            
+
 
             [...e.target.files].forEach((file, index) => {
                 const reader = new FileReader();
@@ -111,17 +111,17 @@ const ModalOverlay = (props) => {
     }
     function formatDate(inputDate) {
         const date = new Date(inputDate);
-      
+
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 만듭니다.
         const day = String(date.getDate()).padStart(2, '0');
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
         const seconds = String(date.getSeconds()).padStart(2, '0');
-      
+
         const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         return formattedDate;
-      }
+    }
 
       function formatTime(second) {
         const seconds = Math.round(second)
@@ -143,33 +143,35 @@ const ModalOverlay = (props) => {
     };
 
     useEffect(() => {
-        localStorage.setItem('gameId',JSON.stringify(gameId));
-        console.log(localStorage.getItem('gameId'))
-    },[gameId])
+        // localStorage.setItem('gameId', JSON.stringify(gameId));
+        // 배열로 저장하지 않고 하나의 문자열로 저장한다. 
+        localStorage.setItem('gameId', gameId);
+        // console.log(localStorage.getItem('gameId'))
+    }, [gameId])
     const handleUpload = async () => {
         if (files) {
             setStatus("uploading");
 
             for (let i = 0; i < files.length; i++) {
                 const formData = new FormData();
-                
+
 
                 files[i]["mode"] = gameModeToNumber(gameTypes[i]['buttonInfo'])
                 formData.append('file', files[i]);
-                formData.append('gameDate',formatDate(files[i]['lastModifiedDate']))
-                formData.append('userId',userId)
+                formData.append('gameDate', formatDate(files[i]['lastModifiedDate']))
+                formData.append('userId', userId)
                 formData.append('mode', files[i]["mode"])
                 formData.append('fileName', files[i].name)
-                formData.append('videoLength',videoDurations[i])
+                formData.append('videoLength', videoDurations[i])
                 console.log(formData.get('mode'));
                 console.log(formData.get('userId'));
                 console.log(formData.get('gameDate'));
-                console.log(formatDate(files[i]['lastModifiedDate']),userId,files[i]["mode"],files[i].name,videoDurations[i])
-                // console.log(gameModeToNumber(gameTypes[i]));
-                // console.log(gameModeToNumber(gameTypes[i]['buttonInfo']))
-                // console.log(files[i])
-                // console.log(formatDate(files[i]['lastModifiedDate']))
-                // console.log(files[i]['lastModifiedDate'])
+                console.log(formatDate(files[i]['lastModifiedDate']), userId, files[i]["mode"], files[i].name, videoDurations[i])
+                    // console.log(gameModeToNumber(gameTypes[i]));
+                    // console.log(gameModeToNumber(gameTypes[i]['buttonInfo']))
+                    // console.log(files[i])
+                    // console.log(formatDate(files[i]['lastModifiedDate']))
+                    // console.log(files[i]['lastModifiedDate'])
                     ;
                 // console.log(formData.get("files"));
                 // console.log(formData);
@@ -181,7 +183,7 @@ const ModalOverlay = (props) => {
                         method: "POST",
                         headers: {
                             // 'Content-Type': 'multipart/form-data',
-                        'Authorization': 'Bearer ' + accessToken
+                            'Authorization': 'Bearer ' + accessToken
                         },
                         body: formData,
                     });
@@ -189,7 +191,7 @@ const ModalOverlay = (props) => {
                     const res = await result.json();
 
                     console.log(res);
-                    setGameId((prev)=>[...prev, res['data']])
+                    setGameId((prev) => [...prev, res['data']])
                     setStatus("success");
                     setFiles(null)
                 } catch (error) {
@@ -241,7 +243,7 @@ const ModalOverlay = (props) => {
                             </div>
                         ))}
                 </div>
-                
+
                 {files && files.length > 0 && ( // files.length > 0을 추가하니까 사라지네 왜지?
                     <div className=" text-right row-start-7">
                         {videoDurations.some(duration => duration > 900) ? (
