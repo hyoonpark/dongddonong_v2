@@ -7,15 +7,17 @@ const Toast = (props) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(true);
+    if (props.toastOpen) {
+      setVisible(true);
 
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, 2000);
+      const timer = setTimeout(() => {
+        setVisible(false);
+      }, 2000);
 
-    return () => {
-      clearTimeout(timer);
-    };
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   }, [props.toastOpen]);
 
   return createPortal(

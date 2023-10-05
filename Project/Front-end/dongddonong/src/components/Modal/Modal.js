@@ -9,7 +9,7 @@ const Backdrop = ({ onClose }) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div className="modal fixed w-3/5 max-w-[400px] inset-1/2 -translate-x-1/2 -translate-y-1/2 h-2/3 z-30 rounded-lg flex justify-center items-center shadow bg-white">
+    <div className="modal fixed w-3/5 max-w-[400px] inset-1/2 -translate-x-1/2 -translate-y-1/2 h-2/3 z-30 rounded-lg flex justify-center items-center shadow">
       {props.children}
     </div>
   );
