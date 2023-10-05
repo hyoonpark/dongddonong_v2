@@ -62,7 +62,11 @@ const DetailPractice = () => {
 
           <div className="mt-6 font-bold text-xl mb-2">최고의 순간</div>
           <div className="flex overflow-x-auto gap-4 mb-4">
-            <HighLight videoURL={playerHistories.highlightUrl}></HighLight>
+            {data.playerHistories && (
+              <HighLight
+                videoURL={data.playerHistories.highlightUrl}
+              ></HighLight>
+            )}
           </div>
         </div>
       </Wrapper>
