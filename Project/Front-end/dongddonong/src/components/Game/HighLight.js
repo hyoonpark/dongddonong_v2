@@ -5,7 +5,7 @@ import Toast from "../../components/Modal/Toast";
 import share from "../../assets/icon/share.png";
 import styles from "./HightLight.module.css";
 
-const HighLight = () => {
+const HighLight = (props) => {
   const [toastOpen, SetToastOpen] = useState(false);
   const [videoURL, SetVideoURL] = useState("");
   const videoRef = useRef();
@@ -34,7 +34,7 @@ const HighLight = () => {
         }}
       />
       <ReactPlayer
-        url="https://player.vimeo.com/external/480437160.sd.mp4?s=8cc88c0030d7e674a75656c8af76a0582fbc438b&profile_id=165&oauth2_token_id=57447761"
+        url={props.videoURL}
         controls
         ref={videoRef}
         width={"100%"}
