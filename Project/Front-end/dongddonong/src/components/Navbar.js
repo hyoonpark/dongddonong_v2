@@ -86,7 +86,7 @@ const Navbar = () => {
               <Li onClick={handleLogoutClick}>로그아웃</Li>
             </>
           )}
-          {user && <button
+          {user.id && <button
             className=""
             onClick={() => {
               setVideoModalOpen(true);
