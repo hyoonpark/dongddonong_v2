@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 
-import styles from "./Home.module.css";
+import Guide from "../../components/Home/Guide";
+import camera from "../../assets/icon/camera.png";
 import Footer from "../../components/Footer";
 import image from "../../assets/image.png";
 import upArrow from "../../assets/icon/up-arrow.png";
 import { useUserContext } from "../../contexts/userContext";
 import { path, path1, path2 } from "./Path";
+import styles from "./Home.module.css";
 
 const Home = () => {
   const { user, loggedIn } = useUserContext();
@@ -72,8 +74,8 @@ const Home = () => {
     <div className="overflow-x-hidden">
       <div className="mb-10 md:mb-0 md:pt-48">
         <div className="relative ml-4">
-          <div className="relative mt-4 left-12 header top-16 max-w-7xl md:absolute md:top-0 md:left-12">
-            <div className="w-5/12 md:w-3/5 md:-translate-y-1/4">
+          <div className="relative mt-4 left-4 header top-16 max-w-7xl md:absolute md:top-0 md:left-12">
+            <div className="w-1/2 md:w-3/5 md:-translate-y-1/4">
               <h1 className="mb-2 text-3xl md:text-4xl font-bold whitespace-nowrap">
                 동또농
               </h1>
@@ -111,16 +113,21 @@ const Home = () => {
           </g>
         </svg>
         <svg className="invisible" viewBox="0 0 752.37 615.05"></svg>
+        <img
+          className="absolute bottom-4 w-[10%] -skew-x-12 right-1/3"
+          src={camera}
+          alt="카메라"
+        ></img>
+
+        <Guide />
       </div>
 
       <div className={`${styles.content1} w-screen relative`} ref={content2Ref}>
         <div className={`${styles.practice} px-4 absolute w-3/5 md:w-1/3`}>
           <h2 className="text-2xl font-bold">연습</h2>
           <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-            libero porro natus, omnis tenetur molestiae quibusdam,
-          </p>
+          <p className="whitespace-nowrap">"최고의 비법은 끊임없는 연습 뿐"</p>
+          <p>- 코비 브라이언트 -</p>
         </div>
 
         <div
@@ -129,20 +136,16 @@ const Home = () => {
           <div className="relative">
             <h2 className="text-2xl font-bold">투바운드</h2>
             <div className="absolute right-0 w-28 my-1 border-t-2 border-black md:my-2"></div>
-            <p className="my-3 md:my-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              libero porro natus, omnis tenetur molestiae quibusdam,
-            </p>
+            <p className="mt-3 md:mt-5">"몇백만 개나 쏘아온 슛이다"</p>
+            <p>- 서태웅 -</p>
           </div>
         </div>
 
         <div className={`${styles.contest} px-4 absolute w-3/5 md:w-1/3`}>
           <h2 className="text-2xl font-bold">경기</h2>
           <div className="w-16 my-1 border-t-2 border-black md:my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-            libero porro natus, omnis tenetur molestiae quibusdam,
-          </p>
+          <p>"농구는 신장으로 하는 것이 아니라 심장으로 하는 것 이다"</p>
+          <p>- 앨런 아이버슨 -</p>
         </div>
 
         <svg
@@ -157,8 +160,9 @@ const Home = () => {
 
       <button
         onClick={scrollToTop}
-        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${showButton ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+        className={`fixed p-3 z-50 bg-black border-none rounded-full transition-all duration-300 bottom-4 right-4 ${
+          showButton ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
       >
         <img className="w-6" src={upArrow} alt="스크롤상단" />
       </button>

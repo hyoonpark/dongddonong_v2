@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import HighLight from "../../components/Game/HighLight";
 import { useUserContext } from "../../contexts/userContext";
 import axios from "../../api/axiosConfig";
 import Wrapper from "../../components/Wrapper";
@@ -19,6 +20,7 @@ const DetailPractice = () => {
   useEffect(() => {
     axios.get(`/game/${param.id}`).then((resp) => {
       setData(resp.data.data);
+      console.log(resp.data.data);
     });
   }, [param.id]);
 
@@ -59,9 +61,8 @@ const DetailPractice = () => {
 
           <div className="mt-6 font-bold text-xl mb-2">최고의 순간</div>
           <div className="flex overflow-x-auto gap-4 mb-4">
-            <img className="w-72 rounded-3xl" src={court} alt="" />
-            <img className="w-72 rounded-3xl" src={court} alt="" />
-            <img className="w-72 rounded-3xl" src={court} alt="" />
+            <HighLight></HighLight>
+            <HighLight></HighLight>
           </div>
         </div>
       </Wrapper>
