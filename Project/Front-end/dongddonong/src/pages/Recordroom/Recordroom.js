@@ -3,18 +3,13 @@ import { useState, useEffect } from "react";
 import { getUserRecord } from "../../api/getUserRecord";
 import { Link } from "react-router-dom";
 
-import user from "../../assets/player.png";
-import user2 from "../../assets/player2.jpg";
-import user3 from "../../assets/player3.jpg";
 import Chart from "../../components/Recordroom/Chart";
 import HalfChart from "../../components/Recordroom/HalfChart";
 import Wrapper from "../../components/Wrapper";
 import leftArrow from "../../assets/icon/left-arrow.png";
 import rightArrow from "../../assets/icon/right-arrow.png";
-import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import RecordCard from "../../components/Recordroom/RecordCard";
-// import useUserContext from '../../contexts/userContext'
 
 const Recordroom = () => {
   const { user } = useUserContext();
