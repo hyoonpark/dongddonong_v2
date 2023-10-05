@@ -121,7 +121,7 @@ const Recordroom = () => {
           <div className="col-start-1 col-end-3 h-24">
             <img
               src={user.profileImgUrl}
-              className="rounded-3xl max-w-[100px] mx-auto"
+              className="rounded-3xl h-[96px] mx-auto"
               alt="사진이 안나와"
             />
           </div>
