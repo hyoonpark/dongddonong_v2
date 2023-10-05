@@ -198,8 +198,8 @@ const Recordroom = () => {
           <Link
             to={
               game[userId].mode === "1"
-                ? `/practice/${game.id}`
-                : `/game/${game.id}`
+                ? `/practice/${game[userId].gameId}`
+                : `/game/${game[userId].gameId}`
             }
           >
             <RecordCard key={index} game={game}></RecordCard>
