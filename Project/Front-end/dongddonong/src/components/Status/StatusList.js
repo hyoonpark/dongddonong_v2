@@ -50,6 +50,7 @@ const StatusList = (props) => {
 
       {notAssignedGameDataList.map((gameData, index) => (
         <StatusNotAssignedItem
+          gameId={notAssignedData[index]}
           key={index}
           data={gameData}
         />
