@@ -17,12 +17,13 @@ const DetailGame = () => {
   const Day = new Date(data.createdAt);
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const [playerHistories, setPlayerHistories] = useState([]);
-  const [classificationIsOpen, SetClassificationIsOpen] = useState(true);
+  const [classificationIsOpen, SetClassificationIsOpen] = useState(false);
 
   useEffect(() => {
     axios.get(`/game/${param.id}`).then((resp) => {
       setData(resp.data.data);
       setPlayerHistories(resp.data.data.playerHistories);
+      SetClassificationIsOpen(true);
     });
   }, [param.id]);
 
