@@ -112,7 +112,7 @@ const RecordCard = (props) => {
               <img
                 src={player2Profile.src}
                 className="rounded-2xl w-14 h-16"
-                alt="어웨이"
+                alt=""
               />
               <div className="text-[12px]">{player2Profile.nickName}</div>
             </div>
