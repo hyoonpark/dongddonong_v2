@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useUserContext } from "../../contexts/userContext";
+import HighLight from "../../components/Game/HighLight";
 import axios from "../../api/axiosConfig";
 import Wrapper from "../../components/Wrapper";
 import court from "../../assets/court.png";
@@ -50,7 +51,7 @@ const DetailGame = () => {
         </div>
         <img
           className="w-full h-72 md:h-96 brightness-50 max-h-[512px]"
-          src="https://cdn.neomeo.co.kr/news/photo/202303/1060_1770_4018.jpg"
+          src={data.thumbnail}
           alt=""
         />
       </div>
@@ -92,9 +93,7 @@ const DetailGame = () => {
           })}
           <div className="mt-6 font-bold text-xl mb-2">최고의 순간</div>
           <div className="flex overflow-x-auto gap-4 mb-4">
-            <img className="w-72 rounded-3xl" src={court} alt="" />
-            <img className="w-72 rounded-3xl" src={court} alt="" />
-            <img className="w-72 rounded-3xl" src={court} alt="" />
+            <HighLight videoURL={null}></HighLight>
           </div>
         </div>
       </Wrapper>
