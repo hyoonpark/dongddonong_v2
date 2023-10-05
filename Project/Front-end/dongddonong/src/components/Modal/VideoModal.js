@@ -90,11 +90,11 @@ const VideoModal = forwardRef((_, ref) => {
     <>
       <div
         ref={ref}
-        className="absolute z-10 w-64 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-0 top-14"
-        style={{ maxHeight: '400px', overflowY: 'auto' }}
+        className="absolute z-10 w-88 px-2 transition-all origin-top-right scale-0 bg-white border rounded-md shadow right-0 top-14"
+        style={{ maxHeight: '400px', overflowY: 'auto', overflowX: 'hidden' }}
       >
-        <div onClick={() => { setIsOpen(true) }} className="py-3 border-b border-black">
-          <img className="inline h-6 pr-4" src={upload} alt="업로드" />
+        <div onClick={() => { setIsOpen(true) }} className=" cursor-pointer py-3 border-b border-black">
+          <img className="inline h-6  pr-4" src={upload} alt="업로드" />
           영상 업로드
         </div>
         {isOpen && (
