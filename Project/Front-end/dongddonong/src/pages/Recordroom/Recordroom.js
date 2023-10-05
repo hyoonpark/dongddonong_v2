@@ -61,7 +61,6 @@ const Recordroom = () => {
     // let gameList = []
     promise.then((data) => {
       // data로 풀어해친다음 딱히 방법이 안보이면 그냥 data를 쓰자 어디할당하지말자
-      console.log(data);
       setGameList(data);
 
       // const gameList = promise
@@ -80,13 +79,8 @@ const Recordroom = () => {
           // 현재게임의 인덱스를 순회하면서 해당유저의 아이디를 key로 value는 해당유저의 경기정보로 객체를 만들고 game객체에 추가
           game[tempGame[index]["userId"]] = tempGame[index];
           // console.log(tempGame[index]['userId'])
-          // console.log(tempGame[index])
-          // console.log(gameObj)
-          game['id'] = data[index]['id']
           
         }
-        console.log(game)
-        // console.log(tempGame[0]['mode'])
         userTotalScore += game[userId]["total"];
 
         if (tempGame[0]["mode"] === "1") {
@@ -110,8 +104,8 @@ const Recordroom = () => {
 
   useEffect(() => {
     //각 배열의 첫번째는 해당 게임의 경기시각, 두번째, 세번째는 해당선수들의 기록
-    console.log("현재게임", games);
-    console.log(user);
+    // console.log("현재게임", games);
+    // console.log(user);
   }, []);
 
   return (
