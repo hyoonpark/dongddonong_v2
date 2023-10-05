@@ -9,6 +9,7 @@ const Classification = ({ playerHistories, userId, onClose }) => {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [initialized, setInitialized] = useState(false);
   const [completeClassify, setCompleteClassify] = useState(true);
+  const arr = [];
 
   let current =
     frameRef.current && frameRef.current.querySelector(".card:last-child");
@@ -17,14 +18,12 @@ const Classification = ({ playerHistories, userId, onClose }) => {
     moveX = 0,
     moveY = 0;
 
-  playerHistories.forEach((e) => {
-    if (!e.id) {
-      setCompleteClassify(false);
+  useEffect(() => {
+    for (const e of playerHistories) {
+      arr.push(playerHistories.indexOf(e));
       frameRef.current && appendCard(e);
     }
-  });
 
-  useEffect(() => {
     if (initialized && current) {
       initCard(current);
     }
@@ -32,9 +31,7 @@ const Classification = ({ playerHistories, userId, onClose }) => {
     if (!initialized && playerHistories.length > 0) {
       setInitialized(true);
     }
-
-    if (completeClassify) onClose();
-  }, [initialized, current, completeClassify]);
+  }, [initialized, current, playerHistories]);
 
   function appendCard(data) {
     if (
@@ -47,9 +44,12 @@ const Classification = ({ playerHistories, userId, onClose }) => {
 
     newCard.key = data.userId;
     newCard.className = "card";
+    if (data.userId) {
+      newCard.className.add("complete");
+    }
     newCard.style.backgroundImage = `url(${data.diffProfileImg})`;
     newCard.innerHTML = `
-    <div class="mx-auto w-full text-center mt-4">본인을 선택 하면 기록이 연동돼요</div>
+    <div class="mx-auto w-full text-center mt-4>본인을 선택 하면 기록이 연동돼요</div>
     <div class="text-white w-full absolute top-1/2 -translate-y-2/3 flex justify-evenly">
       <div>< 본인</div>
       <div class="basis-1/2 md:basis-3/5"></div>
@@ -115,12 +115,16 @@ const Classification = ({ playerHistories, userId, onClose }) => {
     } else cancel();
   }
 
+  let idx = -1;
   function complete() {
+    idx++;
     const flyX = (Math.abs(moveX) / moveX) * innerWidth * 1.3;
     const flyY = (moveY / moveX) * flyX;
     setTransform(flyX, flyY, (flyX / innerWidth) * 50, innerWidth);
 
-    if (flyX < 0) UserMapping(playerHistories.id, userId);
+    if (flyX < 0) {
+      UserMapping(playerHistories[arr[idx]].id, +userId);
+    }
 
     const prev = current;
     const next = current.previousElementSibling;
