@@ -48,7 +48,15 @@ const Classification = ({ playerHistories, userId, onClose }) => {
     newCard.style.backgroundImage = `url(${data.diffProfileImg})`;
     newCard.innerHTML = `
     <div class="mx-auto w-full text-center mt-4>본인을 선택 하면 기록이 연동돼요</div>
-    ${data.userId ? <div className="complete">분류 완료</div> : null}
+    ${
+      data.userId ? (
+        <div className="bg-primary w-fit p-2 rounded-full -rotate-6 top-4 right-4">
+          분류 완료
+        </div>
+      ) : (
+        ""
+      )
+    }
     <div class="text-white w-full absolute top-1/2 -translate-y-2/3 flex justify-evenly">
       <div>< 본인</div>
       <div class="basis-1/2 md:basis-3/5"></div>
