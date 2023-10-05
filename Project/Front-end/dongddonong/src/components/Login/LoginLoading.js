@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 import axios from "../../api/axiosConfig";
 import { useUserContext } from "../../contexts/userContext";
@@ -12,6 +13,8 @@ const LoginLoading = () => {
       .get(`/user/login?code=${code}`)
       .then((res) => {
         setLoggedUser(res.data.data);
+
+        return <Navigate to="/"></Navigate>;
       })
       .catch((error) => {
         console.log("실패!!!!!!", error);
