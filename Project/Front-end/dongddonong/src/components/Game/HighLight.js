@@ -34,7 +34,7 @@ const HighLight = (props) => {
         }}
       />
       <ReactPlayer
-        url={props.videoURL}
+        url="https://dongddonong.s3.ap-northeast-2.amazonaws.com/1266.mp4"
         controls
         ref={videoRef}
         width={"100%"}
