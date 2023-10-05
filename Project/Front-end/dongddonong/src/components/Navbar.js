@@ -37,7 +37,7 @@ const Navbar = () => {
   const location = useLocation();
   const { setLoggedOut } = useUserContext();
   const accessToken = localStorage.getItem("accessToken");
-
+  const { user } = useUserContext();
   const videoRef = useRef(null);
 
   const handleLoginClick = () => {
@@ -86,7 +86,7 @@ const Navbar = () => {
               <Li onClick={handleLogoutClick}>로그아웃</Li>
             </>
           )}
-          <button
+          {user && <button
             className=""
             onClick={() => {
               setVideoModalOpen(true);
@@ -94,7 +94,7 @@ const Navbar = () => {
             }}
           >
             <img className="w-8" src={video} alt="업로드" />
-          </button>
+          </button>}
           <VideoModal
             ref={videoRef}
             videoModalOpen={videoModalOpen}
