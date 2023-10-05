@@ -6,6 +6,7 @@ import share from "../../assets/icon/share.png";
 import styles from "./HightLight.module.css";
 
 const HighLight = (props) => {
+  console.log("동영상 재생");
   const [toastOpen, SetToastOpen] = useState(false);
   const [videoURL, SetVideoURL] = useState("");
   const videoRef = useRef();
@@ -35,6 +36,7 @@ const HighLight = (props) => {
       />
       <ReactPlayer
         url="https://dongddonong.s3.ap-northeast-2.amazonaws.com/1266.mp4"
+        type="mp4"
         controls
         ref={videoRef}
         width={"100%"}
