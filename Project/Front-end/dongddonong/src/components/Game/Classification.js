@@ -44,12 +44,11 @@ const Classification = ({ playerHistories, userId, onClose }) => {
 
     newCard.key = data.userId;
     newCard.className = "card";
-    if (data.userId) {
-      newCard.className.add("complete");
-    }
+
     newCard.style.backgroundImage = `url(${data.diffProfileImg})`;
     newCard.innerHTML = `
     <div class="mx-auto w-full text-center mt-4>본인을 선택 하면 기록이 연동돼요</div>
+    ${data.userId ? <div className="complete">분류 완료</div> : null}
     <div class="text-white w-full absolute top-1/2 -translate-y-2/3 flex justify-evenly">
       <div>< 본인</div>
       <div class="basis-1/2 md:basis-3/5"></div>
@@ -123,7 +122,7 @@ const Classification = ({ playerHistories, userId, onClose }) => {
     setTransform(flyX, flyY, (flyX / innerWidth) * 50, innerWidth);
 
     if (flyX < 0) {
-      UserMapping(playerHistories[arr[idx]].id, +userId);
+      UserMapping(playerHistories[idx].id, +userId);
     }
 
     const prev = current;
