@@ -6,7 +6,7 @@ export const UserMapping = (PlayerHistoryId, userId) => {
       params: { userId: userId },
     })
     .then((resp) => {
-      console.log(resp);
+      // console.log(resp);
       return resp;
     })
     .catch((e) => console.log(e));

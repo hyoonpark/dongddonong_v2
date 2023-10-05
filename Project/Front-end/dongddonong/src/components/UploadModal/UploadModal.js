@@ -26,9 +26,8 @@ const ModalOverlay = (props) => {
   const [gameId, setGameId] = useState([]);
 
   useEffect(() => {
-    console.log(files); // 상태가 업데이트되면 실행됨
+    // console.log(files); // 상태가 업데이트되면 실행됨
     for (const file in files) {
-      console.log(file);
     }
     // console.log(gameTypes); //
   }, [files, gameTypes]);
@@ -49,17 +48,9 @@ const ModalOverlay = (props) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-          //     const data = reader.result;
-          //     const exif = Exifr.parse(data);
-          //     setMetadata(exif);
-          //     // setImagesSrc((prevFiles) => [...prevFiles, reader.result]);
+          
         };
-        // reader.readAsDataURL(file)
-        // const exif = metadata
-        // const date = exif.DateTimeOriginal
-        // console.log(exif)
-        // console.log(date)
-        // 비디오 길이 가져오기
+
 
         if (file.type.startsWith("video/")) {
           const video = document.createElement("video");
@@ -164,26 +155,8 @@ const ModalOverlay = (props) => {
         formData.append("mode", files[i]["mode"]);
         formData.append("fileName", files[i].name);
         formData.append("videoLength", videoDurations[i]);
-        console.log(formData.get("mode"));
-        console.log(formData.get("userId"));
-        console.log(formData.get("gameDate"));
-        console.log(
-          formatDate(files[i]["lastModifiedDate"]),
-          userId,
-          files[i]["mode"],
-          files[i].name,
-          videoDurations[i]
-        );
-        // console.log(gameModeToNumber(gameTypes[i]));
-        // console.log(gameModeToNumber(gameTypes[i]['buttonInfo']))
-        // console.log(files[i])
-        // console.log(formatDate(files[i]['lastModifiedDate']))
-        // console.log(files[i]['lastModifiedDate'])
-        // console.log(formData.get("files"));
-        // console.log(formData);
-        // gameUpload(formData)
+        
         const accessToken = localStorage.getItem("accessToken");
-        console.log(accessToken);
         try {
           const result = await fetch(
             "https://j9e103.p.ssafy.io:8589/game/upload",
@@ -199,7 +172,6 @@ const ModalOverlay = (props) => {
 
           const res = await result.json();
 
-          console.log(res);
           setGameId((prev) => [...prev, res["data"]]);
           setStatus("success");
           setFiles(null);

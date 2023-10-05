@@ -4,7 +4,6 @@ import axiosInstance from "./axiosConfig";
 export const getUserRecord = async (userId) => {
   try {
     const res = await axiosInstance.get(`/game/assign/user/${userId}`,)
-    console.log('요청성공!', res.data)
     return res.data.data
   } catch (err) {
     return err
