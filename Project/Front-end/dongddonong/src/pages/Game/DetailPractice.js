@@ -20,9 +20,10 @@ const DetailPractice = () => {
   useEffect(() => {
     axios.get(`/game/${param.id}`).then((resp) => {
       setData(resp.data.data);
-      console.log(resp.data.data);
     });
   }, [param.id]);
+
+  console.log(playerHistories);
 
   return (
     <div className="relative">
@@ -33,7 +34,7 @@ const DetailPractice = () => {
         </div>
         <img
           className="w-full h-72 md:h-96 brightness-50 max-h-[512px]"
-          src={playerHistories && playerHistories.diffProfileImg}
+          src={data.thumbnail}
           alt=""
         />
       </div>
@@ -61,8 +62,7 @@ const DetailPractice = () => {
 
           <div className="mt-6 font-bold text-xl mb-2">최고의 순간</div>
           <div className="flex overflow-x-auto gap-4 mb-4">
-            <HighLight></HighLight>
-            <HighLight></HighLight>
+            <HighLight videoURL={null}></HighLight>
           </div>
         </div>
       </Wrapper>

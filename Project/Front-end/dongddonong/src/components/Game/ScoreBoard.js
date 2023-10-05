@@ -15,7 +15,10 @@ const ScoreBoard = ({ playerHistories, userId }) => {
 
       {playerHistories.map((e, i) => {
         return (
-          <div className="flex h-32 items-center justify-between relative">
+          <div
+            className="flex h-32 items-center justify-between relative"
+            key={i}
+          >
             <div className="flex w-2/5 items-center justify-center relative">
               {e.userId === +userId ? (
                 <div className="absolute top-0 right-[10%] bg-black text-white rounded-full p-1 px-2 rotate-6">

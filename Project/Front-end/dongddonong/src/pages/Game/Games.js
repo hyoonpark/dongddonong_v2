@@ -76,7 +76,7 @@ const Games = ({ data, user, selectedDate }) => {
               <div className="hidden w-2/5 h-36 justify-around md:flex items-center">
                 <div className="basis-1/5">
                   <img
-                    className="rounded-full"
+                    className="rounded-full h-24"
                     src={myHistory.diffProfileImg}
                     alt=""
                   />
