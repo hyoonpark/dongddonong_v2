@@ -21,7 +21,7 @@ const HighLight = () => {
   return (
     <div className="relative rounded-3xl">
       <img
-        className="absolute w-8 right-1 top-1 z-10 cursor-pointer"
+        className="absolute w-8 right-1 top-1 z-40 cursor-pointer"
         src={share}
         alt="share"
         onClick={() => {
