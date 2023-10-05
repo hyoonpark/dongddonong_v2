@@ -14,4 +14,6 @@ public interface GameRepository extends JpaRepository<Game,String> {
 
     List<Game> findGamesByUserIdAndIsAnalyzingOrderByCreatedAtDesc(Long userId, boolean isAnalyzing);
 
+    List<Game> findAllByIsAnalyzingFalse();
+
 }

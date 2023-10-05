@@ -65,7 +65,7 @@ public class PlayerHistory {
         return PlayerHistory.builder()
                 .game(game)
                 .diffProfileImg(playerHistoryDto.getDiffProfileImg())
-                .mode(playerHistoryDto.getMode())
+                .mode(game.getMode())
                 .twoPts(playerHistoryDto.getTwoPts())
                 .threePts(playerHistoryDto.getThreePts())
                 .tryTwoPts(playerHistoryDto.getTryTwoPts())

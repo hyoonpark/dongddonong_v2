@@ -61,18 +61,18 @@ public class GameController {
         return ApiResponse.ok(gameService.getAllGames());
     }
 
-    @Operation(summary = "해당 유저 경기 모두 가져오기", description = "userId에 해당하는 게임들을 가져온다.")
+    @Operation(summary = "해당 업로더 경기 모두 가져오기", description = "userId에 해당하는 user가 업로드한 게임들을 가져온다.")
     @GetMapping("/all/{userId}")
     public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId) {
         return ApiResponse.ok(gameService.getAllGamesByUserId(userId));
     }
-    @Operation(summary = "할당 여부에 따라 경기 가져오기(미할당된 경기 할당 필요)", description = "isAssigned 여부에 따라 경기를 가져온다. ")
+    @Operation(summary = "할당 여부에 따라 경기 가져오기(미할당된 경기 할당 필요)", description = "isAssigned 여부에 따라 경기를 가져온다. (userId는 업로더 기준)")
     @GetMapping("/assign/{userId}")
     public ApiResponse<List<GameDto>> getAllByAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
         return ApiResponse.ok(gameService.getAllByAssignedGames(userId, isAssigned));
     }
 
-    @Operation(summary = "경기에 유저 할당하기", description = "경기를 유저랑 매핑한다.")
+    @Operation(summary = "경기에 유저 할당하기", description = "경기를 유저랑 매핑한다. ")
     @PatchMapping("/assign/{PlayerHistoryId}")
     public ApiResponse<String> putPlayerHistory(@PathVariable("PlayerHistoryId") long playerHistoryId, @RequestParam long userId) {
         playerHistoryService.patchPlayerHistory(playerHistoryId, userId);
@@ -107,5 +107,11 @@ public class GameController {
     @GetMapping("/status-modal/assign/{userId}")
     public ApiResponse<GameIdDto> getStatusModalAssignedGames(@PathVariable("userId") long userId, @RequestParam boolean isAssigned) {
         return ApiResponse.ok(gameService.getStatusModalAssignedGames(userId, isAssigned));
+    }
+
+    @Operation(summary = "해당 유저가 할당되어 있는 경기 가져오기", description = "해당 유저의 할당이 완료된 경기를 가져온다.")
+    @GetMapping("/assign/user/{userId}")
+    public ApiResponse<List<GameDto>> getUserAssignedGames(@PathVariable("userId") long userId) {
+        return ApiResponse.ok(gameService.getUserAssignedGames(userId));
     }
 }
