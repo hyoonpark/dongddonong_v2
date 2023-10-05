@@ -87,8 +87,10 @@ const Recordroom = () => {
           // console.log(tempGame[index]['userId'])
           // console.log(tempGame[index])
           // console.log(gameObj)
+          game['id'] = data[index]['id']
+          
         }
-        // console.log(game)
+        console.log(game)
         // console.log(tempGame[0]['mode'])
         userTotalScore += game[userId]["total"];
 
@@ -201,8 +203,8 @@ const Recordroom = () => {
           <Link
             to={
               game[userId].mode === "1"
-                ? `/practice/${game[userId].id}`
-                : `/game/${game[userId].id}`
+                ? `/practice/${game.id}`
+                : `/game/${game.id}`
             }
           >
             <RecordCard key={index} game={game}></RecordCard>
