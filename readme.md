@@ -75,13 +75,17 @@
 
 - 메인 화면을 제외한 서비스를 이용하기 위해서는 로그인이 요구됩니다.
 
-**웹**
+| ![login_web](./exec/assets/login_web.gif) | ![login_mobile](./exec/assets/login_mobile.gif) |
+| ----------------------------------------- | ----------------------------------------------- |
+| 웹 화면                                   | 모바일 화면                                     |
+
+<!-- **웹**
 
 ![login_web.gif](./exec/assets/login_web.gif)
 
 **모바일**
 
-![login_mobile.gif](./exec/assets/login_mobile.gif)
+![login_mobile.gif](./exec/assets/login_mobile.gif) -->
 
 **↖️ 영상 업로드**
 
@@ -139,21 +143,13 @@
 - 유저의 프로필과 전체 통계를 확인할 수 있습니다.
 - 경기 모드 별 전체 기록을 한눈에 확인할 수 있습니다.
 
-<!-- 웹
+웹
 
 ![record_web.gif](./exec/assets/record_web.gif)
 
 모바일
 
-![record_mobile.gif](./exec/assets/record_mobile.gif) -->
-
-<div style="display: flex; align-items: center;">
-  <img src="./exec/assets/record_web.gif" style="height: 80px; width: auto;" />
-  <img
-    src="./exec/assets/record_mobile.gif"
-    style="height: 80px; width: auto;"
-  />
-</div>
+![record_mobile.gif](./exec/assets/record_mobile.gif)
 
 **⚡ 하이라이트 영상**
 
