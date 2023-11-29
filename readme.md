@@ -147,7 +147,6 @@
 
 ![record_mobile.gif](./exec/assets/record_mobile.gif) -->
 
-```html
 <div style="display: flex; align-items: center;">
   <img src="./exec/assets/record_web.gif" style="height: 300px; width: auto;" />
   <img
@@ -155,7 +154,6 @@
     style="height: 300px; width: auto;"
   />
 </div>
-```
 
 **⚡ 하이라이트 영상**
 
