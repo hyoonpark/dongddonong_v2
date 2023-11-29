@@ -200,24 +200,22 @@
 - S3
 - **상세 기술스택 및 버전**
 
-```
-| 구분 | 기술 스택 | 상세 내용 | 버전 |
-| --- | --- | --- | --- |
-| BE | java |  | 17 |
-|  | Springboot |  | 3.0.1 |
-|  | jUnit |  | 5 |
-|  | gradle |  | 7.6 |
-|  | swagger |  | 3 |
-|  | mariaDB |  | 10.11.1 RC |
-| FE | Node  |  | 18.17.1 LTS |
-|  | React  |  | 18.2.0 |
-|  | React-router-dom: |  | 6.16.0 |
-|  | Axios |  | 1.5.0 |
-|  | TailwindCSS |  | 3.3.3 |
-| AI | python |  | 3.8 |
-|  | torch |  | 1.11.0 |
-|  | torchvision |  | 0.12.0 |
-```
+| 구분 | 기술 스택         | 상세 내용 | 버전        |
+| ---- | ----------------- | --------- | ----------- |
+| BE   | java              |           | 17          |
+|      | Springboot        |           | 3.0.1       |
+|      | jUnit             |           | 5           |
+|      | gradle            |           | 7.6         |
+|      | swagger           |           | 3           |
+|      | mariaDB           |           | 10.11.1 RC  |
+| FE   | Node              |           | 18.17.1 LTS |
+|      | React             |           | 18.2.0      |
+|      | React-router-dom: |           | 6.16.0      |
+|      | Axios             |           | 1.5.0       |
+|      | TailwindCSS       |           | 3.3.3       |
+| AI   | python            |           | 3.8         |
+|      | torch             |           | 1.11.0      |
+|      | torchvision       |           | 0.12.0      |
 
 ## 4️⃣ 프로젝트 구조
 
