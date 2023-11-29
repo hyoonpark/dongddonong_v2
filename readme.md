@@ -139,13 +139,23 @@
 - 유저의 프로필과 전체 통계를 확인할 수 있습니다.
 - 경기 모드 별 전체 기록을 한눈에 확인할 수 있습니다.
 
-웹
+<!-- 웹
 
 ![record_web.gif](./exec/assets/record_web.gif)
 
 모바일
 
-![record_mobile.gif](./exec/assets/record_mobile.gif)
+![record_mobile.gif](./exec/assets/record_mobile.gif) -->
+
+```html
+<div style="display: flex; align-items: center;">
+  <img src="./exec/assets/record_web.gif" style="height: 300px; width: auto;" />
+  <img
+    src="./exec/assets/record_mobile.gif"
+    style="height: 300px; width: auto;"
+  />
+</div>
+```
 
 **⚡ 하이라이트 영상**
 
