@@ -148,10 +148,10 @@
 ![record_mobile.gif](./exec/assets/record_mobile.gif) -->
 
 <div style="display: flex; align-items: center;">
-  <img src="./exec/assets/record_web.gif" style="height: 150px; width: auto;" />
+  <img src="./exec/assets/record_web.gif" style="height: 80px; width: auto;" />
   <img
     src="./exec/assets/record_mobile.gif"
-    style="height: 150px; width: auto;"
+    style="height: 80px; width: auto;"
   />
 </div>
 
