@@ -77,15 +77,7 @@
 
 | ![login_web](./exec/assets/login_web.gif) | ![login_mobile](./exec/assets/login_mobile.gif) |
 | ----------------------------------------- | ----------------------------------------------- |
-| 웹 화면                                   | 모바일 화면                                     |
-
-<!-- **웹**
-
-![login_web.gif](./exec/assets/login_web.gif)
-
-**모바일**
-
-![login_mobile.gif](./exec/assets/login_mobile.gif) -->
+| **웹**                                    | **모바일**                                      |
 
 **↖️ 영상 업로드**
 
@@ -93,23 +85,15 @@
 
 - 분석하고 싶은 영상을 선택하고 `경기 모드`를 선택한 후 업로드합니다.
 
-웹
-
-![upload_web.gif](./exec/assets/upload_web.gif)
-
-모바일
-
-![upload_mobile.gif](./exec/assets/upload_mobile.gif)
+| ![upload_web](./exec/assets/upload_web.gif) | ![upload_mobile](./exec/assets/upload_mobile.gif) |
+| ------------------------------------------- | ------------------------------------------------- |
+| **웹**                                      | **모바일**                                        |
 
 - 분석 중인 영상과 분석 완료된 영상 목록을 확인할 수 있습니다.
 
-웹
-
-![list_web.gif](./exec/assets/list_web.gif)
-
-모바일
-
-![list_mobile.gif](./exec/assets/list_mobile.gif)
+| ![list_web](./exec/assets/list_web.gif) | ![list_mobile](./exec/assets/list_mobile.gif) |
+| --------------------------------------- | --------------------------------------------- |
+| **웹**                                  | **모바일**                                    |
 
 **🤼 경기 화면**
 
@@ -118,23 +102,15 @@
 - 월 별로 진행한 경기의 개수를 확인할 수 있습니다.
 - 해당 날짜의 경기 목록을 조회할 수 있습니다.
 
-웹
-
-![game_web.gif](./exec/assets/game_web.gif)
-
-모바일
-
-![game_mobile.gif](./exec/assets/game_mobile.gif)
+| ![game_web](./exec/assets/game_web.gif) | ![game_mobile](./exec/assets/game_mobile.gif) |
+| --------------------------------------- | --------------------------------------------- |
+| **웹**                                  | **모바일**                                    |
 
 - 해당 경기의 상세 기록을 확인할 수 있습니다.
 
-웹
-
-![gameDetail_web.gif](./exec/assets/gameDetail_web.gif)
-
-모바일
-
-![gameDetail_mobile.gif](./exec/assets/gameDetail_mobile.gif)
+| ![gameDetail_web](./exec/assets/gameDetail_web.gif) | ![gameDetail_mobile](./exec/assets/gameDetail_mobile.gif) |
+| --------------------------------------------------- | --------------------------------------------------------- |
+| **웹**                                              | **모바일**                                                |
 
 **💽 기록실 화면**
 
@@ -143,13 +119,9 @@
 - 유저의 프로필과 전체 통계를 확인할 수 있습니다.
 - 경기 모드 별 전체 기록을 한눈에 확인할 수 있습니다.
 
-웹
-
-![record_web.gif](./exec/assets/record_web.gif)
-
-모바일
-
-![record_mobile.gif](./exec/assets/record_mobile.gif)
+| ![record_web](./exec/assets/record_web.gif) | ![record_mobile](./exec/assets/record_mobile.gif) |
+| ------------------------------------------- | ------------------------------------------------- |
+| **웹**                                      | **모바일**                                        |
 
 **⚡ 하이라이트 영상**
 
@@ -158,13 +130,9 @@
 - 해당 경기에 관련된 하이라이트 영상을 볼 수 있습니다.
 - 공유하기 기능을 통해 하이라이트를 공유 및 저장할 수 있습니다.
 
-웹
-
-![highlight_web.gif](./exec/assets/highlight_web.gif)
-
-모바일
-
-![highlight_mobile.gif](./exec/assets/highlight_mobile.gif)
+| ![highlight_web](./exec/assets/highlight_web.gif) | ![highlight_mobile](./exec/assets/highlight_mobile.gif) |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| **웹**                                            | **모바일**                                              |
 
 ## 3️⃣ 기술 스택
 
@@ -294,27 +262,23 @@
 
 ### 🗒️ 협업관리
 
-**📉 JIRA - 에자일한 개발 일정 관리**
-![jira_burndown.png](./exec/assets/jira_burndown.png)
-
-**⏳ Gitlab - Gitflow 및 이슈 관리를 통한 커밋 컨벤션**
-![gitlab.png](./exec/assets/gitlab.png)
+| ![jira_burndown](./exec/assets/jira_burndown.png) | ![gitlab](./exec/assets/gitlab.png)                     |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| **📉 JIRA - 에자일한 개발 일정 관리**             | **⏳ Gitlab - Gitflow 및 이슈 관리를 통한 커밋 컨벤션** |
 
 **🗒️ Notion - 협업 및 프로젝트 문서 관리**
-![notion1.png](./exec/assets/notion1.png)
-![notion2.png](./exec/assets/notion2.png)
+
+| ![notion1](./exec/assets/notion1.png) | ![notion2](./exec/assets/notion2.png) |
+| ------------------------------------- | ------------------------------------- |
+| **노션1**                             | **노션2**                             |
 
 **🍳 오전 스크럼 및 KPT 회고를 통한 일정 관리**
 
-**스크럼**
-![scrum.png](./exec/assets/scrum.png)
+| ![scrum](./exec/assets/scrum.png) | ![retrospect](./exec/assets/retrospect.png) |
+| --------------------------------- | ------------------------------------------- |
+| **스크럼**                        | **KPT 회고**                                |
 
-**KPT 회고**
-![retrospect.png](./exec/assets/retrospect.png)
-
-## 6️⃣ 포팅 메뉴얼
-
-## 7️⃣ 팀원 소개
+## 6️⃣ 팀원 소개
 
 | 프로필 사진 |        |           |        |        |     |
 | ----------- | ------ | --------- | ------ | ------ | --- |
